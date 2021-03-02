@@ -8,7 +8,7 @@ a web micro-framework.
 
 - Alex Johannesson arj6153
 - Tony (Truong Anh Tuan) Hoang. tth6714
-- MEMBER3
+- Bin Qiu bcq5933
 - MEMBER4
 
 
