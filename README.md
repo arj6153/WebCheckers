@@ -6,7 +6,7 @@ a web micro-framework.
 
 ## Team
 
-- MEMBER1
+- Alex Johannesson arj6153
 - Tony (Truong Anh Tuan) Hoang. tth6714
 - MEMBER3
 - MEMBER4
