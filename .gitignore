@@ -4,6 +4,8 @@
 # Eclipse #
 ###########
 .project
+github.txt
+.gitignore
 .classpath
 .settings
 **/bin/
