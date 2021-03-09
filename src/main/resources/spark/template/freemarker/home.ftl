@@ -11,19 +11,21 @@
 <div class="page">
 
   <h1>Web Checkers | ${title}</h1>
+  <#include "signin.ftl"/>
 
   <div class ="navigation">
     <a href= "/">Home</a>
     <#if signedIn && name??>
          <a href="/signout">Sign Out</a>
     <#else>
-         <a href= "/signin">Sign In</a>
+         <a href="/signin">Sign In</a>
     </#if>
   <#include "nav-bar.ftl" />
+  </div>
 
   <div class="body">
 
-    <!-- Provide a message to the user, if supplied. -->
+    <p>Welcome to checkers!</p>
     <#include "message.ftl" />
 
     <!-- TODO: future content on the Home:
