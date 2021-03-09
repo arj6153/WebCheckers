@@ -13,7 +13,7 @@ public class GetSignInRoute implements Route {
     private final String VIEW_NAME = "signin.ftl";
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
-    private static final Message TEST_MSG = Message.info("Test Sign in");
+    private static final Message SIGN_IN_MSG = Message.info("Please enter your name!");
 
     private final TemplateEngine templateEngine;
 
@@ -25,8 +25,8 @@ public class GetSignInRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("GetSIgnInRoute is invoked");
         Map<String,Object> vm = new HashMap<>();
-        vm.put("title", TEST_MSG);
-        vm.put("message", "fda");
+        vm.put("title", "Sign In Form");
+        vm.put("message", SIGN_IN_MSG);
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
     }
 }

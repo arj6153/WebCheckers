@@ -9,7 +9,6 @@
 
 <body>
 <div class="page">
-
   <h1>Web Checkers | ${title}</h1>
   <div class ="navigation">
   <#include "nav-bar.ftl" />
@@ -19,13 +18,11 @@
 
     <p>Welcome to checkers!</p>
     <#include "message.ftl" />
-
     <!-- TODO: future content on the Home:
                    to start games,
                    spectating active games,
                    or replay archived games
            -->
-
   </div>
 
 </div>
