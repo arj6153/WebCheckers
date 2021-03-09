@@ -1,0 +1,36 @@
+commit 39fa349c803fb33be605c55c2d0d0cd05513a3a4
+Merge: b2614f1 dcf258f
+Author: Michael <mtm1783@g.rit.edu>
+Date:   Mon Mar 1 21:29:27 2021 -0500
+
+    Merge branch 'master' of https://github.com/RIT-SWEN-261-01/team-project-2205-swen-261-01-a-original
+
+commit b2614f181679c85182c074ae5c5e36d19e97080f
+Author: Michael <mtm1783@g.rit.edu>
+Date:   Mon Mar 1 21:28:31 2021 -0500
+
+    Michael's name change
+
+commit dcf258f636a9c74db410476e7026f2f15497fd90
+Author: bcq5933 <dogsquad@DESKTOP-9S8UAAG.localdomain>
+Date:   Mon Mar 1 21:02:07 2021 -0500
+
+    edited README
+
+commit 75b46ce7d89d92a60551dc0e165d6edc92317864
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Mon Mar 1 20:44:22 2021 -0500
+
+    Added my name(Alex Johannesson) to the README.md file
+
+commit 9ca64eecccfd9c9f9d5bb6788c30c66164c84422
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Mon Mar 1 20:34:07 2021 -0500
+
+    replacing placeholder with name
+
+commit 8bcd8e691d5cce3dda23a17ff43ff6b711a4c885
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Tue Mar 2 01:20:19 2021 +0000
+
+    Initial commit
