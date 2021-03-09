@@ -8,11 +8,12 @@
 </head>
 
 <body>
-<div class="page">
+<div class="signin">
   <h1>Web Checkers | ${title}</h1>
-  <div class="body">
+  <div class="">
   </div>
 </div>
 </body>
 
 </html>
+

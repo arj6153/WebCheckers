@@ -11,15 +11,7 @@
 <div class="page">
 
   <h1>Web Checkers | ${title}</h1>
-  <#include "signin.ftl"/>
-
   <div class ="navigation">
-    <a href= "/">Home</a>
-    <#if signedIn && name??>
-         <a href="/signout">Sign Out</a>
-    <#else>
-         <a href="/signin">Sign In</a>
-    </#if>
   <#include "nav-bar.ftl" />
   </div>
 
