@@ -4,12 +4,14 @@ public class Game {
     private Player redPlayer;
     private Player whitePlayer;
     private Piece[][] board;
+    private int ID;
 
     public Game(Player red, Player white)
     {
         this.redPlayer = red;
         this.whitePlayer = white;
         this.board = newBoardSetup();
+        this.ID = redPlayer.getName().hashCode() * 31 + whitePlayer.getName().hashCode() * 67;
     }
 
     /**
@@ -44,6 +46,11 @@ public class Game {
         }
 
         return newBoard;
+    }
+
+    public int getID()
+    {
+        return this.ID;
     }
 
     public Piece[][] getBoard()
