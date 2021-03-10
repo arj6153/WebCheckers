@@ -34,13 +34,19 @@ public class PostSignInRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostSignInRoute has been invoked.");
         final Session httpSession = request.session();
+        final Object player = httpSession.attribute(GetHomeRoute.CURRENT_PLAYER);
 
         Map<String,Object> vm = new HashMap<>();
         vm.put("title", DESCRIPTION);
         String name = request.queryParams(USER_ID);
 
-        //return templateEngine.render(vm);
-        response.redirect(WebServer.SIGN_IN_URL);
+        if (player != null) {
+            response.redirect(WebServer.HOME_URL);
+        } else {
+            //return templateEngine.render(vm);
+            response.redirect(WebServer.SIGN_IN_URL);
+
+        }
         halt();
         return null;
     }
