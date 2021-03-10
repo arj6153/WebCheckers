@@ -93,16 +93,16 @@ public class Game {
                 // White side (top)
                 if (row <= 2 && isWhiteTile(row, col))
                 {
-                    board[row][col] = Piece.White;
+                    board[row][col] = new Piece(Piece.Color.White);
                 }
                 // Red side (bottom)
                 else if (row >= 5 && isWhiteTile(row, col))
                 {
-                    board[row][col] = Piece.Red;
+                    board[row][col] = new Piece(Piece.Color.Red);
                 }
                 else // Center field
                 {
-                    newBoard[row][col] = Piece.None;
+                    newBoard[row][col] = null;
                 }
             }
         }
@@ -136,7 +136,7 @@ public class Game {
      */
     private boolean isTileEmpty(int x, int y)
     {
-        return board[x][y] == Piece.None;
+        return board[x][y] == null;
     }
 
     /**
@@ -161,12 +161,7 @@ public class Game {
      * @return true if move is within board boundary, else false
      */
     public boolean isValid(int row, int col) {
-        if(row <0 || row > 7 || col<0 || col>7) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return row >= 0 && row <= 7 && col >= 0 && col <= 7;
     }
     /**
      * Returns whether or not a tile on the checker board is white.

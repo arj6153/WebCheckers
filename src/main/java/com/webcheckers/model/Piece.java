@@ -1,24 +1,23 @@
 package com.webcheckers.model;
 
 public class Piece {
-    public enum color{Red, White, None}
-    public enum pieceType{Single, King}
-    private color Color;
-    private pieceType Type;
+    public enum Color {Red, White}
+    private boolean king;
+    private Piece.Color color;
 
 
-    public Piece(color Color) {
-        Type = pieceType.Single;
-        this.Color = Color;
+    public Piece(Piece.Color Color) {
+        king = false;
+        this.color = Color;
     }
 
-
-    public pieceType getType() {
-        return Type;
+    public boolean isKing()
+    {
+        return king;
     }
 
-    public color getColor() {
-        return Color;
+    public Piece.Color getColor() {
+        return color;
     }
 
 }
