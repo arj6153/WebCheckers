@@ -31,6 +31,10 @@ public class Lobby {
 
     }
 
+    public synchronized Player getPlayer(String name) {
+       return this.lobby.get(name);
+    }
+
 
     public String listPlayers(Player player) {
         if(this.lobby.size() <= 1) {

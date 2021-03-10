@@ -1,6 +1,8 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.Player;
+import com.webcheckers.util.Message;
 import spark.*;
 
 import java.util.HashMap;
@@ -19,7 +21,7 @@ public class PostSignInRoute implements Route {
     private final String DESCRIPTION = "Sign in Form";
 
     // Attributes
-    private TemplateEngine templateEngine = null;
+    private TemplateEngine templateEngine;
     private final GameCenter gameCenter;
 
 
@@ -29,18 +31,24 @@ public class PostSignInRoute implements Route {
         LOG.config("PostSignInRoute has been initialized.");
     }
 
-
     @Override
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostSignInRoute has been invoked.");
         final Session httpSession = request.session();
-
-        Map<String,Object> vm = new HashMap<>();
-        vm.put("title", DESCRIPTION);
-        String name = request.queryParams(USER_ID);
-
+        final Player player = httpSession.attribute("currentUser");
+        if (player == null) {
+            Map<String,Object> vm = new HashMap<>();
+            String name = request.queryParams(USER_ID);
+            if(!gameCenter.getLobby().playerExists(name)) {
+               gameCenter.addPlayer(name);
+               vm.put("currentUser",gameCenter.getLobby().getPlayer(name));
+               System.out.println(name);
+            }
+            vm.put("title", GetHomeRoute.DESCRIPTION);
+            return templateEngine.render(new ModelAndView(vm, GetHomeRoute.VIEW_NAME));
+        }
         //return templateEngine.render(vm);
-        response.redirect(WebServer.SIGN_IN_URL);
+        response.redirect(WebServer.HOME_URL);
         halt();
         return null;
     }

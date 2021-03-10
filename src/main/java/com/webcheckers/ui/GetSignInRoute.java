@@ -9,10 +9,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import static spark.Spark.halt;
+
 
 public class GetSignInRoute implements Route {
     //Attributes
-    private final String VIEW_NAME = "signin.ftl";
+    static final String VIEW_NAME = "signin.ftl";
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
     private static final Message SIGN_IN_MSG = Message.info("Please enter your name!");
@@ -29,10 +31,15 @@ public class GetSignInRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("GetSIgnInRoute is invoked");
         final Session httpSession = request.session();
-
-        Map<String,Object> vm = new HashMap<>();
-        vm.put("title", "Sign In Form");
-        vm.put("message", SIGN_IN_MSG);
-        return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
+        final Player player = httpSession.attribute("currentUser");
+        if (player == null) {
+            Map<String,Object> vm = new HashMap<>();
+            vm.put("title", "Sign In Form");
+            vm.put("message", SIGN_IN_MSG);
+            return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
+        }
+        response.redirect(WebServer.HOME_URL);
+        halt();
+        return null;
     }
 }

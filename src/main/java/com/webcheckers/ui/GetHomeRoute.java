@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.Player;
 import spark.*;
 
 import com.webcheckers.util.Message;
@@ -17,9 +18,9 @@ import com.webcheckers.util.Message;
  */
 public class GetHomeRoute implements Route {
 
-  private final String VIEW_NAME = "home.ftl";
-  static final String CURRENT_PLAYER = "currPlayer";
-  private final String DESCRIPTION = "Home";
+  static final String VIEW_NAME = "home.ftl";
+
+  static final String DESCRIPTION = "Home";
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
@@ -55,14 +56,17 @@ public class GetHomeRoute implements Route {
   public Object handle(Request request, Response response) {
     LOG.finer("GetHomeRoute is invoked.");
     final Session httpSession = request.session();
+    final Player player = httpSession.attribute("currentUser");
 
     //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", DESCRIPTION);
-
-    // display a user message in the Home page
-    vm.put("message", WELCOME_MSG);
-
+    if(player != null) {
+      vm.put("message", Message.info("Player not Null"));
+    } else {
+      // display a user message in the Home page
+      vm.put("message", WELCOME_MSG);
+    }
     // render the View
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
   }

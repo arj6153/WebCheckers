@@ -16,5 +16,8 @@ public class GameCenter {
     public Lobby getLobby() {
         return lobby;
     }
+    public void addPlayer(String name) {
+       lobby.addPlayer(name);
+    }
 
 }
