@@ -62,7 +62,7 @@ public class Game {
      */
     private boolean isTileEmpty(int x, int y)
     {
-        return board[x][y] != Piece.None;
+        return board[x][y] == Piece.None;
     }
 
     /**
