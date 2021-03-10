@@ -14,10 +14,13 @@ public class GameCenter {
     }
 
     public Lobby getLobby() {
-        return lobby;
+        return this.lobby;
     }
     public void addPlayer(String name) {
-       lobby.addPlayer(name);
+       this.lobby.addPlayer(name);
+    }
+    public Player getPlayer(String name) {
+        return this.lobby.getPlayer(name);
     }
 
 }

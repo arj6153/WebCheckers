@@ -1,7 +1,7 @@
  <div class="navigation">
   <#if currentUser??>
     <a href="/">my home</a> |
-    <#include "signin.ftl" />
+
     <form id="signout" action="/signout" method="post">
       <a href="#" onclick="event.preventDefault(); signout.submit();">sign out [${currentUser.name}]</a>
     </form>

@@ -41,11 +41,12 @@ public class PostSignInRoute implements Route {
             String name = request.queryParams(USER_ID);
             if(!gameCenter.getLobby().playerExists(name)) {
                gameCenter.addPlayer(name);
-               vm.put("currentUser",gameCenter.getLobby().getPlayer(name));
-               System.out.println(name);
+               vm.put("currentUser", gameCenter.getPlayer(name));
             }
             vm.put("title", GetHomeRoute.DESCRIPTION);
-            return templateEngine.render(new ModelAndView(vm, GetHomeRoute.VIEW_NAME));
+            vm.put("message", Message.info("Ready for battle"));
+            httpSession.attribute("currentUser",gameCenter.getPlayer(name));
+
         }
         //return templateEngine.render(vm);
         response.redirect(WebServer.HOME_URL);

@@ -62,7 +62,8 @@ public class GetHomeRoute implements Route {
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", DESCRIPTION);
     if(player != null) {
-      vm.put("message", Message.info("Player not Null"));
+      vm.put("message", Message.info(String.format("Hello, %s", player.getName())));
+      vm.put("currentUser", player);
     } else {
       // display a user message in the Home page
       vm.put("message", WELCOME_MSG);
