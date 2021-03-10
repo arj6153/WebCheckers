@@ -16,11 +16,16 @@ public class GameCenter {
     public Lobby getLobby() {
         return this.lobby;
     }
+
     public void addPlayer(String name) {
        this.lobby.addPlayer(name);
     }
+
     public Player getPlayer(String name) {
         return this.lobby.getPlayer(name);
     }
 
+    public synchronized void removePlayer(String name) {
+        lobby.removePlayer(name);
+    }
 }

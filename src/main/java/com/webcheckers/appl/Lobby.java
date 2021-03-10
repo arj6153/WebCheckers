@@ -60,6 +60,9 @@ public class Lobby {
         return lobbyPlayers;
     }
 
+    public synchronized void removePlayer(String name) {
+        this.lobby.remove(name);
+    }
 
     public synchronized boolean playerExists(String name) {
         return this.lobby.containsKey(name);

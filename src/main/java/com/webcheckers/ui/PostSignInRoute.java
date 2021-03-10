@@ -18,11 +18,10 @@ public class PostSignInRoute implements Route {
 
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     //CONSTANT
-    static final String USER_ID = "userID";
+    private final String USER_ID = "userID";
     static final String MESSAGE_ATTR = "message";
     static final String MESSAGE_TYPE_ATTR = "messageType";
-    static final String ERROR_TYPE = "error";
-
+    private final String ERROR_TYPE = "error";
 
     // Attributes
     private TemplateEngine templateEngine;
