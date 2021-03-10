@@ -1,10 +1,27 @@
 package com.webcheckers.appl;
 
-public class Player {
+import java.util.HashMap;
+
+public class Player extends Lobby{
 
     private final String name;
 
     public Player(String name) {
         this.name = name;
     }
+
+
+    public String getName() {
+        return name;
+    }
+
+    private boolean isPlaying = false;
+
+    public void setPlaying(boolean status) {
+        isPlaying = status;
+    }
+
+
+
+
 }

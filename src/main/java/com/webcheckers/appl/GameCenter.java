@@ -1,5 +1,6 @@
 package com.webcheckers.appl;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class GameCenter {
@@ -15,4 +16,5 @@ public class GameCenter {
     public Lobby getLobby() {
         return lobby;
     }
+
 }
