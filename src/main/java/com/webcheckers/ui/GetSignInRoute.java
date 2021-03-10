@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.Player;
 import com.webcheckers.util.Message;
 import spark.*;
 import java.util.HashMap;
@@ -27,6 +28,8 @@ public class GetSignInRoute implements Route {
     @Override
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("GetSIgnInRoute is invoked");
+        final Session httpSession = request.session();
+
         Map<String,Object> vm = new HashMap<>();
         vm.put("title", "Sign In Form");
         vm.put("message", SIGN_IN_MSG);

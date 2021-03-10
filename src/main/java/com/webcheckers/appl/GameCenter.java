@@ -11,4 +11,8 @@ public class GameCenter {
     public GameCenter() {
         this.lobby = new Lobby();
     }
+
+    public Lobby getLobby() {
+        return lobby;
+    }
 }

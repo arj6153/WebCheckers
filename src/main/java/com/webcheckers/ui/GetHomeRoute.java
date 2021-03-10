@@ -6,11 +6,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.webcheckers.appl.GameCenter;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import spark.TemplateEngine;
+import spark.*;
 
 import com.webcheckers.util.Message;
 
@@ -22,6 +18,8 @@ import com.webcheckers.util.Message;
 public class GetHomeRoute implements Route {
 
   private final String VIEW_NAME = "home.ftl";
+  static final String CURRENT_PLAYER = "currPlayer";
+  private final String DESCRIPTION = "Home";
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
@@ -56,9 +54,11 @@ public class GetHomeRoute implements Route {
   @Override
   public Object handle(Request request, Response response) {
     LOG.finer("GetHomeRoute is invoked.");
+    final Session httpSession = request.session();
+
     //
     Map<String, Object> vm = new HashMap<>();
-    vm.put("title", "Welcome!");
+    vm.put("title", DESCRIPTION);
 
     // display a user message in the Home page
     vm.put("message", WELCOME_MSG);

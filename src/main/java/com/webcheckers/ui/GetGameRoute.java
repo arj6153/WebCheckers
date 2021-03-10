@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 public class GetGameRoute implements Route {
     //Attributes
     private final String VIEW_NAME = "game.ftl";
+
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
     private static final Message TITLE_MSG = Message.info("Checkers Game");

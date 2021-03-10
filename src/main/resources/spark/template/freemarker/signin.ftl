@@ -11,9 +11,9 @@
 <div class="page">
   <h1>Web Checkers | ${title}</h1>
   <div class="body">
-    <form action="/signin" method="POST">
+    <form action="./signin" method="POST">
       <#include "message.ftl">
-      <input name="userID" />
+      <input type="text" name="userID" />
       <br><br/>
       <button type="submit">Sign In</button>
     </form>
