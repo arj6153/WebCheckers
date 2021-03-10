@@ -6,6 +6,7 @@ import java.util.UUID;
 /**
  * Class contains all the active players on the WebChecker Server
  * @author: Truong Anh Tuan Hoang
+ * @author: Alex Johannesson
  *
  */
 public class Lobby {
@@ -35,6 +36,10 @@ public class Lobby {
        return this.lobby.get(name);
     }
 
+
+    public void playerLogout(Player player) {
+        this.lobby.remove(player.getName());
+    }
 
     public String listPlayers(Player player) {
         if(this.lobby.size() <= 1) {
