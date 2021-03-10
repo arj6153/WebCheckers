@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.util.Message;
 import spark.*;
 import java.util.HashMap;
@@ -16,9 +17,11 @@ public class GetSignInRoute implements Route {
     private static final Message SIGN_IN_MSG = Message.info("Please enter your name!");
 
     private final TemplateEngine templateEngine;
+    private final GameCenter gameCenter;
 
-    public GetSignInRoute(TemplateEngine templateEngine) {
+    public GetSignInRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
+        this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
         LOG.config("GetSignInRoute is initialized.");
     }
     @Override

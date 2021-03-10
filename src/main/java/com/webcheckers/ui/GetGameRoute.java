@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.GameCenter;
 import com.webcheckers.util.Message;
 import spark.*;
 
@@ -17,8 +18,10 @@ public class GetGameRoute implements Route {
     private static final Message TITLE_MSG = Message.info("Checkers Game");
 
     private final TemplateEngine templateEngine;
+    private final GameCenter gameCenter;
 
-    public GetGameRoute(TemplateEngine templateEngine) {
+    public GetGameRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
+        this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         LOG.config("GetGameRoute is initialized.");
     }
