@@ -92,10 +92,10 @@ public class Game {
      * @param y
      *      The Y coordinate of the tile
      * @return
-     *      True if the tile is while, false if the tile is black
+     *      True if the tile is white, false if the tile is black
      */
     private boolean isWhiteTile(int x, int y)
     {
-        return (x + y) % 2 != 0;
+        return (x + y) % 2 == 0;
     }
 }
