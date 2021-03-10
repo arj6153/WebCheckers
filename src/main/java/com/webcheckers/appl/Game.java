@@ -1,10 +1,17 @@
 package com.webcheckers.appl;
 
+import java.util.*;
+
+
 public class Game {
     private Player redPlayer;
     private Player whitePlayer;
     private Piece[][] board;
     private int ID;
+    private int whitePlayerPieces = 12;
+    private int redPlayerPieces = 12;
+    private Player playerTurn;
+
 
     public Game(Player red, Player white)
     {
@@ -13,6 +20,32 @@ public class Game {
         this.board = newBoardSetup();
         this.ID = redPlayer.getName().hashCode() * 31 + whitePlayer.getName().hashCode() * 67;
     }
+
+
+    public Player getRedPlayer() {
+        return redPlayer;
+    }
+
+    public Player getWhitePlayer() {
+        return whitePlayer;
+    }
+
+    public boolean isWhitePlayer(Player player) {
+        return player.equals(getWhitePlayer());
+    }
+
+    public int getRedPlayerPieces() {
+        return redPlayerPieces;
+    }
+
+    public int getWhitePlayerPieces() {
+        return whitePlayerPieces;
+    }
+
+    public boolean isRedPlayer(Player player) {
+        return player.equals(getRedPlayer());
+    }
+
 
     /**
      * Create a new standard board based on checkers rules.
@@ -89,9 +122,18 @@ public class Game {
     {
         // Is the target tile white or occupied? If so, not droppable
         // Is the tile where the selected piece should be actually occupied by a piece? If not, not droppable
-        return isWhiteTile(targetX, targetY) && isTileEmpty(targetX, targetY) && !isTileEmpty(pieceX, pieceY);
+        return isWhiteTile(targetX, targetY) && isTileEmpty(targetX, targetY) || !isTileEmpty(pieceX, pieceY);
     }
 
+
+    public boolean isValid(int row, int col) {
+        if(row <0 || row > 7 || col<0 || col>7) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     /**
      * Returns whether or not a tile on the checker board is white
      * @param x
