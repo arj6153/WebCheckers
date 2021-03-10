@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -31,7 +32,6 @@ public class GetGameRoute implements Route {
         LOG.finer("GetGameRoute is invoked");
         Map<String,Object> vm = new HashMap<>();
         vm.put("title", TITLE_MSG);
-        //vm.put("message", "fda");
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
     }
 }
