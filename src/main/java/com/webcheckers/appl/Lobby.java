@@ -36,28 +36,12 @@ public class Lobby {
        return this.lobby.get(name);
     }
 
-
-    public void playerLogout(Player player) {
-        this.lobby.remove(player.getName());
+    public synchronized HashMap<String,Player> getMap () {
+        return this.lobby;
     }
 
     public synchronized int getLobbySize() {
         return this.lobby.size();
-    }
-    public String listPlayers(Player player) {
-        if(this.lobby.size() <= 1) {
-            return error;
-
-        }
-        String lobbyPlayers = "";
-        for(String players : this.lobby.keySet()) {
-            Player p = this.lobby.get(players);
-            if(p != player) { // && (gameNotActive == null)) add once game is setup
-                return error;
-            }
-            lobbyPlayers += "<ol> <li class='players'> <div class='list'> <p> <a href='/game/" + p.getName() + '>' + players + " </p> </div> </li> </ol>";
-        }
-        return lobbyPlayers;
     }
 
     public synchronized void removePlayer(String name) {

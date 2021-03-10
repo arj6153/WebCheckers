@@ -1,8 +1,6 @@
 package com.webcheckers.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.logging.Logger;
 
 import com.webcheckers.appl.GameCenter;
@@ -65,6 +63,7 @@ public class GetHomeRoute implements Route {
     if(player != null) {
       vm.put("message", Message.info(String.format("Hello, %s", player.getName())));
       vm.put("currentUser", player);
+      vm.put("playerList", gameCenter.getLobby().getMap());
     } else {
       // display a user message in the Home page
       vm.put("message", WELCOME_MSG);
