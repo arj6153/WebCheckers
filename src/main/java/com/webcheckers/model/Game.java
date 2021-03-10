@@ -151,7 +151,7 @@ public class Game {
     {
         // Is the target tile white or occupied? If so, not droppable
         // Is the tile where the selected piece should be actually occupied by a piece? If not, not droppable
-        return isWhiteTile(targetX, targetY) && isTileEmpty(targetX, targetY) || !isTileEmpty(pieceX, pieceY);
+        return !isWhiteTile(targetX, targetY) && isTileEmpty(targetX, targetY) && !isTileEmpty(pieceX, pieceY);
     }
 
     /**
