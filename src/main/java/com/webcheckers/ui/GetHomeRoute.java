@@ -23,7 +23,8 @@ public class GetHomeRoute implements Route {
   static final String DESCRIPTION = "Home";
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
-  private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
+  static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
+  static final String LOBBY_COUNT = "lobbyCount";
 
   private final TemplateEngine templateEngine;
   private final GameCenter gameCenter;
@@ -67,6 +68,7 @@ public class GetHomeRoute implements Route {
     } else {
       // display a user message in the Home page
       vm.put("message", WELCOME_MSG);
+      vm.put(LOBBY_COUNT, gameCenter.getLobby().getLobbySize());
     }
     // render the View
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));

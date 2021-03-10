@@ -18,6 +18,8 @@
 
     <p>Welcome to checkers!</p>
     <#include "message.ftl" />
+    <br><br/>
+    <#include "view-players.ftl"/>
     <!-- TODO: future content on the Home:
                    to start games,
                    spectating active games,

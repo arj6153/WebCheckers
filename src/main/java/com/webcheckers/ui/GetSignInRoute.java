@@ -14,10 +14,11 @@ import static spark.Spark.halt;
 
 public class GetSignInRoute implements Route {
     //Attributes
-    static final String VIEW_NAME = "signin.ftl";
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
-    private static final Message SIGN_IN_MSG = Message.info("Please enter your name!");
+    static final String VIEW_NAME = "signin.ftl";
+    static final Message SIGN_IN_MSG = Message.info("Please enter your name!");
+    static final String DESCRIPTION = "Sign-In Form";
 
     private final TemplateEngine templateEngine;
     private final GameCenter gameCenter;
@@ -34,7 +35,7 @@ public class GetSignInRoute implements Route {
         final Player player = httpSession.attribute("currentUser");
         if (player == null) {
             Map<String,Object> vm = new HashMap<>();
-            vm.put("title", "Sign In Form");
+            vm.put("title", DESCRIPTION);
             vm.put("message", SIGN_IN_MSG);
             return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
         }

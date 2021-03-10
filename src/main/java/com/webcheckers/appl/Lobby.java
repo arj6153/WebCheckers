@@ -41,6 +41,9 @@ public class Lobby {
         this.lobby.remove(player.getName());
     }
 
+    public synchronized int getLobbySize() {
+        return this.lobby.size();
+    }
     public String listPlayers(Player player) {
         if(this.lobby.size() <= 1) {
             return error;
