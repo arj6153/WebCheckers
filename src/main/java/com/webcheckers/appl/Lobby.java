@@ -1,54 +1,76 @@
 package com.webcheckers.appl;
 
+import com.webcheckers.model.Player;
+
 import java.util.HashMap;
-import java.util.UUID;
 
 /**
- * Class contains all the active players on the WebChecker Server
+ * Class contains all the active players on the WebChecker Server.
+ *
  * @author: Truong Anh Tuan Hoang
  * @author: Alex Johannesson
- *
  */
 public class Lobby {
 
-
     // lobby holds the username of a player as a key and the Player as the value
-    private HashMap<String, Player> lobby;
+    private HashMap<String, Player> map;
     private String error = "<p> There are no players available at this time </p>";
 
-
+    /**
+     * Constructor of the lobby holding the hashmap.
+     */
     public Lobby() {
-
-        this.lobby = new HashMap<>();
+        this.map = new HashMap<>();
     }
 
-    // Public Methods
-
-
-
+    /**
+     * Add player to hashmap.
+     * @param name player name
+     */
     public synchronized void addPlayer(String name) {
         Player player = new Player(name);
-        this.lobby.put(name, player);
-
+        this.map.put(name, player);
     }
 
+    /**
+     * Gets player in hashmap.
+     * @param name player name
+     * @return player
+     */
     public synchronized Player getPlayer(String name) {
-       return this.lobby.get(name);
+       return this.map.get(name);
     }
 
+    /**
+     * Hashmap of the players and their names.
+     * @return hashmap
+     */
     public synchronized HashMap<String,Player> getMap () {
-        return this.lobby;
+        return this.map;
     }
 
+    /**
+     * Gets the size of the hashmap.
+     * @return lobby size
+     */
     public synchronized int getLobbySize() {
-        return this.lobby.size();
+        return this.map.size();
     }
 
+    /**
+     * Removes player from hashmap.
+     * @param name player name
+     */
     public synchronized void removePlayer(String name) {
-        this.lobby.remove(name);
+        this.map.remove(name);
     }
 
+    /**
+     * Checks if player exists in hashmap.
+     * @param name player name
+     * @return true if player exists, else false
+     */
     public synchronized boolean playerExists(String name) {
-        return this.lobby.containsKey(name);
+        return this.map.containsKey(name);
     }
 }

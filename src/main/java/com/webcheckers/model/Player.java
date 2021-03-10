@@ -1,8 +1,10 @@
-package com.webcheckers.appl;
+package com.webcheckers.model;
+
+import com.webcheckers.appl.Lobby;
 
 import java.util.HashMap;
 
-public class Player extends Lobby{
+public class Player extends Lobby {
 
     private final String name;
 
