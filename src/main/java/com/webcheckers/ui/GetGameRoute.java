@@ -97,12 +97,13 @@ public class GetGameRoute implements Route {
            }
            Game game = gameCenter.getGame(Integer.parseInt(gameID));
            vm.put(VIEWMODE_ATTR, mode.PLAY);
-           //vm.put(MODEOPTIONS_ATTR, gson.);
+           //vm.put(MODEOPTIONS_ATTR, (something));
            vm.put(CURRENT_USER, player);
            vm.put(RED_PLAYER_ATTR, game.getRedPlayer());
            vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
            vm.put(ACTIVE_COLOR_ATTR, game.getPlayerColor().toString());
            vm.put(GAMEID_ATTR, gameID);
+           vm.put("board", game.getBoard());
         }
         vm.put("title", TITLE_MSG);
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
