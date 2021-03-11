@@ -57,7 +57,7 @@ public class PostSignInRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostSignInRoute has been invoked.");
         final Session httpSession = request.session();
-        final Player player = httpSession.attribute("currentUser");
+        final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         Map<String,Object> vm = new HashMap<>();
         vm.put("title", GetSignInRoute.DESCRIPTION);
         vm.put("message", GetSignInRoute.SIGN_IN_MSG);

@@ -23,6 +23,7 @@ public class GetHomeRoute implements Route {
 
   static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
   static final String LOBBY_COUNT = "lobbyCount";
+  static final String CURRENT_USER = "currentUser";
 
   private final TemplateEngine templateEngine;
   private final GameCenter gameCenter;
@@ -55,14 +56,14 @@ public class GetHomeRoute implements Route {
   public Object handle(Request request, Response response) {
     LOG.finer("GetHomeRoute is invoked.");
     final Session httpSession = request.session();
-    final Player player = httpSession.attribute("currentUser");
+    final Player player = httpSession.attribute(CURRENT_USER);
 
     //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", DESCRIPTION);
     if(player != null) {
       vm.put("message", Message.info(String.format("Hello, %s", player.getName())));
-      vm.put("currentUser", player);
+      vm.put(CURRENT_USER, player);
       vm.put("playerList", gameCenter.getLobby().getMap());
     } else {
       // display a user message in the Home page

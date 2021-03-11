@@ -43,7 +43,7 @@ public class PostSignOutRoute implements Route{
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostSignInRoute has been invoked.");
         final Session httpSession = request.session();
-        final Player player = httpSession.attribute("currentUser");
+        final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         gameCenter.removePlayer(player.getName());
         httpSession.attribute("currentUser", null);
         response.redirect(WebServer.HOME_URL);

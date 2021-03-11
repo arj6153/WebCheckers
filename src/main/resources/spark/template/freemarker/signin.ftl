@@ -12,7 +12,7 @@
     <div class="body">
       <form action="/signin" method="POST">
         <#include "message.ftl">
-        <input type="text" name="userID" />
+        <input name="userID" />
         <br><br/>
         <button type="submit">Sign In</button>
       </form>

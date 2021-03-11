@@ -55,7 +55,7 @@ public class GetSignInRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("GetSIgnInRoute is invoked");
         final Session httpSession = request.session();
-        final Player player = httpSession.attribute("currentUser");
+        final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         if (player == null) {
             Map<String,Object> vm = new HashMap<>();
             vm.put("title", DESCRIPTION);
