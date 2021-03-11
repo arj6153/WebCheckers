@@ -52,24 +52,7 @@ public class GameCenter {
     }
 
     /**
-     * Adds a player to the hashmap  vm.put(VIEWMODE_PARAM, mode.PLAY);
-
-      GameBoard board = gameCenter.getGame(gameId); //gets board via gameID
-      board.isWhitePlayerBoard(!board.isRedPlayer(player));
-
-      vm.put(REDPLAYER_PARAM, board.getRedPlayer());
-      vm.put(WHITEPLAYER_PARAM, board.getWhitePlayer());
-      vm.put(BOARD_PARAM, board);
-      vm.put(ACTIVECOLOR_PARAM,board.getPlayerColor(board.getPlayerTurn()));
-      if(board.isGameOver()){ // checks to see if the game is over
-        modeOptions.put("isGameOver",board.isGameOver()); //sets the game over value into the map
-        modeOptions.put("gameOverMessage",board.getGameOverMessage()); //stores the gameOver message into the map
-        vm.put(MODEOPTIONS_PARAM, gson.toJson(modeOptions)); //converts the modeOptions map into a json
-        board.getRedPlayer().setPlaying(false); //sets the red player to not be playing
-        board.getWhitePlayer().setPlaying(false); //sets the white player to not be playing
-        gameCenter.removeCurrentGame(gameId);
-        gameCenter.addGameSave(gameId);
-      }.
+     * Adds a player to the hashmap
      * @param name name of player
      */
     public void addPlayer(String name) {

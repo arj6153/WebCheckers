@@ -74,7 +74,11 @@ public class GetGameRoute implements Route {
            String gameID = request.queryParams(GAMEID_ATTR);
            if(gameID == null) {
                if(!player.isPlaying()) {
+                   String opponentName = request.queryParams(PLAYER_ATTR);
+                   System.out.println(opponentName);
                    final Player opponent = gameCenter.getPlayer(request.queryParams(PLAYER_ATTR));
+
+
                    ModelAndView mv;
                    if(opponent.isPlaying()) {
                        httpSession.attribute(MESSAGE_ATTR, Message.error("Player is in game. Choose another"));
