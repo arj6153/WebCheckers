@@ -2,13 +2,15 @@ package com.webcheckers.model;
 
 public class Board {
     private Piece[][] board;
-    private int whitePlayerPieces = 12;
-    private int redPlayerPieces = 12;
+    private int whitePlayerPieces;
+    private int redPlayerPieces;
 
 
     public Board() {
         this.board = new Piece[8][8];
         this.initializeBoard();
+        this.whitePlayerPieces = 12;
+        this.redPlayerPieces = 12;
     }
 
     public int getWhitePlayerPieces() {
