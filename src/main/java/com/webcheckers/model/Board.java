@@ -31,6 +31,15 @@ public class Board {
     }
 
     /**
+     * Retrieve a piece (if any) from the given x/y coordinates.
+     * @return
+     *      The piece if there is one present, null if none exists.
+     */
+    public Piece getTile(int x, int y) {
+        return board[x][y];
+    }
+
+    /**
      * Given the x,y coordinates of a piece and a target location, determines if the piece can be dropped at the target.
      * @param pieceX the X location of the selected piece
      * @param pieceY the Y location of the selected piece
