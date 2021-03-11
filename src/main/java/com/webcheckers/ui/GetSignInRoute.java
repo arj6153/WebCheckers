@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import static spark.Spark.halt;
 
 /**
- * UI controller for the signin page
+ * UI controller for the signin page.
  *
  * @author Alex Johannesson
  * @author Truong Anh Tuan Hoang

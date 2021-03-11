@@ -9,6 +9,7 @@ import java.util.HashMap;
  *
  * @author: Truong Anh Tuan Hoang
  * @author: Alex Johannesson
+ * @author: Bin Qiu
  */
 public class Lobby {
 

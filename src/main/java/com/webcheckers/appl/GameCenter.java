@@ -82,6 +82,11 @@ public class GameCenter {
         lobby.removePlayer(name);
     }
 
+    /**
+     * Gets the current game.
+     * @param gameID ID of the game
+     * @return current game
+     */
     public synchronized Game getGame(int gameID) {
        return this.gameMap.get(gameID);
     }

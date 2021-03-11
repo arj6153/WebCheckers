@@ -1,12 +1,12 @@
 package com.webcheckers.model;
 
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Game logic of Webcheckers.
  *
  * @author Michael Merlino
+ * @author Truong Anh Tuan Hoang
  */
 public class Game implements Iterable<Row>{
     private final Player redPlayer;
