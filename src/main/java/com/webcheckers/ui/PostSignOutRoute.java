@@ -25,8 +25,10 @@ public class PostSignOutRoute implements Route{
     /**
      * Creates the sign out route
      *
-     * @param gameCenter the instance of the game center
-     * @param <templateEngine> the HTML template rendering engine
+     * @param gameCenter
+     *      the instance of the game center
+     * @param <templateEngine>
+     *      the HTML template rendering engine
      */
     public <templateEngine> PostSignOutRoute(GameCenter gameCenter) {
         this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
@@ -37,10 +39,13 @@ public class PostSignOutRoute implements Route{
      * Handles a POST /signout , player signing out
      * Renders the sign out page
      *
-     * @param request the HTTP request
-     * @param response the HTTP response
+     * @param request
+     *      the HTTP request
+     * @param response
+     *      the HTTP response
      *
-     * @return null
+     * @return
+     *      null
      * @throws Exception // doesn't actually throw
      */
     @Override

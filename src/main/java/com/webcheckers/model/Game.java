@@ -25,8 +25,11 @@ public class Game implements Iterable<Row>{
 
     /**
      * Constructor of Game.
-     * @param red player color
-     * @param white opponent color
+     *
+     * @param red
+     *      player color
+     * @param white
+     *      opponent color
      */
     public Game(Player currPlayer, Player red, Player white)
     {
@@ -40,7 +43,9 @@ public class Game implements Iterable<Row>{
 
     /**
      * Get red player, this is the user.
-     * @return red player
+     *
+     * @return
+     *      red player
      */
     public Player getRedPlayer() {
         return redPlayer;
@@ -48,7 +53,9 @@ public class Game implements Iterable<Row>{
 
     /**
      * Get white player, this is the opponent.
-     * @return white player
+     *
+     * @return
+     *      white player
      */
     public Player getWhitePlayer() {
         return whitePlayer;
@@ -58,6 +65,7 @@ public class Game implements Iterable<Row>{
     }
     /**
      * Gets the player whose turn it currently is.
+     *
      * @return
      *      Red player on red's turn, White player on white's turn.
      */
@@ -72,6 +80,7 @@ public class Game implements Iterable<Row>{
 
     /**
      * Gets current player color.
+     *
      * @return
      *      Red player on red's turn, White player on white's turn.
      */
@@ -83,8 +92,12 @@ public class Game implements Iterable<Row>{
     }
     /**
      * Checks if player is white player, opponent.
-     * @param player white player
-     * @return true if player is white player, else false
+     *
+     * @param player
+     *      white player
+     *
+     * @return
+     *      true if player is white player, else false
      */
     public boolean isWhitePlayer(Player player) {
         return player.equals(getWhitePlayer());
@@ -92,17 +105,22 @@ public class Game implements Iterable<Row>{
 
     /**
      * Checks if player is red player, user.
-     * @param player red player
-     * @return true if player is red player, else false
+     *
+     * @param player
+     *      red player
+     *
+     * @return
+     *      true if player is red player, else false
      */
     public boolean isRedPlayer(Player player) {
         return player.equals(getRedPlayer());
     }
 
     /**
-     * Checks if a given player object is participating in this game
+     * Checks if a given player object is participating in this game.
      * @param player
      *      The player to check
+     *
      * @return
      *      True if the player is in the game, false otherwise
      */
@@ -111,7 +129,9 @@ public class Game implements Iterable<Row>{
     }
     /**
      * Gets the game session's ID.
-     * @return game ID
+     *
+     * @return
+     *      game ID
      */
     public int getID()
     {
@@ -138,7 +158,7 @@ public class Game implements Iterable<Row>{
     }
 
     /**
-     * Set the turn to Red
+     * Set the turn to Red.
      */
     public void setRedTurn(boolean status) {
        this.redTurn = status;
@@ -177,7 +197,7 @@ public class Game implements Iterable<Row>{
     }
 
     /**
-     * Sets which player's turn it is
+     * Sets which player's turn it is.
      */
     public void setPlayerTurn(Player playerTurn) {
         this.playerTurn = playerTurn;

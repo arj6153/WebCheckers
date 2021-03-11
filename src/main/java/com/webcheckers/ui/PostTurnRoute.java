@@ -29,9 +29,12 @@ public class PostTurnRoute implements Route {
     /**
      * Constructor of PostTurnRoute
      *
-     * @param templateEngine the HTML template rendering engine
-     * @param gameCenter the instance of the game center
-     * @param gson The instance of the gson
+     * @param templateEngine
+     *      the HTML template rendering engine
+     * @param gameCenter
+     *      the instance of the game center
+     * @param gson
+     *      the instance of the gson
      */
     public PostTurnRoute(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson) {
         this.templateEngine = templateEngine;
@@ -43,10 +46,13 @@ public class PostTurnRoute implements Route {
     /**
      * Handles the Turn Ajax requests
      *
-     * @param request the HTTP request
-     * @param response the HTTP response
+     * @param request
+     *      the HTTP request
+     * @param response
+     *      the HTTP response
      *
-     * @return a json of the message regarding which player's turn it is
+     * @return
+     *      a json of the message regarding which player's turn it is
      * @throws Exception
      */
     @Override

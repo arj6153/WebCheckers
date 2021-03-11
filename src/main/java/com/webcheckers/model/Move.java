@@ -21,8 +21,11 @@ public class Move {
 
     /**
      * Constructor of Move.
-     * @param start starting position of the piece
-     * @param end ending position of the piece
+     *
+     * @param start
+     *      starting position of the piece
+     * @param end
+     *      ending position of the piece
      */
     public Move(Position start, Position end) {
         this.start = start;
@@ -32,7 +35,9 @@ public class Move {
 
     /**
      * Gets end position of a checker piece.
-     * @return a position
+     *
+     * @return
+     *      a position
      */
     public Position getEnd() {
         return end;
@@ -40,7 +45,9 @@ public class Move {
 
     /**
      * Gets the type of move used.
-     * @return move type
+     *
+     * @return
+     *      move type
      */
     public moveType getType() {
         return Type;
@@ -48,7 +55,9 @@ public class Move {
 
     /**
      * Gets the start position of a checker piece.
-     * @return a position
+     *
+     * @return
+     *      a position
      */
     public Position getStart() {
         return start;
@@ -56,7 +65,9 @@ public class Move {
 
     /**
      * Sets the move type.
-     * @param type move type
+     *
+     * @param type
+     *      move type
      */
     public void setType(moveType type) {
         Type = type;
@@ -64,7 +75,9 @@ public class Move {
 
     /**
      * Sets the ending position of a checker piece.
-     * @param end a position
+     *
+     * @param end
+     *      a position
      */
     public void setEnd(Position end) {
         this.end = end;
@@ -72,7 +85,9 @@ public class Move {
 
     /**
      * Sets the starting position of a checker piece.
-     * @param start a position
+     *
+     * @param start
+     *      a position
      */
     public void setStart(Position start) {
         this.start = start;

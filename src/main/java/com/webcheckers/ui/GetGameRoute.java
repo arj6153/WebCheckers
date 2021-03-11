@@ -45,8 +45,11 @@ public class GetGameRoute implements Route {
     }
     /**
      * Constructor of GetGameRoute.
-     * @param gameCenter the instance of the game center
-     * @param templateEngine freemarker
+     *
+     * @param gameCenter
+     *      the instance of the game center
+     * @param templateEngine
+     *      the HTML template rendering engine
      */
     public GetGameRoute(GameCenter gameCenter, TemplateEngine templateEngine, final Gson gson) {
         this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
@@ -57,9 +60,14 @@ public class GetGameRoute implements Route {
 
     /**
      * Renders the game page.
-     * @param request HTTP request
-     * @param response HTTP response
-     * @return rendered HTML
+     *
+     * @param request
+     *      HTTP request
+     * @param response
+     *      HTTP response
+     *
+     * @return
+     *      rendered HTML
      * @throws Exception
      */
     @Override

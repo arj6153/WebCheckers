@@ -12,8 +12,11 @@ public class Tile {
 
     /**
      * Constructor of Tile.
-     * @param cellIdx cell information
-     * @param currentPiece current checker piece
+     *
+     * @param cellIdx
+     *      cell information
+     * @param currentPiece
+     *      current checker piece
      */
     public Tile(int cellIdx, Piece currentPiece, boolean valid) {
         this.valid = valid;
@@ -22,7 +25,9 @@ public class Tile {
     }
     /**
      * Gets cell column.
-     * @return column number
+     *
+     * @return
+     *      column number
      */
     public int getCellIdx() {
         return this.cellIdx;
@@ -30,8 +35,12 @@ public class Tile {
 
     /**
      * Sets a checker piece on an empty tile.
-     * @param piece current checker piece
-     * @return boolean if successful set or not
+     *
+     * @param piece
+     *      current checker piece
+     *
+     * @return
+     *      boolean if successful set or not
      */
     public boolean setPiece(Piece piece) {
         if (this.piece == null) {
@@ -42,8 +51,10 @@ public class Tile {
     }
     /**
      * Checks if the tile is valid.
-     * @return true if the tile is black and there is not piece already there,
-     *         otherwise false
+     *
+     * @return
+     *      true if the tile is black and there is not piece already there,
+     *      otherwise false
      */
     public boolean isValid() {
         return valid && piece == null;
@@ -52,7 +63,9 @@ public class Tile {
 
     /**
      * Checks status of a tile to see if it is occupied.
-     * @return true if tile is occupied, else false
+     *
+     * @return
+     *      true if tile is occupied, else false
      */
     public Piece getPiece() {
         return this.piece;

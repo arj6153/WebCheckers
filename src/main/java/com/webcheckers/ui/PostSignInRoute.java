@@ -35,9 +35,12 @@ public class PostSignInRoute implements Route {
     /**
      * creates the sign in route
      *
-     * @param gameCenter the instance of the game center
-     * @param templateEngine the HTML template rendering engine
-     * @param <templateEngine> template engine
+     * @param gameCenter
+     *      the instance of the game center
+     * @param templateEngine
+     *      the HTML template rendering engine
+     * @param <templateEngine>
+     *      template engine
      */
     public <templateEngine> PostSignInRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
@@ -48,10 +51,13 @@ public class PostSignInRoute implements Route {
     /**
      * Handles a POST /signin , player signing in
      *
-     * @param request the HTTP request
-     * @param response the HTTP response
+     * @param request
+     *      the HTTP request
+     * @param response
+     *      the HTTP response
      *
-     * @return Player signing in, renders new home page view
+     * @return
+     *      Player signing in, renders new home page view
      * @throws Exception // doesn't actually throw
      */
     @Override
@@ -92,10 +98,13 @@ public class PostSignInRoute implements Route {
     }
 
     /**
-     * @param vm map of view model
-     * @param message Sign in message
+     * @param vm
+     *      map of view model
+     * @param message
+     *      Sign in message
      *
-     * @return rendered sign in page
+     * @return
+     *      rendered sign in page
      */
     private ModelAndView error(final Map<String, Object> vm, final String message) {
         vm.put(MESSAGE_ATTR, Message.error(message));

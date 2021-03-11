@@ -15,7 +15,9 @@ public class Piece {
 
     /**
      * Constructor of Piece.
-     * @param color red or white
+     *
+     * @param color
+     *      red or white
      */
     public Piece(Type type, Game.color color) {
         this.type = type;
@@ -24,7 +26,9 @@ public class Piece {
 
     /**
      * Checks if a checker piece is a king piece.
-     * @return true if a checker piece is a king, else false
+     *
+     * @return
+     *      true if a checker piece is a king, else false
      */
     public boolean isKing()
     {
@@ -33,7 +37,9 @@ public class Piece {
 
     /**
      * Gets the color of a checker piece.
-     * @return red or white
+     *
+     * @return
+     *      red or white
      */
     public Game.color getColor() {
         return this.color;
@@ -41,7 +47,9 @@ public class Piece {
 
     /**
      * Gets the Piece type.
-     * @return Piece Type
+     *
+     * @return
+     *      Piece Type
      */
     public Type getType() {
         return this.type;

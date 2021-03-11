@@ -19,10 +19,14 @@ public class Row implements Iterable<Tile>{
 
     /**
      * Constructor of Row.
-     * @param index row number
-     * @param color tile color
-     * @param flag true puts a checker piece on the tile, and
-     *             tile is empty if false
+     *
+     * @param index
+     *      row number
+     * @param color
+     *      tile color
+     * @param flag
+     *      true puts a checker piece on the tile, and
+     *      tile is empty if false
      */
     public Row(int index, Game.color color, boolean flag){
         this.tiles = new ArrayList<>();
@@ -32,8 +36,11 @@ public class Row implements Iterable<Tile>{
 
     /**
      * Initializes a board based on the color of the tiles.
-     * @param color tile colors
-     * @param flag true puts a checker piece on the tile, and
+     *
+     * @param color
+     *      tile colors
+     * @param flag
+     *      true puts a checker piece on the tile, and
      *             tile is empty if false
      */
     public void initialize(Game.color color, boolean flag) {
@@ -49,7 +56,9 @@ public class Row implements Iterable<Tile>{
 
     /**
      * Iterator for the space in the row.
-     * @return iterator of the row
+     *
+     * @return
+     *      iterator of the row
      */
     public Iterator<Tile> iterator() {
         return this.tiles.iterator();
@@ -57,7 +66,9 @@ public class Row implements Iterable<Tile>{
 
     /**
      * Gets the row number.
-     * @return row number
+     *
+     * @return
+     *      row number
      */
     public int getIndex() {
         return index;
@@ -65,7 +76,9 @@ public class Row implements Iterable<Tile>{
 
     /**
      * Sets the row number.
-     * @param index row number
+     *
+     * @param index
+     *      row number
      */
     public void setRow(int index) {
         this.index = index;

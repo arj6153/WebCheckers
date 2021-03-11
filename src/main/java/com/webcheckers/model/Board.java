@@ -34,9 +34,14 @@ public class Board {
     }
     /**
      * Checks if a tile is occupied by a checker piece.
-     * @param x  the X coordinate of the tile
-     * @param y the Y coordinate of the tile
-     * @return true if there is no checker on the tile, false if there is one
+     *
+     * @param x
+     *      the X coordinate of the tile
+     * @param y
+     *      the Y coordinate of the tile
+     *
+     * @return
+     *      true if there is no checker on the tile, false if there is one
      */
     private boolean isTileEmpty(int x, int y)
     {
@@ -45,7 +50,9 @@ public class Board {
 
     /**
      * Retrieve a piece (if any) from the given x/y coordinates.
-     * @return The piece if there is one present, null if none exists.
+     *
+     * @return
+     *      The piece if there is one present, null if none exists.
      */
     public Piece getTile(int x, int y) {
         return null;
@@ -53,12 +60,20 @@ public class Board {
 
     /**
      * Given the x,y coordinates of a piece and a target location, determines if the piece can be dropped at the target.
-     * @param pieceX the X location of the selected piece
-     * @param pieceY the Y location of the selected piece
-     * @param targetX the X location of the target tile
-     * @param targetY the Y location of the target tile
-     * @return true if the piece can be dropped at the target, false is not
      *
+     * @param pieceX
+     *      the X location of the selected piece
+     * @param pieceY
+     *      the Y location of the selected piece
+     * @param argetX
+     *      the X location of the target tile
+     * @param targetY
+     *      the Y location of the target tile
+     *
+     * @return
+     *      true if the piece can be dropped at the target, false is not
+     *
+
     public boolean isDroppable(int pieceX, int pieceY, int targetX, int targetY)
     {
         // Is the target tile white or occupied? If so, not droppable
@@ -68,7 +83,9 @@ public class Board {
 
     /**
      * Create a new standard board based on checkers rules.
-     * @return a new board, as an array of piece enums
+     *
+     * @return
+     *      a new board, as an array of piece enums
      */
     public void initializeBoard(Game.color color) {
         List<Row> board = null;
@@ -100,9 +117,14 @@ public class Board {
 
     /**
      * Checks if move is within boundary of the board.
-     * @param row the row coordinate
-     * @param col the column coordinate
-     * @return true if move is within board boundary, else false
+     *
+     * @param row
+     *      the row coordinate
+     * @param col
+     *      the column coordinate
+     *
+     * @return
+     *      true if move is within board boundary, else false
      */
     public boolean isValid(int row, int col) {
         return row >= 0 && row <= 7 && col >= 0 && col <= 7;
@@ -110,7 +132,9 @@ public class Board {
 
     /**
      * Set up the white player's board, else set up the red player's board.
-     * @param whiteboard true if the board is the whiteboard, false if the board is the redboard
+     *
+     * @param whiteboard
+     *      true if the board is the whiteboard, false if the board is the redboard
      */
     public void setBoard(boolean whiteboard) {
        if (whiteboard) {
@@ -122,7 +146,9 @@ public class Board {
 
     /**
      * Gets the checker board.
-     * @return checker board
+     *
+     * @return
+     *      checker board
      */
     public List<Row> getBoard() {
         return board;
