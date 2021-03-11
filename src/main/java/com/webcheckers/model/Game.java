@@ -8,10 +8,8 @@ package com.webcheckers.model;
 public class Game {
     private Player redPlayer;
     private Player whitePlayer;
-    private Piece[][] board;
+    private Board board;
     private int ID;
-    private int whitePlayerPieces = 12;
-    private int redPlayerPieces = 12;
     private Player playerTurn;
 
     /**
@@ -23,7 +21,7 @@ public class Game {
     {
         this.redPlayer = red;
         this.whitePlayer = white;
-        this.board = newBoardSetup();
+        this.board = new Board();
         this.ID = redPlayer.getName().hashCode() * 31 + whitePlayer.getName().hashCode() * 67;
     }
 
@@ -53,22 +51,6 @@ public class Game {
     }
 
     /**
-     * Gets pieces for the red player.
-     * @return red pieces
-     */
-    public int getRedPlayerPieces() {
-        return redPlayerPieces;
-    }
-
-    /**
-     * Gets pieces for the white player.
-     * @return white pieces
-     */
-    public int getWhitePlayerPieces() {
-        return whitePlayerPieces;
-    }
-
-    /**
      * Checks if player is red player, user.
      * @param player red player
      * @return true if player is red player, else false
@@ -76,10 +58,6 @@ public class Game {
     public boolean isRedPlayer(Player player) {
         return player.equals(getRedPlayer());
     }
-
-
-
-
 
     /**
      * Gets the game session's ID.
@@ -94,54 +72,8 @@ public class Game {
      * Get the board of the current instance
      * @return current board
      */
-    public Piece[][] getBoard()
+    public Board getBoard()
     {
         return this.board;
-    }
-
-    /**
-     * Checks if a tile is occupied by a checker piece.
-     * @param x  the X coordinate of the tile
-     * @param y the Y coordinate of the tile
-     * @return true if there is no checker on the tile, false if there is one
-     */
-    private boolean isTileEmpty(int x, int y)
-    {
-        return board[x][y] == null;
-    }
-
-    /**
-     * Given the x,y coordinates of a piece and a target location, determines if the piece can be dropped at the target.
-     * @param pieceX the X location of the selected piece
-     * @param pieceY the Y location of the selected piece
-     * @param targetX the X location of the target tile
-     * @param targetY the Y location of the target tile
-     * @return true if the piece can be dropped at the target, false is not
-     */
-    public boolean isDroppable(int pieceX, int pieceY, int targetX, int targetY)
-    {
-        // Is the target tile white or occupied? If so, not droppable
-        // Is the tile where the selected piece should be actually occupied by a piece? If not, not droppable
-        return !isWhiteTile(targetX, targetY) && isTileEmpty(targetX, targetY) && !isTileEmpty(pieceX, pieceY);
-    }
-
-    /**
-     * Checks if move is within boundary of the board.
-     * @param row the row coordinate
-     * @param col the column coordinate
-     * @return true if move is within board boundary, else false
-     */
-    public boolean isValid(int row, int col) {
-        return row >= 0 && row <= 7 && col >= 0 && col <= 7;
-    }
-    /**
-     * Returns whether or not a tile on the checker board is white.
-     * @param x the X coordinate of the tile
-     * @param y the Y coordinate of the tile
-     * @return true if the tile is white, false if the tile is black
-     */
-    private boolean isWhiteTile(int x, int y)
-    {
-        return (x + y) % 2 == 0;
     }
 }
