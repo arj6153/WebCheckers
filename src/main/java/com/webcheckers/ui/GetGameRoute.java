@@ -29,7 +29,6 @@ public class GetGameRoute implements Route {
     static final String ACTIVE_COLOR_ATTR = "activeColor";
     static final String MODEOPTIONS_ATTR = "modeOptionsAsJSON";
 
-
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
     private static final Message TITLE_MSG = Message.info("Checkers Game");
@@ -96,11 +95,14 @@ public class GetGameRoute implements Route {
                    return null;
                }
            }
-           vm.put(VIEWMODE_ATTR, mode.PLAY);
            Game game = gameCenter.getGame(Integer.parseInt(gameID));
+           vm.put(VIEWMODE_ATTR, mode.PLAY);
+           //vm.put(MODEOPTIONS_ATTR, gson.);
+           vm.put(CURRENT_USER, player);
            vm.put(RED_PLAYER_ATTR, game.getRedPlayer());
            vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
-           vm.put(ACTIVE_COLOR_ATTR, game.getPlayerColor());
+           vm.put(ACTIVE_COLOR_ATTR, game.getPlayerColor().toString());
+           vm.put(GAMEID_ATTR, gameID);
         }
         vm.put("title", TITLE_MSG);
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));

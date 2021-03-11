@@ -10,7 +10,7 @@
     "gameID" : ${gameID!'null'},
     "currentUser" : "${currentUser.name}",
     "viewMode" : "${viewMode}",
-    "modeOptions" : ${modeOptionsAsJSON!'{}'},
+
     "redPlayer" : "${redPlayer.name}",
     "whitePlayer" : "${whitePlayer.name}",
     "activeColor" : "${activeColor}"
