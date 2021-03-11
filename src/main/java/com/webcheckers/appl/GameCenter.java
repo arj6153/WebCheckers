@@ -9,6 +9,7 @@ import java.util.logging.Logger;
  *
  * @author Truong Anh Tuan Hoang
  * @author Bin Qiu
+ * @author Alex Johannesson
  */
 public class GameCenter {
     private static final Logger LOG = Logger.getLogger(GameCenter.class.getName());

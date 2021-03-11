@@ -13,9 +13,16 @@ import java.util.regex.Pattern;
 
 import static spark.Spark.halt;
 
-
+/**
+ * the {@code Post /signin} route handler
+ * @author Alex Johannesson
+ * @author Truong Anh Tuan Hoang
+ */
 public class PostSignInRoute implements Route {
 
+    /**
+     * Global Variables
+     */
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     //CONSTANT
     private final String USER_ID = "userID";
@@ -27,13 +34,25 @@ public class PostSignInRoute implements Route {
     private TemplateEngine templateEngine;
     private final GameCenter gameCenter;
 
-
+    /**
+     * creates the signin route
+     * @param gameCenter
+     * @param templateEngine
+     * @param <templateEngine>
+     */
     public <templateEngine> PostSignInRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
         LOG.config("PostSignInRoute has been initialized.");
     }
 
+    /**
+     * Handles a POST /signin , player signing in
+     * @param request the http request
+     * @param response the http response
+     * @return Player signing in, renders new home page view
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostSignInRoute has been invoked.");
@@ -71,6 +90,11 @@ public class PostSignInRoute implements Route {
         return null;
     }
 
+    /**
+     * @param vm map of view model
+     * @param message Sign in message
+     * @return rendered signin page
+     */
     private ModelAndView error(final Map<String, Object> vm, final String message) {
         vm.put(MESSAGE_ATTR, Message.info(message));
         vm.put(MESSAGE_TYPE_ATTR, ERROR_TYPE);

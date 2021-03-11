@@ -11,8 +11,17 @@ import java.util.logging.Logger;
 
 import static spark.Spark.halt;
 
-
+/**
+ * UI controller for the signin page
+ *
+ * @author Alex Johannesson
+ * @author Truong Anh Tuan Hoang
+ */
 public class GetSignInRoute implements Route {
+
+    /**
+     * Global Variables
+     */
     //Attributes
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
@@ -23,11 +32,25 @@ public class GetSignInRoute implements Route {
     private final TemplateEngine templateEngine;
     private final GameCenter gameCenter;
 
+    /**
+     * Creates the UI controller to handle The {@code Get /signin} route handler
+     * @param gameCenter
+     * @param templateEngine
+     */
     public GetSignInRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
         this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
         LOG.config("GetSignInRoute is initialized.");
     }
+
+    /**
+     * Renders the signin page
+     *
+     * @param request http request
+     * @param response http response
+     * @return the rendered singin page
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("GetSIgnInRoute is invoked");
