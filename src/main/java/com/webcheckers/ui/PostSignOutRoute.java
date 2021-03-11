@@ -40,7 +40,7 @@ public class PostSignOutRoute implements Route{
      * @param response the HTTP response
      *
      * @return null
-     * @throws Exception
+     * @throws Exception // doesn't actually throw
      */
     @Override
     public Object handle(Request request, Response response) throws Exception {

@@ -52,7 +52,7 @@ public class PostSignInRoute implements Route {
      * @param response the HTTP response
      *
      * @return Player signing in, renders new home page view
-     * @throws Exception
+     * @throws Exception // doesn't actually throw
      */
     @Override
     public Object handle(Request request, Response response) throws Exception {
