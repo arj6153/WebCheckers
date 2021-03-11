@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * UI controller for 00000000000
  *
- * @author:Truong Anh Tuan Hoang
+ * @author:Alex Johannesson
  */
 public class PostTurnRoute implements Route {
 
@@ -28,9 +28,10 @@ public class PostTurnRoute implements Route {
 
     /**
      * Constructor of PostTurnRoute
-     * @param templateEngine
+     *
+     * @param templateEngine the HTML template rendering engine
      * @param gameCenter the instance of the game center
-     * @param gson
+     * @param gson The instance of the gson
      */
     public PostTurnRoute(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson) {
         this.templateEngine = templateEngine;
@@ -38,6 +39,16 @@ public class PostTurnRoute implements Route {
         this.gson = gson;
     }
 
+
+    /**
+     * Handles the Turn Ajax requests
+     *
+     * @param request the HTTP request
+     * @param response the HTTP response
+     *
+     * @return a json of the message regarding which player's turn it is
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostTurnRoute has been invoked.");
