@@ -101,11 +101,8 @@ public class GetGameRoute implements Route {
            }
            vm.put(VIEWMODE_ATTR, mode.PLAY);
            Game game = gameCenter.getGame(Integer.parseInt(gameID));
-
-
            options.put("isGameOver", false);
            options.put("gameOverMessage", "YOU LOSE");
-
            vm.put(MODEOPTIONS_ATTR, gson.toJson(options));
            vm.put(RED_PLAYER_ATTR, game.getRedPlayer());
            vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
