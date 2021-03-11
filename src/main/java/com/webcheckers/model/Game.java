@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import java.util.List;
+
 /**
  * Game logic of Webcheckers.
  *
@@ -98,9 +100,9 @@ public class Game {
      * Get the board of the current instance
      * @return current board
      */
-    public Board getBoard()
+    public List<List<Piece>> getBoard()
     {
-        return this.board;
+        return this.board.getBoard();
     }
 
     /**

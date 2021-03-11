@@ -1,5 +1,8 @@
 package com.webcheckers.model;
 
+import java.util.*;
+import java.util.List;
+
 /**
  * Class that contains the board, tiles, and checker pieces.
  *
@@ -8,7 +11,7 @@ package com.webcheckers.model;
  * @author: Michael Merlino
  */
 public class Board {
-    private Piece[][] board;
+    private List<List<Piece>> board;
     private int whitePlayerPieces;
     private int redPlayerPieces;
 
@@ -16,8 +19,7 @@ public class Board {
      * Constructor of the checker board.
      */
     public Board() {
-        this.board = new Piece[8][8];
-        this.initializeBoard();
+        this.board = initializeBoard();
         this.whitePlayerPieces = 12;
         this.redPlayerPieces = 12;
     }
@@ -46,7 +48,7 @@ public class Board {
      */
     private boolean isTileEmpty(int x, int y)
     {
-        return board[x][y] == null;
+        return board.get(x).get(y) == null;
     }
 
     /**
@@ -55,7 +57,7 @@ public class Board {
      *      The piece if there is one present, null if none exists.
      */
     public Piece getTile(int x, int y) {
-        return board[x][y];
+        return board.get(x).get(y);
     }
 
     /**
@@ -77,8 +79,8 @@ public class Board {
      * Create a new standard board based on checkers rules.
      * @return a new board, as an array of piece enums
      */
-    public Piece[][] initializeBoard() {
-        Piece[][] newBoard = new Piece[8][8];
+    public List<List<Piece>> initializeBoard() {
+        List<List<Piece>> newBoard = new ArrayList<>();
         for (int row = 0; row < 8; row++)
         {
             for (int col = 0; col < 8; col++)
@@ -86,21 +88,26 @@ public class Board {
                 // White side (top)
                 if (row <= 2 && isWhiteTile(row, col))
                 {
-                    board[row][col] = new Piece(Piece.Color.White);
+                    board.get(row).set(col, new Piece(Piece.Color.White));
                 }
                 // Red side (bottom)
                 else if (row >= 5 && isWhiteTile(row, col))
                 {
-                    board[row][col] = new Piece(Piece.Color.Red);
+                    board.get(row).set(col, new Piece(Piece.Color.Red));
                 }
                 else // Center field
                 {
-                    board[row][col] = null;
+                    board.get(row).set(col, null);
                 }
             }
         }
 
         return newBoard;
+    }
+
+    public List<List<Piece>> getBoard()
+    {
+        return board;
     }
 
     /**
