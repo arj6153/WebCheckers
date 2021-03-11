@@ -2,6 +2,8 @@ package com.webcheckers.model;
 
 /**
  * Class for types of pieces in a checker game.
+ *
+ * @author Michael Merlino
  */
 public class Piece {
     public enum Type {
