@@ -1,7 +1,8 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.Player;
+import com.webcheckers.model.*;
 
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 /**
@@ -14,6 +15,7 @@ public class GameCenter {
     private static final Logger LOG = Logger.getLogger(GameCenter.class.getName());
 
     // Attributes
+    private HashMap<Integer, Game> gameMap;
     private final Lobby lobby;
 
     /**
@@ -21,6 +23,19 @@ public class GameCenter {
      */
     public GameCenter() {
         this.lobby = new Lobby();
+    }
+
+    /**
+     * Adds a game to the master list
+     * @param challenger
+     *      The player that sent the game request.
+     * @param recipient
+     *      The player that received the game request.
+     */
+    public void addGame(Player challenger, Player recipient)
+    {
+        Game coolNewGame = new Game(challenger, recipient);
+        gameMap.put(coolNewGame.hashCode(), coolNewGame);
     }
 
     /**
