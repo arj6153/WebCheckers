@@ -24,6 +24,7 @@ public class GameCenter {
      */
     public GameCenter() {
         this.lobby = new Lobby();
+        this.gameMap = new HashMap<>();
     }
 
     /**
@@ -36,6 +37,7 @@ public class GameCenter {
     public int addGame(Player challenger, Player recipient)
     {
         Game coolNewGame = new Game(challenger, recipient);
+        System.out.println(coolNewGame.getID());
         gameMap.put(coolNewGame.getID(), coolNewGame);
         challenger.setPlaying(true);
         recipient.setPlaying(true);
