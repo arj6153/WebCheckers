@@ -1,11 +1,20 @@
 package com.webcheckers.model;
 
+/**
+ * Class that contains the board, tiles, and checker pieces.
+ *
+ * @author: Alex Johannesson
+ * @author: Bin Qiu
+ * @author: Michael Merlino
+ */
 public class Board {
     private Piece[][] board;
     private int whitePlayerPieces;
     private int redPlayerPieces;
 
-
+    /**
+     * Constructor of the checker board.
+     */
     public Board() {
         this.board = new Piece[8][8];
         this.initializeBoard();
@@ -13,10 +22,18 @@ public class Board {
         this.redPlayerPieces = 12;
     }
 
+    /**
+     * Gets the number of white player pieces on the board.
+     * @return number of white pieces
+     */
     public int getWhitePlayerPieces() {
         return whitePlayerPieces;
     }
 
+    /**
+     * Gets the number of red player pieces on the board.
+     * @return number of red pieces
+     */
     public int getRedPlayerPieces() {
         return redPlayerPieces;
     }
@@ -107,6 +124,3 @@ public class Board {
         return (x + y) % 2 == 0;
     }
 }
-
-
-
