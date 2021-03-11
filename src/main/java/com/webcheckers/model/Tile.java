@@ -1,6 +1,8 @@
 package com.webcheckers.model;
 /**
  * Class containing the Tiles of the checker board.
+ *
+ * @author Truong Anh Tuan Hoang
  */
 public class Tile {
 
@@ -16,11 +18,7 @@ public class Tile {
     public Tile(int cellIdx, Piece currentPiece, boolean valid) {
         this.valid = valid;
         this.cellIdx = cellIdx;
-        if (currentPiece == null) {
-            this.piece = null;
-        } else {
-            this.piece = currentPiece;
-        }
+        this.piece = currentPiece;
     }
     /**
      * Gets cell column.
