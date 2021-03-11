@@ -16,6 +16,9 @@ import com.webcheckers.util.Message;
  */
 public class GetHomeRoute implements Route {
 
+  /**
+   * Global Variables
+   */
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
@@ -26,7 +29,6 @@ public class GetHomeRoute implements Route {
   static final String MESSAGE_ATTR = "message";
   static final String MESSAGE_TYPE_ATTR = "messageType";
   static final String ERROR_ATTR = "error";
-
 
   private final TemplateEngine templateEngine;
   private final GameCenter gameCenter;
@@ -61,7 +63,6 @@ public class GetHomeRoute implements Route {
     final Session httpSession = request.session();
     final Player player = httpSession.attribute(CURRENT_USER);
 
-    //
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", DESCRIPTION);
     if(player != null) {
