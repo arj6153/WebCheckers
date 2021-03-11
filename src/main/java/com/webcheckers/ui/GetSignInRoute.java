@@ -49,7 +49,8 @@ public class GetSignInRoute implements Route {
      *
      * @param request the HTTP request
      * @param response the HTTP response
-     * @return the rendered singin page
+     * @return the rendered sing in page
+     *
      * @throws Exception
      */
     @Override

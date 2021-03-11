@@ -47,8 +47,10 @@ public class PostSignInRoute implements Route {
 
     /**
      * Handles a POST /signin , player signing in
+     *
      * @param request the HTTP request
      * @param response the HTTP response
+     *
      * @return Player signing in, renders new home page view
      * @throws Exception
      */
@@ -92,6 +94,7 @@ public class PostSignInRoute implements Route {
     /**
      * @param vm map of view model
      * @param message Sign in message
+     *
      * @return rendered sign in page
      */
     private ModelAndView error(final Map<String, Object> vm, final String message) {

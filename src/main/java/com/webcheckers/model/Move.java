@@ -9,6 +9,9 @@ import javax.swing.text.Position;
  * @author: Bin Qiu
  */
 public class Move {
+    /**
+     * Global Variables
+     */
     public enum moveType{Single,Capture, Invalid, None}
 
     private Position start;
