@@ -51,7 +51,7 @@ public class PostTurnRoute implements Route {
         if(board.isRedTurn(player)) {
             json = gson.toJson(Message.info("true"));
         } else {
-            json = gson.toJson(Message.info("flase"));
+            json = gson.toJson(Message.info("false"));
         }
         return json;
     }

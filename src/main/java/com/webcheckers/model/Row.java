@@ -38,13 +38,10 @@ public class Row implements Iterable<Tile>{
      */
     public void initialize(Game.color color, boolean flag) {
         for(int col = 0; col < 8; col++) {
-           if(color == NONE) {
-               tiles.add(new Tile(col, null));
-           }
            if(flag) {
-               tiles.add(new Tile( col,new Piece(Piece.Type.NORMAL, color)));
+               tiles.add(new Tile( col,new Piece(Piece.Type.NORMAL, color),true));
            } else {
-               tiles.add(new Tile(col, null));
+               tiles.add(new Tile(col, null,false));
            }
            flag = !flag;
         }
