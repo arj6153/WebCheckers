@@ -9,8 +9,10 @@ public class Piece {
     public enum Type {
         NORMAL, KING
     }
+
     private Game.color color;
     private Type type;
+
     /**
      * Constructor of Piece.
      * @param color red or white
@@ -19,6 +21,7 @@ public class Piece {
         this.type = type;
         this.color = color;
     }
+
 
     /**
      * Checks if a checker piece is a king piece.

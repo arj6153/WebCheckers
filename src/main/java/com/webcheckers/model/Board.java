@@ -20,6 +20,7 @@ public class Board {
 
     private List<Row> redBoard = new ArrayList<>();
     private List<Row> whiteBoard = new ArrayList<>();
+
     /**
      * Constructor of the checker board.
      */

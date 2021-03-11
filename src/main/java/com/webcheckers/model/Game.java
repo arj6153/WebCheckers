@@ -14,6 +14,9 @@ public class Game implements Iterable<Row>{
     private Board board;
     private final int ID;
     private boolean redTurn;
+    private Player playerTurn;
+    private int whitePieces = 12;
+    private int redPieces = 12;
 
     public enum color {RED, WHITE, NONE}
 
@@ -119,4 +122,26 @@ public class Game implements Iterable<Row>{
     public void setRedTurn(boolean status) {
        this.redTurn = true;
     }
+
+    public int getNumRedPieces() {
+        return redPieces;
+    }
+
+    public int getNumWhitePieces() {
+        return whitePieces;
+    }
+
+    public boolean isRedTurn(Player player) {
+        return redPlayer.equals(playerTurn);
+    }
+
+    public Player getPlayerTurn() {
+        return playerTurn;
+    }
+
+    public void setPlayerTurn(Player playerTurn) {
+        this.playerTurn = playerTurn;
+    }
+
+
 }
