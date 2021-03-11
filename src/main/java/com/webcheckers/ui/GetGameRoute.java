@@ -87,6 +87,7 @@ public class GetGameRoute implements Route {
                    } else {
                        gameID = String.valueOf(gameCenter.addGame(player, opponent));
                        response.redirect(WebServer.GAME_URL + "?gameID=" + gameID);
+                       return null;
                    }
                }
            } else {
