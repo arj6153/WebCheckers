@@ -17,6 +17,8 @@ import static spark.Spark.halt;
 
 /**
  * The UI controller to GET the game page
+ *
+ * @author:Truong Anh Tuan Hoang
  */
 public class GetGameRoute implements Route {
     //Attributes
@@ -30,7 +32,6 @@ public class GetGameRoute implements Route {
     static final String MODEOPTIONS_ATTR = "modeOptionsAsJSON";
     static final String BOARD_ATTR = "board";
 
-
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
     private static final Message TITLE_MSG = Message.info("Checkers Game");
@@ -43,8 +44,8 @@ public class GetGameRoute implements Route {
         PLAY
     }
     /**
-     * Constructor of GetGameRoute
-     * @param gameCenter
+     * Constructor of GetGameRoute.
+     * @param gameCenter the instance of the game center
      * @param templateEngine freemarker
      */
     public GetGameRoute(GameCenter gameCenter, TemplateEngine templateEngine, final Gson gson) {
@@ -55,7 +56,7 @@ public class GetGameRoute implements Route {
     }
 
     /**
-     * Renders the game page
+     * Renders the game page.
      * @param request HTTP request
      * @param response HTTP response
      * @return rendered HTML

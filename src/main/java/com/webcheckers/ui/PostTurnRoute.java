@@ -10,6 +10,11 @@ import spark.*;
 
 import java.util.logging.Logger;
 
+/**
+ * UI controller for 00000000000
+ *
+ * @author:Truong Anh Tuan Hoang
+ */
 public class PostTurnRoute implements Route {
 
     /**
@@ -21,6 +26,12 @@ public class PostTurnRoute implements Route {
     private Gson gson;
     private final GameCenter gameCenter;
 
+    /**
+     * Constructor of PostTurnRoute
+     * @param templateEngine
+     * @param gameCenter the instance of the game center
+     * @param gson
+     */
     public PostTurnRoute(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson) {
         this.templateEngine = templateEngine;
         this.gameCenter = gameCenter;
