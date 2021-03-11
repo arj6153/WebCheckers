@@ -44,7 +44,7 @@ public class GetSignInRoute implements Route {
     }
 
     /**
-     * Renders the signin page
+     * Renders the sign in page
      *
      * @param request http request
      * @param response http response

@@ -21,7 +21,7 @@ public class PostSignOutRoute implements Route{
     private final GameCenter gameCenter;
 
     /**
-     * Creates the signout route
+     * Creates the sign out route
      * @param gameCenter
      * @param <templateEngine>
      */
@@ -32,7 +32,7 @@ public class PostSignOutRoute implements Route{
 
     /**
      * Handles a POST /signout , player signing out
-     * Renders the signout page
+     * Renders the sign out page
      *
      * @param request the http request
      * @param response the http response

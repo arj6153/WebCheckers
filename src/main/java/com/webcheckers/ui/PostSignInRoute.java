@@ -35,7 +35,7 @@ public class PostSignInRoute implements Route {
     private final GameCenter gameCenter;
 
     /**
-     * creates the signin route
+     * creates the sign in route
      * @param gameCenter
      * @param templateEngine
      * @param <templateEngine>
@@ -93,7 +93,7 @@ public class PostSignInRoute implements Route {
     /**
      * @param vm map of view model
      * @param message Sign in message
-     * @return rendered signin page
+     * @return rendered sign in page
      */
     private ModelAndView error(final Map<String, Object> vm, final String message) {
         vm.put(MESSAGE_ATTR, Message.info(message));
