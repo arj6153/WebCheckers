@@ -68,6 +68,8 @@ public class GetHomeRoute implements Route {
 
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", DESCRIPTION);
+    vm.put(MESSAGE_ATTR, WELCOME_MSG);
+    final Message message = httpSession.attribute(MESSAGE_ATTR);
     if(player != null) {
       if(player.isPlaying()) {
         String gameID = "";
@@ -81,12 +83,17 @@ public class GetHomeRoute implements Route {
         halt();
         return null;
       }
-      vm.put("message", Message.info(String.format("Hello, %s", player.getName())));
+      if(message != null) {
+        vm.put(MESSAGE_ATTR, message);
+        httpSession.attribute(MESSAGE_ATTR, null);
+      } else {
+        vm.put(MESSAGE_ATTR, Message.info("Choose a Player"));
+      }
       vm.put(CURRENT_USER, player);
       vm.put("playerList", gameCenter.getLobby().getMap());
     } else {
       // display a user message in the Home page
-      vm.put("message", WELCOME_MSG);
+
       vm.put(LOBBY_COUNT, gameCenter.getLobby().getLobbySize());
     }
     // render the View
