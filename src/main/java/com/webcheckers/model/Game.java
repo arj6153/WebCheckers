@@ -10,7 +10,7 @@ public class Game {
     private Player whitePlayer;
     private Board board;
     private int ID;
-    private Player playerTurn;
+    private boolean redTurn;
 
     /**
      * Constructor of Game.
@@ -23,6 +23,7 @@ public class Game {
         this.whitePlayer = white;
         this.board = new Board();
         this.ID = redPlayer.getName().hashCode() * 31 + whitePlayer.getName().hashCode() * 67;
+        this.redTurn = true;
     }
 
     /**
@@ -39,6 +40,23 @@ public class Game {
      */
     public Player getWhitePlayer() {
         return whitePlayer;
+    }
+
+    /**
+     * Gets the player whose turn it currently is.
+     * @return
+     *      Red player on red's turn, White player on white's turn.
+     */
+    public Player getCurrentPlayer()
+    {
+        if (redTurn)
+        {
+            return redPlayer;
+        }
+        else
+        {
+            return whitePlayer;
+        }
     }
 
     /**
