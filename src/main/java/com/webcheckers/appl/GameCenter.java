@@ -36,7 +36,7 @@ public class GameCenter {
      */
     public synchronized int addGame(Player challenger, Player recipient)
     {
-        Game coolNewGame = new Game(challenger, recipient);
+        Game coolNewGame = new Game(challenger, challenger, recipient);
         System.out.println(coolNewGame.getID());
         gameMap.put(coolNewGame.getID(), coolNewGame);
         challenger.setPlaying(true);

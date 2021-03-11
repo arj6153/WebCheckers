@@ -115,13 +115,8 @@ public class Board {
             this.board = redBoard;
         }
     }
-
-    public List<Row> getRedBoard() {
-        return redBoard;
-    }
-
-    public List<Row> getWhiteBoard() {
-        return whiteBoard;
+    public List<Row> getBoard() {
+        return board;
     }
 
 }

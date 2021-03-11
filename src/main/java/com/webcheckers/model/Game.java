@@ -9,12 +9,13 @@ import java.util.List;
  * @author Michael Merlino
  */
 public class Game implements Iterable<Row>{
-    private Player redPlayer;
-    private Player whitePlayer;
-    private Board board;
+    private final Player redPlayer;
+    private final Player whitePlayer;
+    private final Board board;
     private final int ID;
     private boolean redTurn;
     private Player playerTurn;
+    private Player currPlayer;
     private int whitePieces = 12;
     private int redPieces = 12;
 
@@ -29,8 +30,9 @@ public class Game implements Iterable<Row>{
      * @param red player color
      * @param white opponent color
      */
-    public Game(Player red, Player white)
+    public Game(Player currPlayer, Player red, Player white)
     {
+        this.currPlayer = currPlayer;
         this.redPlayer = red;
         this.whitePlayer = white;
         this.board = new Board(redPlayer, whitePlayer);
@@ -53,7 +55,9 @@ public class Game implements Iterable<Row>{
     public Player getWhitePlayer() {
         return whitePlayer;
     }
-
+    public void setCurrPlayer(Player player) {
+        this.currPlayer = player;
+    }
     /**
      * Gets the player whose turn it currently is.
      * @return
@@ -112,16 +116,14 @@ public class Game implements Iterable<Row>{
     }
 
 
-    public List<Row> getRedBoard() {
-        return board.getRedBoard();
-    }
-
-    public List<Row> getWhiteBoard() {
-        return board.getWhiteBoard();
-    }
     @Override
     public Iterator<Row> iterator() {
-        return this.board.getRedBoard().iterator();
+        if(currPlayer.equals(redPlayer)){
+            this.board.setBoard(false);
+            return this.board.getBoard().iterator();
+        }
+        this.board.setBoard(true);
+        return this.board.getBoard().iterator();
     }
 
     /**
