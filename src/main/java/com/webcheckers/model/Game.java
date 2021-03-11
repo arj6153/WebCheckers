@@ -78,37 +78,8 @@ public class Game {
     }
 
 
-    /**
-     * Create a new standard board based on checkers rules.
-     * @return a new board, as an array of piece enums
-     */
-    private Piece[][] newBoardSetup()
-    {
-        Piece[][] newBoard = new Piece[8][8];
 
-        for (int row = 0; row < 8; row++)
-        {
-            for (int col = 0; col < 8; col++)
-            {
-                // White side (top)
-                if (row <= 2 && isWhiteTile(row, col))
-                {
-                    board[row][col] = new Piece(Piece.Color.White);
-                }
-                // Red side (bottom)
-                else if (row >= 5 && isWhiteTile(row, col))
-                {
-                    board[row][col] = new Piece(Piece.Color.Red);
-                }
-                else // Center field
-                {
-                    newBoard[row][col] = null;
-                }
-            }
-        }
 
-        return newBoard;
-    }
 
     /**
      * Gets the game session's ID.
