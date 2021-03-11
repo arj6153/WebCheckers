@@ -4,23 +4,15 @@ public class Tile {
 
     private int cellIdx;
     private Piece piece;
-    private Status status;
-
-    public enum Status {
-        EMPTY,
-        FILLED,
-        INVALID
-    }
     private boolean valid;
 
-    public Tile(int cellIdx, Piece currentPiece) {
+    public Tile(int cellIdx, Piece currentPiece, boolean valid) {
+        this.valid = valid;
         this.cellIdx = cellIdx;
         if (currentPiece == null) {
             this.piece = null;
-            this.status = Status.EMPTY;
         } else {
             this.piece = currentPiece;
-            this.status = Status.FILLED;
         }
     }
 
@@ -28,17 +20,13 @@ public class Tile {
         return this.cellIdx;
     }
 
-    public Status getTile() {
-        return this.status;
-    }
 
-    public Status setPiece(Piece piece) {
-        if (status == Status.EMPTY) {
+    public boolean setPiece(Piece piece) {
+        if (this.piece == null) {
             this.piece = piece;
-            this.status = Status.FILLED;
-            return this.status;
+            return true;
         }
-        return this.status;
+        return false;
     }
 
     public boolean isValid() {
@@ -46,13 +34,6 @@ public class Tile {
 
     }
 
-    public boolean isFilled() {
-        return this.status == Status.FILLED;
-    }
-
-    public boolean isEmpty() {
-        return this.status == Status.EMPTY;
-    }
 
     public Piece getPiece() {
         return this.piece;
