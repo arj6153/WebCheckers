@@ -16,14 +16,17 @@ import com.webcheckers.util.Message;
  */
 public class GetHomeRoute implements Route {
 
-  static final String VIEW_NAME = "home.ftl";
-
-  static final String DESCRIPTION = "Home";
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
   static final String LOBBY_COUNT = "lobbyCount";
   static final String CURRENT_USER = "currentUser";
+  static final String VIEW_NAME = "home.ftl";
+  static final String DESCRIPTION = "Home";
+  static final String MESSAGE_ATTR = "message";
+  static final String MESSAGE_TYPE_ATTR = "messageType";
+  static final String ERROR_ATTR = "error";
+
 
   private final TemplateEngine templateEngine;
   private final GameCenter gameCenter;

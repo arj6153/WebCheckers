@@ -11,6 +11,9 @@ import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import static com.webcheckers.ui.GetHomeRoute.MESSAGE_ATTR;
+import static com.webcheckers.ui.GetHomeRoute.MESSAGE_TYPE_ATTR;
+import static com.webcheckers.ui.GetHomeRoute.ERROR_ATTR;
 import static spark.Spark.halt;
 
 /**
@@ -26,9 +29,6 @@ public class PostSignInRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
     //CONSTANT
     private final String USER_ID = "userID";
-    static final String MESSAGE_ATTR = "message";
-    static final String MESSAGE_TYPE_ATTR = "messageType";
-    private final String ERROR_TYPE = "error";
 
     // Attributes
     private TemplateEngine templateEngine;
@@ -96,8 +96,8 @@ public class PostSignInRoute implements Route {
      * @return rendered sign in page
      */
     private ModelAndView error(final Map<String, Object> vm, final String message) {
-        vm.put(MESSAGE_ATTR, Message.info(message));
-        vm.put(MESSAGE_TYPE_ATTR, ERROR_TYPE);
+        vm.put(MESSAGE_ATTR, Message.error(message));
+        vm.put(MESSAGE_TYPE_ATTR, ERROR_ATTR);
         return new ModelAndView(vm, GetSignInRoute.VIEW_NAME);
     }
 }

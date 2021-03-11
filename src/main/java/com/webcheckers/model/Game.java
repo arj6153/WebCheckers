@@ -9,8 +9,9 @@ public class Game {
     private Player redPlayer;
     private Player whitePlayer;
     private Board board;
-    private int ID;
+    private final int ID;
     private boolean redTurn;
+    public enum Color {Red, White}
 
     /**
      * Constructor of Game.
@@ -53,12 +54,19 @@ public class Game {
         {
             return redPlayer;
         }
-        else
-        {
-            return whitePlayer;
-        }
+        return whitePlayer;
     }
-
+    /**
+     * Gets current player color.
+     * @return
+     *      Red player on red's turn, White player on white's turn.
+     */
+    public Color getPlayerColor() {
+        if (redTurn) {
+            return Color.Red;
+        }
+        return Color.White;
+    }
     /**
      * Checks if player is white player, opponent.
      * @param player white player
@@ -93,5 +101,12 @@ public class Game {
     public Board getBoard()
     {
         return this.board;
+    }
+
+    /**
+     * Set the turn to Red
+     */
+    public void setRedTurn(boolean status) {
+       this.redTurn = true;
     }
 }

@@ -33,10 +33,14 @@ public class GameCenter {
      * @param recipient
      *      The player that received the game request.
      */
-    public void addGame(Player challenger, Player recipient)
+    public int addGame(Player challenger, Player recipient)
     {
         Game coolNewGame = new Game(challenger, recipient);
-        gameMap.put(coolNewGame.hashCode(), coolNewGame);
+        gameMap.put(coolNewGame.getID(), coolNewGame);
+        challenger.setPlaying(true);
+        recipient.setPlaying(true);
+        coolNewGame.setRedTurn(true);
+        return coolNewGame.getID();
     }
 
     /**
@@ -48,7 +52,24 @@ public class GameCenter {
     }
 
     /**
-     * Adds a player to the hashmap.
+     * Adds a player to the hashmap  vm.put(VIEWMODE_PARAM, mode.PLAY);
+
+      GameBoard board = gameCenter.getGame(gameId); //gets board via gameID
+      board.isWhitePlayerBoard(!board.isRedPlayer(player));
+
+      vm.put(REDPLAYER_PARAM, board.getRedPlayer());
+      vm.put(WHITEPLAYER_PARAM, board.getWhitePlayer());
+      vm.put(BOARD_PARAM, board);
+      vm.put(ACTIVECOLOR_PARAM,board.getPlayerColor(board.getPlayerTurn()));
+      if(board.isGameOver()){ // checks to see if the game is over
+        modeOptions.put("isGameOver",board.isGameOver()); //sets the game over value into the map
+        modeOptions.put("gameOverMessage",board.getGameOverMessage()); //stores the gameOver message into the map
+        vm.put(MODEOPTIONS_PARAM, gson.toJson(modeOptions)); //converts the modeOptions map into a json
+        board.getRedPlayer().setPlaying(false); //sets the red player to not be playing
+        board.getWhitePlayer().setPlaying(false); //sets the white player to not be playing
+        gameCenter.removeCurrentGame(gameId);
+        gameCenter.addGameSave(gameId);
+      }.
      * @param name name of player
      */
     public void addPlayer(String name) {
@@ -71,4 +92,9 @@ public class GameCenter {
     public synchronized void removePlayer(String name) {
         lobby.removePlayer(name);
     }
+
+    public synchronized Game getGame(int gameID) {
+       return this.gameMap.get(gameID);
+    }
+
 }

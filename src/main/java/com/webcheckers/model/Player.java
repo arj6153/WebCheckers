@@ -23,6 +23,10 @@ public class Player extends Lobby {
         isPlaying = status;
     }
 
+    public boolean isPlaying() {
+        return this.isPlaying;
+    }
+
 
 
 
