@@ -11,7 +11,7 @@ import spark.*;
 import java.util.logging.Logger;
 
 /**
- * UI controller for checking which player's turn it is
+ * UI controller for checking which player's turn
  *
  * @author:Alex Johannesson
  */
