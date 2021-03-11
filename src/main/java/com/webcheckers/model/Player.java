@@ -2,8 +2,6 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.Lobby;
 
-import java.util.HashMap;
-
 /**
  * Class for a Player containing the name and status.
  */
@@ -27,9 +25,15 @@ public class Player extends Lobby {
         return name;
     }
 
+    /**
+     * Checks if the two players' names are the same.
+     * @param otherPlayer player being compared
+     * @return true if names are equal, false otherwise
+     */
     public boolean equals(Player otherPlayer) {
         return this.name.equals(otherPlayer.name);
     }
+
     private boolean isPlaying = false;
 
     /**

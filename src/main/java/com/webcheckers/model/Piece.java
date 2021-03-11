@@ -1,7 +1,5 @@
 package com.webcheckers.model;
 
-
-
 /**
  * Class for types of pieces in a checker game.
  */
@@ -22,7 +20,6 @@ public class Piece {
         this.color = color;
     }
 
-
     /**
      * Checks if a checker piece is a king piece.
      * @return true if a checker piece is a king, else false
@@ -41,7 +38,7 @@ public class Piece {
     }
 
     /**
-     * Gets the Piece type
+     * Gets the Piece type.
      * @return Piece Type
      */
     public Type getType() {

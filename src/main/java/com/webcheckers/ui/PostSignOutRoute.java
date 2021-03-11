@@ -10,7 +10,8 @@ import java.util.logging.Logger;
 import static spark.Spark.halt;
 
 /**
- * The {@code Post /signout} route handler
+ * The {@code Post /signout} route handler.
+ *
  * @author Bin Qiu
  */
 public class PostSignOutRoute implements Route{

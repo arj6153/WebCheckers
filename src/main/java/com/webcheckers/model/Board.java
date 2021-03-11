@@ -58,14 +58,13 @@ public class Board {
      * @param targetX the X location of the target tile
      * @param targetY the Y location of the target tile
      * @return true if the piece can be dropped at the target, false is not
+     *
     public boolean isDroppable(int pieceX, int pieceY, int targetX, int targetY)
     {
         // Is the target tile white or occupied? If so, not droppable
         // Is the tile where the selected piece should be actually occupied by a piece? If not, not droppable
         return !isWhiteTile(targetX, targetY) && isTileEmpty(targetX, targetY) && !isTileEmpty(pieceX, pieceY);
-    }
-
-     */
+    }*/
 
     /**
      * Create a new standard board based on checkers rules.
@@ -108,15 +107,24 @@ public class Board {
     public boolean isValid(int row, int col) {
         return row >= 0 && row <= 7 && col >= 0 && col <= 7;
     }
+
+    /**
+     * Set up the white player's board, else set up the red player's board.
+     * @param whiteboard true if the board is the whiteboard, false if the board is the redboard
+     */
     public void setBoard(boolean whiteboard) {
-        if (whiteboard) {
+       if (whiteboard) {
             this.board = whiteBoard;
         } else {
             this.board = redBoard;
         }
     }
+
+    /**
+     * Gets the checker board.
+     * @return checker board
+     */
     public List<Row> getBoard() {
         return board;
     }
-
 }
