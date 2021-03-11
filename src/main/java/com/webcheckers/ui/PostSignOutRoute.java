@@ -11,6 +11,7 @@ import static spark.Spark.halt;
 
 /**
  * The {@code Post /signout} route handler
+ * @author Bin Qiu
  */
 public class PostSignOutRoute implements Route{
 
@@ -22,8 +23,9 @@ public class PostSignOutRoute implements Route{
 
     /**
      * Creates the sign out route
-     * @param gameCenter
-     * @param <templateEngine>
+     *
+     * @param gameCenter the instance of the game center
+     * @param <templateEngine> the HTML template rendering engine
      */
     public <templateEngine> PostSignOutRoute(GameCenter gameCenter) {
         this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
@@ -34,10 +36,11 @@ public class PostSignOutRoute implements Route{
      * Handles a POST /signout , player signing out
      * Renders the sign out page
      *
-     * @param request the http request
-     * @param response the http response
+     * @param request the HTTP request
+     * @param response the HTTP response
+     *
      * @return null
-     * @throws Exception
+     * @throws Exception // doesn't actually throw
      */
     @Override
     public Object handle(Request request, Response response) throws Exception {

@@ -34,8 +34,9 @@ public class GetSignInRoute implements Route {
 
     /**
      * Creates the UI controller to handle The {@code Get /signin} route handler
-     * @param gameCenter
-     * @param templateEngine
+     *
+     * @param gameCenter the instance of the game center
+     * @param templateEngine the HTML template rendering engine
      */
     public GetSignInRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
@@ -46,10 +47,11 @@ public class GetSignInRoute implements Route {
     /**
      * Renders the sign in page
      *
-     * @param request http request
-     * @param response http response
-     * @return the rendered singin page
-     * @throws Exception
+     * @param request the HTTP request
+     * @param response the HTTP response
+     *
+     * @return the rendered sing in page
+     * @throws Exception // doesn't actually throw
      */
     @Override
     public Object handle(Request request, Response response) throws Exception {
