@@ -2,10 +2,8 @@ package com.webcheckers.model;
 
 import java.util.*;
 import java.util.List;
-import java.util.Iterator;
 
-import static com.webcheckers.model.Game.Color.RED;
-import static com.webcheckers.model.Game.Color.WHITE;
+import static com.webcheckers.model.Game.color.*;
 
 /**
  * Class that contains the board, tiles, and checker pieces.
@@ -72,7 +70,7 @@ public class Board {
      * Create a new standard board based on checkers rules.
      * @return a new board, as an array of piece enums
      */
-    public void initializeBoard(Game.Color color) {
+    public void initializeBoard(Game.color color) {
         List<Row> board = null;
         if (color == RED) {
            board = this.redBoard;
@@ -94,7 +92,7 @@ public class Board {
                     board.add(row, new Row(row, WHITE, flag));
                 }
             } else {
-                board.add(row, new Row(row, null, flag));
+                board.add(row, new Row(row, NONE, flag));
             }
             flag = !flag;
         }

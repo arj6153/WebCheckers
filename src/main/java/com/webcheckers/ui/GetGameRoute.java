@@ -66,6 +66,7 @@ public class GetGameRoute implements Route {
         LOG.finer("GetGameRoute is invoked");
         final Session httpSession = request.session();
         Map<String,Object> vm = new HashMap<>();
+        final Map<String, Object> options = new HashMap<>(2);
         vm.put("title", TITLE_MSG);
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         if (player == null) {
@@ -98,6 +99,10 @@ public class GetGameRoute implements Route {
            }
            vm.put(VIEWMODE_ATTR, mode.PLAY);
            Game game = gameCenter.getGame(Integer.parseInt(gameID));
+
+           options.put("isGameOver", false);
+           options.put("gameOverMessage", "YOU LOSE");
+           vm.put(MODEOPTIONS_ATTR, gson.toJson(options));
            vm.put(RED_PLAYER_ATTR, game.getRedPlayer());
            vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
            vm.put(BOARD_ATTR, game);

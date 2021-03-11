@@ -9,13 +9,13 @@ public class Piece {
     public enum Type {
         NORMAL, KING
     }
-    private Game.Color color;
+    private Game.color color;
     private Type type;
     /**
      * Constructor of Piece.
      * @param color red or white
      */
-    public Piece(Type type, Game.Color color) {
+    public Piece(Type type, Game.color color) {
         this.type = type;
         this.color = color;
     }
@@ -33,7 +33,7 @@ public class Piece {
      * Gets the color of a checker piece.
      * @return red or white
      */
-    public Game.Color getColor() {
+    public Game.color getColor() {
         return this.color;
     }
 

@@ -15,7 +15,7 @@ public class Game implements Iterable<Row>{
     private final int ID;
     private boolean redTurn;
 
-    public enum Color {RED, WHITE}
+    public enum color {RED, WHITE, NONE}
 
 
 
@@ -67,11 +67,11 @@ public class Game implements Iterable<Row>{
      * @return
      *      Red player on red's turn, White player on white's turn.
      */
-    public Game.Color getPlayerColor() {
+    public Game.color getPlayerColor() {
         if (redTurn) {
-            return Color.RED;
+            return color.RED;
         }
-        return Color.WHITE;
+        return color.WHITE;
     }
     /**
      * Checks if player is white player, opponent.
