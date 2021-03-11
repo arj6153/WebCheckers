@@ -4,10 +4,13 @@ import java.util.*;
 import java.util.logging.Logger;
 
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import spark.*;
 
 import com.webcheckers.util.Message;
+
+import static spark.Spark.halt;
 
 /**
  * The UI Controller to GET the Home page.
@@ -66,6 +69,18 @@ public class GetHomeRoute implements Route {
     Map<String, Object> vm = new HashMap<>();
     vm.put("title", DESCRIPTION);
     if(player != null) {
+      if(player.isPlaying()) {
+        String gameID = "";
+        for (Game game: gameCenter.getGameMap().values()) {
+          if(game.isPlayerInGame(player) && !game.isGameOver()) {
+            gameID = String.valueOf(game.getID());
+            break;
+          }
+        }
+        response.redirect(WebServer.GAME_URL + "?gameID="+ gameID);
+        halt();
+        return null;
+      }
       vm.put("message", Message.info(String.format("Hello, %s", player.getName())));
       vm.put(CURRENT_USER, player);
       vm.put("playerList", gameCenter.getLobby().getMap());

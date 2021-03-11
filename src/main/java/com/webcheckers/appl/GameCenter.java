@@ -53,6 +53,10 @@ public class GameCenter {
         return this.lobby;
     }
 
+
+    public HashMap<Integer, Game> getGameMap() {
+        return this.gameMap;
+    }
     /**
      * Adds a player to the hashmap
      * @param name name of player

@@ -27,6 +27,9 @@ public class Player extends Lobby {
         return name;
     }
 
+    public boolean equals(Player otherPlayer) {
+        return this.name.equals(otherPlayer.name);
+    }
     private boolean isPlaying = false;
 
     /**

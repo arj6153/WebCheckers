@@ -18,6 +18,8 @@ public class Game implements Iterable<Row>{
     private int whitePieces = 12;
     private int redPieces = 12;
 
+    private boolean gameOver = false;
+
     public enum color {RED, WHITE, NONE}
 
 
@@ -94,6 +96,9 @@ public class Game implements Iterable<Row>{
         return player.equals(getRedPlayer());
     }
 
+    public boolean isPlayerInGame(Player player) {
+        return player.equals(redPlayer) || player.equals(whitePlayer);
+    }
     /**
      * Gets the game session's ID.
      * @return game ID
@@ -101,6 +106,9 @@ public class Game implements Iterable<Row>{
     public int getID()
     {
         return this.ID;
+    }
+    public boolean isGameOver() {
+        return gameOver;
     }
 
 
