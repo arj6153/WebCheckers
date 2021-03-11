@@ -28,6 +28,8 @@ public class GetGameRoute implements Route {
     static final String VIEWMODE_ATTR = "viewMode";
     static final String ACTIVE_COLOR_ATTR = "activeColor";
     static final String MODEOPTIONS_ATTR = "modeOptionsAsJSON";
+    static final String BOARD_ATTR = "board";
+
 
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
@@ -64,6 +66,7 @@ public class GetGameRoute implements Route {
         LOG.finer("GetGameRoute is invoked");
         final Session httpSession = request.session();
         Map<String,Object> vm = new HashMap<>();
+        vm.put("title", TITLE_MSG);
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         if (player == null) {
             response.redirect(WebServer.HOME_URL);
@@ -71,12 +74,10 @@ public class GetGameRoute implements Route {
             return null;
         } else {
            String gameID = request.queryParams(GAMEID_ATTR);
-           if(gameID == null) {
+            vm.put(CURRENT_USER, player);
+            if(gameID == null) {
                if(!player.isPlaying()) {
-                   String opponentName = request.queryParams(PLAYER_ATTR);
                    final Player opponent = gameCenter.getPlayer(request.queryParams(PLAYER_ATTR));
-
-                   ModelAndView mv;
                    if(opponent.isPlaying()) {
                        httpSession.attribute(MESSAGE_ATTR, Message.error("Player is in game. Choose another"));
                        response.redirect(WebServer.HOME_URL);
@@ -95,17 +96,13 @@ public class GetGameRoute implements Route {
                    return null;
                }
            }
-           Game game = gameCenter.getGame(Integer.parseInt(gameID));
            vm.put(VIEWMODE_ATTR, mode.PLAY);
-           //vm.put(MODEOPTIONS_ATTR, (something));
-           vm.put(CURRENT_USER, player);
+           Game game = gameCenter.getGame(Integer.parseInt(gameID));
            vm.put(RED_PLAYER_ATTR, game.getRedPlayer());
            vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
-           vm.put(ACTIVE_COLOR_ATTR, game.getPlayerColor().toString());
-           vm.put(GAMEID_ATTR, gameID);
-           vm.put("board", game.getBoard());
+           vm.put(BOARD_ATTR, game);
+           vm.put(ACTIVE_COLOR_ATTR, game.getPlayerColor());
         }
-        vm.put("title", TITLE_MSG);
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
     }
 

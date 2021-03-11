@@ -34,7 +34,7 @@ public class GameCenter {
      * @param recipient
      *      The player that received the game request.
      */
-    public int addGame(Player challenger, Player recipient)
+    public synchronized int addGame(Player challenger, Player recipient)
     {
         Game coolNewGame = new Game(challenger, recipient);
         System.out.println(coolNewGame.getID());

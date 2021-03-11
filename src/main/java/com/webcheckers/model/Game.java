@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -7,13 +8,16 @@ import java.util.List;
  *
  * @author Michael Merlino
  */
-public class Game {
+public class Game implements Iterable<Row>{
     private Player redPlayer;
     private Player whitePlayer;
     private Board board;
     private final int ID;
     private boolean redTurn;
-    public enum Color {Red, White}
+
+    public enum Color {RED, WHITE}
+
+
 
     /**
      * Constructor of Game.
@@ -24,7 +28,7 @@ public class Game {
     {
         this.redPlayer = red;
         this.whitePlayer = white;
-        this.board = new Board();
+        this.board = new Board(redPlayer, whitePlayer);
         this.ID = redPlayer.getName().hashCode() * 31 + whitePlayer.getName().hashCode() * 67;
         this.redTurn = true;
     }
@@ -63,11 +67,11 @@ public class Game {
      * @return
      *      Red player on red's turn, White player on white's turn.
      */
-    public Color getPlayerColor() {
+    public Game.Color getPlayerColor() {
         if (redTurn) {
-            return Color.Red;
+            return Color.RED;
         }
-        return Color.White;
+        return Color.WHITE;
     }
     /**
      * Checks if player is white player, opponent.
@@ -96,13 +100,17 @@ public class Game {
         return this.ID;
     }
 
-    /**
-     * Get the board of the current instance
-     * @return current board
-     */
-    public List<List<Piece>> getBoard()
-    {
-        return this.board.getBoard();
+
+    public List<Row> getRedBoard() {
+        return board.getRedBoard();
+    }
+
+    public List<Row> getWhiteBoard() {
+        return board.getWhiteBoard();
+    }
+    @Override
+    public Iterator<Row> iterator() {
+        return this.board.getRedBoard().iterator();
     }
 
     /**

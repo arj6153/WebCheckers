@@ -2,6 +2,10 @@ package com.webcheckers.model;
 
 import java.util.*;
 import java.util.List;
+import java.util.Iterator;
+
+import static com.webcheckers.model.Game.Color.RED;
+import static com.webcheckers.model.Game.Color.WHITE;
 
 /**
  * Class that contains the board, tiles, and checker pieces.
@@ -11,35 +15,24 @@ import java.util.List;
  * @author: Michael Merlino
  */
 public class Board {
-    private List<List<Piece>> board;
-    private int whitePlayerPieces;
-    private int redPlayerPieces;
+    private List<Row> board;
 
+    private Player redPlayer;
+    private Player whitePlayer;
+
+    private List<Row> redBoard = new ArrayList<>();
+    private List<Row> whiteBoard = new ArrayList<>();
     /**
      * Constructor of the checker board.
      */
-    public Board() {
-        this.board = initializeBoard();
-        this.whitePlayerPieces = 12;
-        this.redPlayerPieces = 12;
-    }
+    public Board(Player redPlayer, Player whitePlayer) {
+       this.redPlayer = redPlayer;
+       this.whitePlayer = whitePlayer;
+       this.board = new ArrayList<>();
+       initializeBoard(RED);
+       initializeBoard(WHITE);
 
-    /**
-     * Gets the number of white player pieces on the board.
-     * @return number of white pieces
-     */
-    public int getWhitePlayerPieces() {
-        return whitePlayerPieces;
     }
-
-    /**
-     * Gets the number of red player pieces on the board.
-     * @return number of red pieces
-     */
-    public int getRedPlayerPieces() {
-        return redPlayerPieces;
-    }
-
     /**
      * Checks if a tile is occupied by a checker piece.
      * @param x  the X coordinate of the tile
@@ -48,16 +41,15 @@ public class Board {
      */
     private boolean isTileEmpty(int x, int y)
     {
-        return board.get(x).get(y) == null;
+        return false;
     }
 
     /**
      * Retrieve a piece (if any) from the given x/y coordinates.
-     * @return
-     *      The piece if there is one present, null if none exists.
+     * @return The piece if there is one present, null if none exists.
      */
     public Piece getTile(int x, int y) {
-        return board.get(x).get(y);
+        return null;
     }
 
     /**
@@ -67,7 +59,6 @@ public class Board {
      * @param targetX the X location of the target tile
      * @param targetY the Y location of the target tile
      * @return true if the piece can be dropped at the target, false is not
-     */
     public boolean isDroppable(int pieceX, int pieceY, int targetX, int targetY)
     {
         // Is the target tile white or occupied? If so, not droppable
@@ -75,39 +66,38 @@ public class Board {
         return !isWhiteTile(targetX, targetY) && isTileEmpty(targetX, targetY) && !isTileEmpty(pieceX, pieceY);
     }
 
+     */
+
     /**
      * Create a new standard board based on checkers rules.
      * @return a new board, as an array of piece enums
      */
-    public List<List<Piece>> initializeBoard() {
-        List<List<Piece>> newBoard = new ArrayList<>();
-        for (int row = 0; row < 8; row++)
-        {
-            for (int col = 0; col < 8; col++)
-            {
-                // White side (top)
-                if (row <= 2 && isWhiteTile(row, col))
-                {
-                    board.get(row).set(col, new Piece(Piece.Color.White));
-                }
-                // Red side (bottom)
-                else if (row >= 5 && isWhiteTile(row, col))
-                {
-                    board.get(row).set(col, new Piece(Piece.Color.Red));
-                }
-                else // Center field
-                {
-                    board.get(row).set(col, null);
-                }
-            }
+    public void initializeBoard(Game.Color color) {
+        List<Row> board = null;
+        if (color == RED) {
+           board = this.redBoard;
+        } else if (color == WHITE) {
+            board = this.whiteBoard;
         }
-
-        return newBoard;
-    }
-
-    public List<List<Piece>> getBoard()
-    {
-        return board;
+        boolean flag = false;
+        for( int row = 0; row < 8; row++) {
+            if (row <= 2) {
+                if (color == RED) {
+                    board.add(row, new Row(row, WHITE, flag));
+                } else if(color == WHITE) {
+                    board.add(row, new Row(row, RED, flag));
+                }
+            } else if (row >= 5) {
+                if (color == RED) {
+                    board.add(row, new Row(row, RED, flag));
+                } else if(color == WHITE) {
+                    board.add(row, new Row(row, WHITE, flag));
+                }
+            } else {
+                board.add(row, new Row(row, null, flag));
+            }
+            flag = !flag;
+        }
     }
 
     /**
@@ -119,15 +109,20 @@ public class Board {
     public boolean isValid(int row, int col) {
         return row >= 0 && row <= 7 && col >= 0 && col <= 7;
     }
-
-    /**
-     * Returns whether or not a tile on the checker board is white.
-     * @param x the X coordinate of the tile
-     * @param y the Y coordinate of the tile
-     * @return true if the tile is white, false if the tile is black
-     */
-    private boolean isWhiteTile(int x, int y)
-    {
-        return (x + y) % 2 == 0;
+    public void setBoard(boolean whiteboard) {
+        if (whiteboard) {
+            this.board = whiteBoard;
+        } else {
+            this.board = redBoard;
+        }
     }
+
+    public List<Row> getRedBoard() {
+        return redBoard;
+    }
+
+    public List<Row> getWhiteBoard() {
+        return whiteBoard;
+    }
+
 }

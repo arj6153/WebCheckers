@@ -1,20 +1,23 @@
 package com.webcheckers.model;
 
+
+
 /**
  * Class for types of pieces in a checker game.
  */
 public class Piece {
-    public enum Color {Red, White}
-    private boolean king;
-    private Piece.Color color;
-
+    public enum Type {
+        NORMAL, KING
+    }
+    private Game.Color color;
+    private Type type;
     /**
      * Constructor of Piece.
-     * @param Color red or white
+     * @param color red or white
      */
-    public Piece(Piece.Color Color) {
-        king = false;
-        this.color = Color;
+    public Piece(Type type, Game.Color color) {
+        this.type = type;
+        this.color = color;
     }
 
     /**
@@ -23,15 +26,22 @@ public class Piece {
      */
     public boolean isKing()
     {
-        return king;
+        return this.type == Type.KING;
     }
 
     /**
      * Gets the color of a checker piece.
      * @return red or white
      */
-    public Piece.Color getColor() {
-        return color;
+    public Game.Color getColor() {
+        return this.color;
     }
 
+    /**
+     * Gets the Piece type
+     * @return Piece Type
+     */
+    public Type getType() {
+        return this.type;
+    }
 }

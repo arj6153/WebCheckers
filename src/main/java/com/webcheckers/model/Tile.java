@@ -1,25 +1,26 @@
 package com.webcheckers.model;
 
-public class Space {
+public class Tile {
 
     private int cellIdx;
     private Piece piece;
-    private Tile tile;
+    private Status status;
 
-    public enum Tile {
+    public enum Status {
         EMPTY,
         FILLED,
         INVALID
     }
+    private boolean valid;
 
-    public Space(int cellIdx, Piece currentPiece) {
+    public Tile(int cellIdx, Piece currentPiece) {
         this.cellIdx = cellIdx;
         if (currentPiece == null) {
             this.piece = null;
-            this.tile = Tile.EMPTY;
+            this.status = Status.EMPTY;
         } else {
             this.piece = currentPiece;
-            this.tile = Tile.FILLED;
+            this.status = Status.FILLED;
         }
     }
 
@@ -27,30 +28,30 @@ public class Space {
         return this.cellIdx;
     }
 
-    public Tile getTile() {
-        return this.tile;
+    public Status getTile() {
+        return this.status;
     }
 
-    public Tile setPiece(Piece piece) {
-        if (tile == Tile.EMPTY) {
+    public Status setPiece(Piece piece) {
+        if (status == Status.EMPTY) {
             this.piece = piece;
-            this.tile = Tile.FILLED;
-            return this.tile;
+            this.status = Status.FILLED;
+            return this.status;
         }
-        return this.tile;
+        return this.status;
     }
 
     public boolean isValid() {
-        return !(this.tile == Tile.INVALID ||
-                this.tile == Tile. FILLED);
+        return valid && piece == null;
+
     }
 
     public boolean isFilled() {
-        return this.tile == Tile.FILLED;
+        return this.status == Status.FILLED;
     }
 
     public boolean isEmpty() {
-        return this.tile == Tile.EMPTY;
+        return this.status == Status.EMPTY;
     }
 
     public Piece getPiece() {
