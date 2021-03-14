@@ -70,7 +70,7 @@ public class PostSignInRoute implements Route {
         vm.put("message", GetSignInRoute.SIGN_IN_MSG);
         if (player == null) {
             String name = request.queryParams(USER_ID);
-            Pattern p = Pattern.compile("[a-zA-Z0-9 ]");
+            Pattern p = Pattern.compile("^[a-zA-Z0-9 ]+$");
             ModelAndView mv;
             if(name.isBlank()) {
                 mv = error(vm, "Username is empty. Try again");
