@@ -31,11 +31,11 @@ public class GetGameRoute implements Route {
     static final String VIEWMODE_ATTR = "viewMode";
     static final String ACTIVE_COLOR_ATTR = "activeColor";
     static final String MODEOPTIONS_ATTR = "modeOptionsAsJSON";
+    private static final String DESCRIPTION = "Checkers Game";
     static final String BOARD_ATTR = "board";
 
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
-    private static final Message TITLE_MSG = Message.info("Checkers Game");
 
     private final TemplateEngine templateEngine;
     private final GameCenter gameCenter;
@@ -77,7 +77,7 @@ public class GetGameRoute implements Route {
         final Session httpSession = request.session();
         Map<String,Object> vm = new HashMap<>();
         final Map<String, Object> options = new HashMap<>(2);
-        vm.put("title", TITLE_MSG);
+        vm.put("title", DESCRIPTION);
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         if (player == null) {
             response.redirect(WebServer.HOME_URL);
