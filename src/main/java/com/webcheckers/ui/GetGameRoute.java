@@ -2,6 +2,7 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.Board;
 import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
@@ -40,7 +41,7 @@ public class GetGameRoute implements Route {
     private final GameCenter gameCenter;
     private final Gson gson;
 
-    public enum mode {
+    public enum Mode {
         PLAY
     }
     /**
@@ -107,7 +108,7 @@ public class GetGameRoute implements Route {
                    return null;
                }
            }
-           vm.put(VIEWMODE_ATTR, mode.PLAY);
+           vm.put(VIEWMODE_ATTR, Mode.PLAY);
            Game game = gameCenter.getGame(Integer.parseInt(gameID));
            options.put("isGameOver", false);
            options.put("gameOverMessage", "YOU LOSE");

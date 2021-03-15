@@ -84,7 +84,7 @@ public class PostSignInRoute implements Route {
                         "alphanumeric value and optional spaces only. Try again");
                 return templateEngine.render(mv);
             } else if(gameCenter.getLobby().playerExists(name)) {
-                mv = error(vm, "Username is taken Try again");
+                mv = error(vm, "Username is taken. Try again");
                 return templateEngine.render(mv);
             }
             gameCenter.addPlayer(name);

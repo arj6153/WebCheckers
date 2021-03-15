@@ -4,7 +4,7 @@ package com.webcheckers.model;
  *
  * @author Truong Anh Tuan Hoang
  */
-public class Tile {
+public class Space {
 
     private int cellIdx;
     private Piece piece;
@@ -18,7 +18,7 @@ public class Tile {
      * @param currentPiece
      *      current checker piece
      */
-    public Tile(int cellIdx, Piece currentPiece, boolean valid) {
+    public Space(int cellIdx, Piece currentPiece, boolean valid) {
         this.valid = valid;
         this.cellIdx = cellIdx;
         this.piece = currentPiece;

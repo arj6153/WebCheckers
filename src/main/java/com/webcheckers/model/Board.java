@@ -15,11 +15,11 @@ import static com.webcheckers.model.Game.color.*;
 public class Board {
     private List<Row> board;
 
-    private Player redPlayer;
-    private Player whitePlayer;
+    private final Player redPlayer;
+    private final Player whitePlayer;
 
-    private List<Row> redBoard = new ArrayList<>();
-    private List<Row> whiteBoard = new ArrayList<>();
+    private final List<Row> redBoard = new ArrayList<>();
+    private final List<Row> whiteBoard = new ArrayList<>();
 
     /**
      * Constructor of the checker board.
@@ -30,56 +30,7 @@ public class Board {
        this.board = new ArrayList<>();
        initializeBoard(RED);
        initializeBoard(WHITE);
-
     }
-    /**
-     * Checks if a tile is occupied by a checker piece.
-     *
-     * @param x
-     *      the X coordinate of the tile
-     * @param y
-     *      the Y coordinate of the tile
-     *
-     * @return
-     *      true if there is no checker on the tile, false if there is one
-     */
-    private boolean isTileEmpty(int x, int y)
-    {
-        return false;
-    }
-
-    /**
-     * Retrieve a piece (if any) from the given x/y coordinates.
-     *
-     * @return
-     *      The piece if there is one present, null if none exists.
-     */
-    public Piece getTile(int x, int y) {
-        return null;
-    }
-
-    /**
-     * Given the x,y coordinates of a piece and a target location, determines if the piece can be dropped at the target.
-     *
-     * @param pieceX
-     *      the X location of the selected piece
-     * @param pieceY
-     *      the Y location of the selected piece
-     * @param argetX
-     *      the X location of the target tile
-     * @param targetY
-     *      the Y location of the target tile
-     *
-     * @return
-     *      true if the piece can be dropped at the target, false is not
-     *
-
-    public boolean isDroppable(int pieceX, int pieceY, int targetX, int targetY)
-    {
-        // Is the target tile white or occupied? If so, not droppable
-        // Is the tile where the selected piece should be actually occupied by a piece? If not, not droppable
-        return !isWhiteTile(targetX, targetY) && isTileEmpty(targetX, targetY) && !isTileEmpty(pieceX, pieceY);
-    }*/
 
     /**
      * Create a new standard board based on checkers rules.
@@ -103,31 +54,12 @@ public class Board {
                     board.add(row, new Row(row, RED, flag));
                 }
             } else if (row >= 5) {
-                if (color == RED) {
-                    board.add(row, new Row(row, RED, flag));
-                } else if(color == WHITE) {
-                    board.add(row, new Row(row, WHITE, flag));
-                }
+                board.add(row, new Row(row, color, flag));
             } else {
                 board.add(row, new Row(row, NONE, flag));
             }
             flag = !flag;
         }
-    }
-
-    /**
-     * Checks if move is within boundary of the board.
-     *
-     * @param row
-     *      the row coordinate
-     * @param col
-     *      the column coordinate
-     *
-     * @return
-     *      true if move is within board boundary, else false
-     */
-    public boolean isValid(int row, int col) {
-        return row >= 0 && row <= 7 && col >= 0 && col <= 7;
     }
 
     /**

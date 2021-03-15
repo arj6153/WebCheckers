@@ -20,7 +20,7 @@
 <body>
   <div class="page">
     <h1>Web Checkers | Game View</h1>
-    
+
     <#include "nav-bar.ftl" />
 
     <div class="body">
@@ -29,7 +29,7 @@
 
       <div>
         <div id="game-controls">
-        
+
           <fieldset id="game-info">
             <legend>Info</legend>
 
@@ -63,17 +63,17 @@
             <tbody>
             <#list board.iterator() as row>
               <tr data-row="${row.index}">
-              <#list row.iterator() as tile>
-                <td data-cell="${tile.cellIdx}"
-                    <#if tile.isValid() >
-                    class="Tile"
+              <#list row.iterator() as space>
+                <td data-cell="${space.cellIdx}"
+                    <#if space.isValid() >
+                    class="Space"
                     </#if>
                     >
-                <#if tile.piece??>
+                <#if space.piece??>
                   <div class="Piece"
-                       id="piece-${row.index}-${tile.cellIdx}"
-                       data-type="${tile.piece.type}"
-                       data-color="${tile.piece.color}">
+                       id="piece-${row.index}-${space.cellIdx}"
+                       data-type="${space.piece.type}"
+                       data-color="${space.piece.color}">
                   </div>
                 </#if>
                 </td>

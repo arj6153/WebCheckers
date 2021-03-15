@@ -12,10 +12,10 @@ import static com.webcheckers.model.Game.color.NONE;
  *
  * @author Truong Anh Tuan Hoang
  */
-public class Row implements Iterable<Tile>{
+public class Row implements Iterable<Space>{
 
     private int index;
-    private List<Tile> tiles;
+    private final List<Space> spaces;
 
     /**
      * Constructor of Row.
@@ -29,7 +29,7 @@ public class Row implements Iterable<Tile>{
      *      tile is empty if false
      */
     public Row(int index, Game.color color, boolean flag){
-        this.tiles = new ArrayList<>();
+        this.spaces = new ArrayList<>();
         this.index = index;
         initialize(color, flag);
     }
@@ -45,10 +45,10 @@ public class Row implements Iterable<Tile>{
      */
     public void initialize(Game.color color, boolean flag) {
         for(int col = 0; col < 8; col++) {
-           if(flag) {
-               tiles.add(new Tile( col,new Piece(Piece.Type.NORMAL, color),true));
+           if(flag && color != NONE) {
+               spaces.add(new Space( col,new Piece(Piece.Type.SINGLE, color),true));
            } else {
-               tiles.add(new Tile(col, null,false));
+               spaces.add(new Space(col, null, flag));
            }
            flag = !flag;
         }
@@ -60,8 +60,8 @@ public class Row implements Iterable<Tile>{
      * @return
      *      iterator of the row
      */
-    public Iterator<Tile> iterator() {
-        return this.tiles.iterator();
+    public Iterator<Space> iterator() {
+        return this.spaces.iterator();
     }
 
     /**
@@ -85,7 +85,7 @@ public class Row implements Iterable<Tile>{
     }
 
     @Override
-    public Spliterator<Tile> spliterator() {
+    public Spliterator<Space> spliterator() {
         return null;
     }
 }

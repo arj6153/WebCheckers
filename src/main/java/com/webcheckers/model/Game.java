@@ -202,4 +202,13 @@ public class Game implements Iterable<Row>{
     public void setPlayerTurn(Player playerTurn) {
         this.playerTurn = playerTurn;
     }
+
+    /**
+     * Get board
+     * @return
+     *      the board
+     */
+     public Board getBoard() {
+         return this.board;
+     }
 }

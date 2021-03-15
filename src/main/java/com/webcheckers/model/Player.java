@@ -1,13 +1,11 @@
 package com.webcheckers.model;
 
-import com.webcheckers.appl.Lobby;
-
 /**
  * Class for a Player containing the name and status.
  *
  * @author Alex Johannesson
  */
-public class Player extends Lobby {
+public class Player {
 
     private final String name;
 
