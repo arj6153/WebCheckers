@@ -65,8 +65,8 @@ public class GetSignInRoute implements Route {
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         if (player == null) {
             Map<String,Object> vm = new HashMap<>();
-            vm.put("title", DESCRIPTION);
-            vm.put("message", SIGN_IN_MSG);
+            vm.put(GetHomeRoute.TITLE_ATTR, DESCRIPTION);
+            vm.put(GetHomeRoute.MESSAGE_ATTR, SIGN_IN_MSG);
 
             return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
         }

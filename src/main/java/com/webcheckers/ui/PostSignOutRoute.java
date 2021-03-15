@@ -54,7 +54,7 @@ public class PostSignOutRoute implements Route{
         final Session httpSession = request.session();
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         gameCenter.removePlayer(player.getName());
-        httpSession.attribute("currentUser", null);
+        httpSession.attribute(GetHomeRoute.CURRENT_USER, null);
         response.redirect(WebServer.HOME_URL);
         return null;
     }

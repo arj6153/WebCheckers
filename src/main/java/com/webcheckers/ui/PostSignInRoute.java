@@ -11,9 +11,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-import static com.webcheckers.ui.GetHomeRoute.MESSAGE_ATTR;
-import static com.webcheckers.ui.GetHomeRoute.MESSAGE_TYPE_ATTR;
-import static com.webcheckers.ui.GetHomeRoute.ERROR_ATTR;
+import static com.webcheckers.ui.GetHomeRoute.*;
 import static spark.Spark.halt;
 
 /**
@@ -66,8 +64,8 @@ public class PostSignInRoute implements Route {
         final Session httpSession = request.session();
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         Map<String,Object> vm = new HashMap<>();
-        vm.put("title", GetSignInRoute.DESCRIPTION);
-        vm.put("message", GetSignInRoute.SIGN_IN_MSG);
+        vm.put(TITLE_ATTR, GetSignInRoute.DESCRIPTION);
+        vm.put(MESSAGE_ATTR, GetSignInRoute.SIGN_IN_MSG);
         if (player == null) {
             String name = request.queryParams(USER_ID);
             Pattern p = Pattern.compile("^[a-zA-Z0-9 ]+$");

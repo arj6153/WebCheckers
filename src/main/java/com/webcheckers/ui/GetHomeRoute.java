@@ -32,6 +32,7 @@ public class GetHomeRoute implements Route {
   static final String MESSAGE_ATTR = "message";
   static final String MESSAGE_TYPE_ATTR = "messageType";
   static final String ERROR_ATTR = "error";
+  static final String TITLE_ATTR = "title";
 
   private final TemplateEngine templateEngine;
   private final GameCenter gameCenter;
@@ -67,7 +68,7 @@ public class GetHomeRoute implements Route {
     final Player player = httpSession.attribute(CURRENT_USER);
 
     Map<String, Object> vm = new HashMap<>();
-    vm.put("title", DESCRIPTION);
+    vm.put(TITLE_ATTR, DESCRIPTION);
     vm.put(MESSAGE_ATTR, WELCOME_MSG);
     final Message message = httpSession.attribute(MESSAGE_ATTR);
     if(player != null) {

@@ -31,7 +31,7 @@ public class GetGameRoute implements Route {
     static final String VIEWMODE_ATTR = "viewMode";
     static final String ACTIVE_COLOR_ATTR = "activeColor";
     static final String MODEOPTIONS_ATTR = "modeOptionsAsJSON";
-    private static final String DESCRIPTION = "Checkers Game";
+    static final String DESCRIPTION = "Checkers Game";
     static final String BOARD_ATTR = "board";
 
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
@@ -77,7 +77,7 @@ public class GetGameRoute implements Route {
         final Session httpSession = request.session();
         Map<String,Object> vm = new HashMap<>();
         final Map<String, Object> options = new HashMap<>(2);
-        vm.put("title", DESCRIPTION);
+        vm.put(TITLE_ATTR, DESCRIPTION);
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         if (player == null) {
             response.redirect(WebServer.HOME_URL);
@@ -92,12 +92,11 @@ public class GetGameRoute implements Route {
                    if(opponent.isPlaying()) {
                        httpSession.attribute(MESSAGE_ATTR, Message.error("Player is in game. Choose another"));
                        response.redirect(WebServer.HOME_URL);
-                       return null;
                    } else {
                        gameID = String.valueOf(gameCenter.addGame(player, opponent));
                        response.redirect(WebServer.GAME_URL + "?gameID=" + gameID);
-                       return null;
                    }
+                   return null;
                }
            } else {
                if(gameID.equals("")) {
