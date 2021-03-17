@@ -8,20 +8,18 @@ import java.util.Iterator;
  * @author Michael Merlino
  * @author Truong Anh Tuan Hoang
  */
-public class Game implements Iterable<Row>{
+public class Game{
     private final Player redPlayer;
     private final Player whitePlayer;
-    private final Board board;
+    private final BoardView board;
     private final int ID;
     private boolean redTurn;
     private Player playerTurn;
-    private Player currPlayer;
-    private int whitePieces = 12;
     private int redPieces = 12;
+    private int whitePieces = 12;
+    private boolean gameOver;
 
-    private boolean gameOver = false;
-
-    public enum color {RED, WHITE, NONE}
+    public enum Color {RED, WHITE, NONE}
 
     /**
      * Constructor of Game.
@@ -33,12 +31,13 @@ public class Game implements Iterable<Row>{
      */
     public Game(Player currPlayer, Player red, Player white)
     {
-        this.currPlayer = currPlayer;
+        playerTurn = currPlayer;
         this.redPlayer = red;
         this.whitePlayer = white;
-        this.board = new Board(redPlayer, whitePlayer);
-        this.ID = redPlayer.getName().hashCode() * 31 + whitePlayer.getName().hashCode() * 67;
+        this.board = new BoardView();
+        this.ID = redPlayer.hashCode() * 31 + whitePlayer.hashCode() * 67;
         this.redTurn = true;
+        gameOver = false;
     }
 
     /**
@@ -60,23 +59,6 @@ public class Game implements Iterable<Row>{
     public Player getWhitePlayer() {
         return whitePlayer;
     }
-    public void setCurrPlayer(Player player) {
-        this.currPlayer = player;
-    }
-    /**
-     * Gets the player whose turn it currently is.
-     *
-     * @return
-     *      Red player on red's turn, White player on white's turn.
-     */
-    public Player getCurrentPlayer()
-    {
-        if (redTurn)
-        {
-            return redPlayer;
-        }
-        return whitePlayer;
-    }
 
     /**
      * Gets current player color.
@@ -84,11 +66,11 @@ public class Game implements Iterable<Row>{
      * @return
      *      Red player on red's turn, White player on white's turn.
      */
-    public Game.color getPlayerColor() {
+    public Color getPlayerColor() {
         if (redTurn) {
-            return color.RED;
+            return Color.RED;
         }
-        return color.WHITE;
+        return Color.WHITE;
     }
     /**
      * Checks if player is white player, opponent.
@@ -100,7 +82,7 @@ public class Game implements Iterable<Row>{
      *      true if player is white player, else false
      */
     public boolean isWhitePlayer(Player player) {
-        return player.equals(getWhitePlayer());
+        return player.equals(this.whitePlayer);
     }
 
     /**
@@ -113,7 +95,7 @@ public class Game implements Iterable<Row>{
      *      true if player is red player, else false
      */
     public boolean isRedPlayer(Player player) {
-        return player.equals(getRedPlayer());
+        return player.equals(this.redPlayer);
     }
 
     /**
@@ -146,17 +128,6 @@ public class Game implements Iterable<Row>{
         return gameOver;
     }
 
-
-    @Override
-    public Iterator<Row> iterator() {
-        if(currPlayer.equals(redPlayer)){
-            this.board.setBoard(false);
-            return this.board.getBoard().iterator();
-        }
-        this.board.setBoard(true);
-        return this.board.getBoard().iterator();
-    }
-
     /**
      * Set the turn to Red.
      */
@@ -166,26 +137,10 @@ public class Game implements Iterable<Row>{
 
     /**
      * @return
-     *      The amount of red checkers left on the board
-     */
-    public int getNumRedPieces() {
-        return redPieces;
-    }
-
-    /**
-     * @return
-     *      The amount of white checkers left on the board
-     */
-    public int getNumWhitePieces() {
-        return whitePieces;
-    }
-
-    /**
-     * @return
      *      True if it is currently the red player's turn
      */
     public boolean isRedTurn(Player player) {
-        return redPlayer.equals(playerTurn);
+        return redTurn;
     }
 
     /**
@@ -199,8 +154,8 @@ public class Game implements Iterable<Row>{
     /**
      * Sets which player's turn it is.
      */
-    public void setPlayerTurn(Player playerTurn) {
-        this.playerTurn = playerTurn;
+    public void setPlayerTurn(Player player) {
+        this.playerTurn = player;
     }
 
     /**
@@ -208,7 +163,33 @@ public class Game implements Iterable<Row>{
      * @return
      *      the board
      */
-     public Board getBoard() {
+     public BoardView getBoard() {
          return this.board;
      }
+
+    /**
+     * Get the number of pieces players has
+     * @param
+     *      color: the color of the player to get num pieces from
+     * @return
+     *      The num pieces
+     */
+     public int getNumPieces(Color color) {
+        if (color == Color.RED) {
+            return this.redPieces;
+        }
+        return this.whitePieces;
+    }
+
+    /**
+     *
+     */
+     public void setGameOver() {
+         gameOver = true;
+     }
+
+
+
+
+
 }

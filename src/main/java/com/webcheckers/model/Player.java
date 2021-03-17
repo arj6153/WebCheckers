@@ -8,6 +8,8 @@ package com.webcheckers.model;
 public class Player {
 
     private final String name;
+    private boolean isPlaying = false;
+
 
     /**
      * Constructor for Player
@@ -42,7 +44,14 @@ public class Player {
         return this.name.equals(otherPlayer.name);
     }
 
-    private boolean isPlaying = false;
+    /**
+     * @return
+     *      Player Object Hashcode
+     */
+    public int hashCode() {
+        return this.name.hashCode();
+    }
+
 
     /**
      * Sets the status of a player.

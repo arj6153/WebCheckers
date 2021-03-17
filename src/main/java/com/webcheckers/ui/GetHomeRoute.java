@@ -76,7 +76,7 @@ public class GetHomeRoute implements Route {
         String gameID = "";
         for (Game game: gameCenter.getGameMap().values()) {
           if(game.isPlayerInGame(player) && !game.isGameOver()) {
-            game.setCurrPlayer(player);
+            game.setPlayerTurn(player);
             gameID = String.valueOf(game.getID());
             break;
           }

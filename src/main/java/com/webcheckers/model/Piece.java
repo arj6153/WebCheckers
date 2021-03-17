@@ -10,7 +10,8 @@ public class Piece {
         SINGLE, KING
     }
 
-    private Game.color color;
+
+    private Game.Color color;
     private Type type;
 
     /**
@@ -19,7 +20,7 @@ public class Piece {
      * @param color
      *      red or white
      */
-    public Piece(Type type, Game.color color) {
+    public Piece(Type type, Game.Color color) {
         this.type = type;
         this.color = color;
     }
@@ -41,7 +42,7 @@ public class Piece {
      * @return
      *      red or white
      */
-    public Game.color getColor() {
+    public Game.Color getColor() {
         return this.color;
     }
 
