@@ -1,7 +1,5 @@
 package com.webcheckers.model;
 
-import javax.swing.text.Position;
-
 /**
  * Class containing the moves of a checker piece and its position.
  *
