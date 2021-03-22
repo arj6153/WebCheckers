@@ -12,7 +12,7 @@ geometry: margin=1in
 * Team name: TEAMNAME
 * Team members
   * Bin Qiu
-  * 
+  * Truong Anh Tuan Hoang
   * Alex Johannesson
   * Michael Merlino
 
