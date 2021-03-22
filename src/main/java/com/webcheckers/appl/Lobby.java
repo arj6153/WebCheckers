@@ -14,8 +14,7 @@ import java.util.HashMap;
 public class Lobby {
 
     // lobby holds the username of a player as a key and the Player as the value
-    private HashMap<String, Player> map;
-    private String error = "<p> There are no players available at this time </p>";
+    private final HashMap<String, Player> map;
 
     /**
      * Constructor of the lobby holding the hashmap.
