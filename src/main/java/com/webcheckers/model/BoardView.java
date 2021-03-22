@@ -23,6 +23,9 @@ public class BoardView implements Iterable<Row>{
        initializeBoard();
     }
 
+
+
+
     
     /**
      * Create a new standard board based on checkers rules.
