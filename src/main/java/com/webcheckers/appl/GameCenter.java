@@ -42,7 +42,6 @@ public class GameCenter {
         gameMap.put(coolNewGame.getID(), coolNewGame);
         challenger.setPlaying(true);
         recipient.setPlaying(true);
-        coolNewGame.setRedTurn(true);
         return coolNewGame.getID();
     }
 

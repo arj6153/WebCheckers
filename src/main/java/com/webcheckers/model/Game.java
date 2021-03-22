@@ -13,7 +13,6 @@ public class Game{
     private final Player whitePlayer;
     private final BoardView board;
     private final int ID;
-    private boolean redTurn;
     private Player playerTurn;
     private int redPieces = 12;
     private int whitePieces = 12;
@@ -36,7 +35,6 @@ public class Game{
         this.whitePlayer = white;
         this.board = new BoardView();
         this.ID = redPlayer.hashCode() * 31 + whitePlayer.hashCode() * 67;
-        this.redTurn = true;
         gameOver = false;
     }
 
@@ -67,10 +65,12 @@ public class Game{
      *      Red player on red's turn, White player on white's turn.
      */
     public Color getPlayerColor() {
-        if (redTurn) {
+        if (playerTurn == redPlayer) {
             return Color.RED;
+        } else if (playerTurn == whitePlayer) {
+            return Color.WHITE;
         }
-        return Color.WHITE;
+        return null;
     }
     /**
      * Checks if player is white player, opponent.
@@ -128,19 +128,13 @@ public class Game{
         return gameOver;
     }
 
-    /**
-     * Set the turn to Red.
-     */
-    public void setRedTurn(boolean status) {
-       this.redTurn = status;
-    }
 
     /**
      * @return
      *      True if it is currently the red player's turn
      */
     public boolean isRedTurn() {
-        return redTurn;
+        return playerTurn == redPlayer;
     }
 
     /**

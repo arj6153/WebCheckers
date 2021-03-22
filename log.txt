@@ -1,0 +1,693 @@
+commit 664cebf4b51695d335d2aabd785f3ea8265af6e4
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Mon Mar 22 16:08:07 2021 -0400
+
+    change minors details about redTurn
+
+commit deb92d199990c1788491ca76d2d0ba1d91146313
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 18 10:17:26 2021 -0400
+
+    initiated PostValidateMove and successfully pulled the start and end positions of the move user made
+
+commit 00e79f87f3a9d2718f172eef337d9556d746d7eb
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Tue Mar 16 20:49:46 2021 -0400
+
+    redesign Board to BoardView and clean up some minor details
+
+commit 374b8be98e07455cbe020541cadbdfc9b0ad61c2
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Mon Mar 15 21:03:26 2021 -0400
+
+    Updated ATP
+
+commit 3f48222f2a9f8c5318070a08486bd601f9785214
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Mon Mar 15 19:50:23 2021 -0400
+
+    change duplicated strings to a var and reuse var instead
+
+commit 1afbac2d06f4c5c2207d98debfae200287238c81
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Mon Mar 15 19:39:31 2021 -0400
+
+    fixed the name page not displaying correctly for game page
+
+commit d4156577ad7a6fdd7bda1716031fe90f3950c6b4
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Mon Mar 15 17:54:09 2021 -0400
+
+    change Tile back to Space since they messed up the draggable feature of javascript and change the faulty core logic of isValid. Completed Sprint 1
+
+commit 0f1934288ee63f2dadcc9c8f688777a357099e18
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Sun Mar 14 14:33:34 2021 -0400
+
+    update checking error when entering name, now it supposed to only accept when the user enter alphanumeric and spaces. need testing still
+
+commit d94fff524959f634a2e9b07a759ed96132811f6f
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 10:02:04 2021 -0500
+
+    ATP updated to include new issue found in the sign-in story
+
+commit 28d08b9a9c9b2b4753caaa598ab7ac772afb6db7
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 09:27:14 2021 -0500
+
+    All docstrings edited to be consistent with eachother
+
+commit bd03ad6a50ec45d8c107a2708667e0803fe46d47
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 09:11:17 2021 -0500
+
+    docstrings for PostTurnRoute.java edited
+
+commit 24c826f54579a8d4fb3662bb35e37a404c2b6ef0
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 09:10:12 2021 -0500
+
+    docstrings for PostTurnRoute.java edited
+
+commit 5618298d741989b9d460d6f849325a49811c47f7
+Merge: 4fca014 4d01b82
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 09:09:39 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 4fca0141082264f9f1b6ddcc0307b6ca8e45a1f0
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 09:09:27 2021 -0500
+
+    docstrings for PostTurnRoute.java edited
+
+commit 4d01b825f1c29ce0a50b214ac24c6709f6c08be9
+Merge: 27649a1 2eea6fd
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 09:08:16 2021 -0500
+
+    Merge remote-tracking branch 'origin/master' into master
+
+commit 27649a175b77e0a197b41f39a56038a2c890e2b4
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 09:08:10 2021 -0500
+
+    Added credit to Tile.java, simplified if/else
+
+commit 2eea6fd6384a811161cbbf89af7f616a4c352a44
+Merge: 4a3443e 2cd5619
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 09:08:06 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 4a3443e0c456641bfc3edf8bf7922062a38778ac
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 09:07:59 2021 -0500
+
+    docstrings for PostTurnRoute.java
+
+commit 2cd5619ec89809b66de56ee637020397e826e2c5
+Merge: 6d1d188 93f2163
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 09:05:18 2021 -0500
+
+    Merge remote-tracking branch 'origin/master' into master
+
+commit 6d1d1884176c67733a99ae291182866ac996f5f2
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 09:05:12 2021 -0500
+
+    Added author name to relevant classes
+
+commit 93f21634378dadd8f6c6037ab11d98b1d15b6223
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 11 08:59:26 2021 -0500
+
+    adding doc string
+    s
+
+commit 58b4aaa38d10d885cc826cedddec908899cc72c6
+Merge: a0325ca 8a78ae3
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 11 08:55:40 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       src/main/java/com/webcheckers/model/Tile.java
+
+commit 8a78ae3a95a1d4a5988731e027b43d5f84ff4ec0
+Merge: c2dbe48 7952e55
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 08:50:44 2021 -0500
+
+    Merge remote-tracking branch 'origin/master' into master
+
+commit c2dbe48f6dc7200ee6100eb45280f72ee0ed282c
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 08:50:35 2021 -0500
+
+    Finalized ATP for Sprint 1
+
+commit 7952e55bdb2090e9cb7da8f5a42b1cf4015780d2
+Merge: 76ebadd 8bf6838
+Author: bqiu <bincqiu@gmail.com>
+Date:   Thu Mar 11 08:49:54 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 76ebadd0b6d659b88085c3985c941c8f41c75839
+Author: bqiu <bincqiu@gmail.com>
+Date:   Thu Mar 11 08:49:33 2021 -0500
+
+    Updated documentation and formatting of lines.
+
+commit 8bf6838a83abba0bee719b98a707b04fa3c1afb2
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 08:03:30 2021 -0500
+
+    Documenting & cleaning up Game.java
+
+commit a0325ca6a8fdfb9488ea4d057ffe96743076bf70
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 11 07:59:23 2021 -0500
+
+    modifying Row and Tile
+
+commit 30dd2ac168481004177d31977b328d9c3a1b351b
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 07:49:03 2021 -0500
+
+    Update ATP with morning tests
+
+commit 2683c64be7ee3a18c3762c665f7034f7d089de2c
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 11 07:07:02 2021 -0500
+
+    Implement the correct orientation of the board view for each player
+
+commit 525dbb2e1d9a7252238182036f4e40079c834d13
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 11 06:26:06 2021 -0500
+
+    displaying error message when clicking on player in the game
+
+commit 1ed419e8587dab6d1dde6aee6952c0db373be5ab
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 11 05:53:06 2021 -0500
+
+    get both player inside a match to view the game
+
+commit 1e7662fec89dc008a71246fe6784fbabc162051d
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 05:39:10 2021 -0500
+
+    Distinguishing between who's turn it should be in the live game view set up.
+
+commit cad79d28c2f5feae1e5aeee7afc1812ece773d1e
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 11 05:00:49 2021 -0500
+
+    succesfully render the game view but without the logic, need work
+
+commit 31ff1641983cd37a4ba5ae768b4b954d856e17fa
+Merge: 0783269 881e677
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 11 04:19:50 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 07832697a9efb4a47b3edf5fb22f751c5486d065
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Thu Mar 11 04:19:32 2021 -0500
+
+    Trying to fix the piece.color to display
+
+commit 881e6778e53dee37a96c9c8e38cf71b55c8f6fd6
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 03:36:14 2021 -0500
+
+    added more docstrings(editing format so its correct)
+
+commit 11ca654d1436b97bcfa67ac307e3cdf71bfe78a6
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 03:34:55 2021 -0500
+
+    added more docstrings(editing format so its correct)
+
+commit 4ae68f74f8489c45a685d78264e18d876a600733
+Merge: c8554a7 ba6e9a6
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 03:32:58 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit c8554a72a2c19039154ef3b441fa2130fe48e2f6
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Thu Mar 11 03:32:35 2021 -0500
+
+    added more docstrings(editing format so its correct)
+
+commit ba6e9a60ef25322ee0c6d06b3c9ccb6de24cb2e3
+Merge: e8003c1 bcd64cd
+Author: bqiu <bincqiu@gmail.com>
+Date:   Thu Mar 11 01:15:05 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit e8003c136874f61066978f4060f66b2dce8870e0
+Author: bqiu <bincqiu@gmail.com>
+Date:   Thu Mar 11 01:14:45 2021 -0500
+
+    Implemented Space class.
+
+commit bcd64cd9d7cb3c9b5c6741ef47475c1425e96948
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 00:38:10 2021 -0500
+
+    Updated ATP (does not include tests for game start)
+
+commit 10d2252526495dcd60fd6aeec377ff678428e669
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Thu Mar 11 00:13:18 2021 -0500
+
+    i do not know what this changes. i am losing my mind
+
+commit f7f23432a5320e2dedbb91485e44a86125f37dcf
+Merge: c1e3925 1350ebe
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 23:17:42 2021 -0500
+
+    Merge remote-tracking branch 'origin/master' into master
+
+commit c1e39251c47d14d6c5d2e0619b9d8aeebeed32e2
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 23:17:32 2021 -0500
+
+    More progress on making the game page load properly
+
+commit 1350ebe9f757ae87e07109d661a1f6f1beea8556
+Author: bqiu <bincqiu@gmail.com>
+Date:   Wed Mar 10 23:16:34 2021 -0500
+
+    Updated documentation in Board, Move, Piece, and Player classes.
+
+commit e1eb15ab42774aa5dd1d78a5504ccd6b89a27ab2
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 22:59:10 2021 -0500
+
+    Removed redundant stuff
+
+commit bb3545fab63a27781b0b438b5cace29b0a63a1bd
+Merge: 79aa517 e03c658
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 22:40:59 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 79aa517d014802c0c295c1d385c4fc5603cb1183
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 22:40:50 2021 -0500
+
+    currently working on GetGameRoute
+
+commit e03c658751f991bc29ad4032dd37cb96d5255542
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 22:26:01 2021 -0500
+
+    Moved establishment of piece counts into the Board constructor
+
+commit 01acdc2e964ec4774f3dbfd93fdd1aa9d2740539
+Merge: 85d4e79 ff9375f
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 22:16:08 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 85d4e7986051f36c1c29687362772855101c892d
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 22:15:55 2021 -0500
+
+    Working on GetGameRoute
+
+commit ff9375f3fdaec0723892800719c51c2ba030ec2e
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 21:08:07 2021 -0500
+
+    Added getTile() to Board.java
+
+commit e2ef495e840d946cf17ba0f81756249e7d233c01
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 20:37:05 2021 -0500
+
+    add CURRENT_USER = currentUser and replace every place that use currentUser to CURRENT_USER
+
+commit a33ec6a61f9681bae26e837377e3669f1dd23046
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 20:35:41 2021 -0500
+
+    add CURRENT_USER = currentUser and replace every place that use currentUser to CURRENT_USER
+
+commit ccbb03bb0b0bed7cbc6707a84b833cb357612041
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Wed Mar 10 20:31:32 2021 -0500
+
+    Docstrings for GetSignInRoute, PostSignInRoute, and PostSignOutRoute
+
+commit 9192207aaeeec0e7414272b4c41a2a8fb44b1ecd
+Merge: 360a449 59667b4
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Wed Mar 10 20:25:35 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 360a4494c88111a53b286c81a3df779507f98df5
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Wed Mar 10 20:25:00 2021 -0500
+
+    Docstrings for GetSignInRoute, PostSignInRoute, and PostSignOutRoute
+
+commit 59667b4441dd4f76b9e3fb4bc9e417e6cc2928a6
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 20:09:26 2021 -0500
+
+    Add basic game list support
+
+commit 98a849f4446291caa7a2e56b6463cc623bf8613a
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 19:45:20 2021 -0500
+
+    Added getCurrentPlayer(), changed how current turn is tracked
+
+commit 025bd87327d89d8729e88df0e98ba2c5422294a7
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 19:38:26 2021 -0500
+
+    Moved much of the board handling code into Board.java
+
+commit de4f61af2b8142370055867e8b2d34c53360cca4
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Wed Mar 10 19:33:53 2021 -0500
+
+    Created GameBoard which handles the board view of the game and the Move class which handles the types of moves you can make.
+
+commit 1cdd97d2f9ce23b1a511d13573e4db68b5058f59
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 18:53:07 2021 -0500
+
+    Fixed isDroppable()
+
+commit f222c84ebe232b3804326166880efdb9a988b401
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Wed Mar 10 18:50:44 2021 -0500
+
+    Refactored Piece.java; Tiles without a piece are now null
+
+commit a9edb2fc1fd126460f57dfc83c3291814384f2ed
+Author: bqiu <bincqiu@gmail.com>
+Date:   Wed Mar 10 18:45:30 2021 -0500
+
+    GameBoard and Move classes set up - needs implementing.
+
+commit f27c68759da88a52e962c593b276c2d8137a81cd
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Wed Mar 10 18:42:07 2021 -0500
+
+    Piece class setup and edited so that pieces are correctly instantiated.
+
+commit 8342b8da7e986c266289c68b9612b97bd8a22782
+Author: bqiu <bincqiu@gmail.com>
+Date:   Wed Mar 10 17:18:26 2021 -0500
+
+    Included documentation for GameCenter, Lobby, and Game. Refractored .lobby in Game to .map to have better clarity when comparing hashmap and lobby.'
+
+commit e2d4fafa6b79492c56b56573d730cf7cd988a19f
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 16:51:04 2021 -0500
+
+    finished implementing Sign In  userstory
+
+commit 3e2b08e2d4e3f9bd315b895d6c5fedb1792f620d
+Author: bqiu <bincqiu@gmail.com>
+Date:   Wed Mar 10 14:37:37 2021 -0500
+
+    Implemented PostSignOutRoute that allows player to sign out and is redirected to home page. Added removePlayer() in Lobby and GameCenter.
+
+commit 44364501b90c46127b3144487783acfcec0442cf
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Wed Mar 10 14:05:09 2021 -0500
+
+    Some changes made to the game logic with move validity, and some useful functions added.
+
+commit 9409af09b16d59332a2324260124bf1b0cb5ee9b
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 12:40:38 2021 -0500
+
+    Handled invalid username when signing in. Display current player population in home page when not signed in.
+
+commit 8a56c3e36c332448b91f3fac88e4db3d6b7d0aca
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 10:46:09 2021 -0500
+
+    Implemented signin without checking for username error - error checking needed
+
+commit 9f137ff8b798bf7e75d9bbc49886af781369d9d8
+Merge: ac9d0a4 983015a
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 00:17:50 2021 -0500
+
+    Merge branch 'master' of github.com:RIT-SWEN-261-01/team-project-2205-swen-261-01-a-original
+    
+    # Conflicts:
+    #       src/main/java/com/webcheckers/ui/PostSignInRoute.java
+
+commit ac9d0a4596f49963221cd1b4f24389e51568145e
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Wed Mar 10 00:15:28 2021 -0500
+
+    implementing current user to GetHomeRoute, GetSignInRoute, PostSignInRoute, work needs to be fixed
+
+commit 983015aff6d52a07b8677bf69cac0f24130793c3
+Merge: d1df7dd b62d4f3
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 22:37:10 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit d1df7ddc2571dda75c40693da787cebf4b79c2db
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 22:37:00 2021 -0500
+
+    Quick little changes for later user (ignore)
+
+commit b62d4f3e41cb5ded88f32268a94d3123e5a9cd11
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 22:13:35 2021 -0500
+
+    Added ID field to Game.java
+
+commit ed616fce61f2e6c2eb58a5e3d42d721c3d164c3d
+Merge: 4e658d6 d6a8ea3
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 22:04:01 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 4e658d61c58faeca2e990f73764f5bddf5177c64
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 22:03:49 2021 -0500
+
+    Looping through hashmap to list which players are active waiting for a game.
+
+commit d6a8ea361eb9a5b5e91da64d47d51f87b2d60889
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 21:32:10 2021 -0500
+
+    Fix isTileEmpty to be actually correct
+
+commit 0f3f4863b4a1f2064c92be53c11972a883bef411
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 21:30:55 2021 -0500
+
+    Added more to Game.java, including helper methods for the "droppable" functionality
+
+commit f9134eb9196e77765015de63ecba362a79d19318
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 21:29:41 2021 -0500
+
+    Added more to Game.java, including helper methods for the "droppable" functionality
+
+commit 4abf270a5aa02a2f279adba681b5155883189d1b
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 21:15:37 2021 -0500
+
+    For loop fix
+
+commit 95907808ca210bc9e67828662a90df956528fa64
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 21:14:38 2021 -0500
+
+    Add Game.java, a class that contains info about a given match (WIP)
+
+commit 771ad62c4b2f363845231c836be17519bf79f5ce
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Tue Mar 9 20:42:07 2021 -0500
+
+    modify PostSignInRoute so that it receives user input from player when entering username.
+
+commit 0e978b2b3cb8e65277cef3d8d0580d7c57735c93
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Tue Mar 9 19:50:09 2021 -0500
+
+    Create a Player class and Lobby class. Create a GameCenter and add it to Get and Post classes
+
+commit 843b502441c16b725b6d216069daace77ef143dd
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Tue Mar 9 17:39:10 2021 -0500
+
+    Implement the sign-in form
+
+commit 968530dd6a00c2a14a49bca389bb2be00b84d7ec
+Merge: 4c85c31 874a9d8
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 17:05:36 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 4c85c319a47fa9efc9b5b6d50c0c1f048b7387c6
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 17:05:28 2021 -0500
+
+    PostSignInRoute instantiated, Basic Username functionality implemented
+
+commit 874a9d8caa908f0e14a9659eaeadf53adf95308a
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 16:58:14 2021 -0500
+
+    Registered /game as a valid directory to visit (but it currently returns 500 when attempting to connect)
+
+commit f0d64b7e82584926158fb794d1b60a84ad4153e3
+Merge: 36f52bf 0d8b46c
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Tue Mar 9 16:39:41 2021 -0500
+
+    Merge branch 'master' of github.com:RIT-SWEN-261-01/team-project-2205-swen-261-01-a-original
+
+commit 36f52bf1a39ec582fa2eb05a1c2988e615e16c5b
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Tue Mar 9 16:39:11 2021 -0500
+
+    press signin button on homepage will lead to /signin
+
+commit 0d8b46cd3ff2abfbbf01f2593df00ccfabd673e0
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 16:18:19 2021 -0500
+
+    Removing VS project files, because nobody is using VS now
+
+commit 470497df894dff91f7804aa30cec0f86df8f5c34
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Tue Mar 9 16:06:22 2021 -0500
+
+    adding VIEW_NAME = 'homt.tfl' in GetHomeRoute
+
+commit fae1649b696bc4d8e3d348867d479c7078aaa4d0
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 16:03:06 2021 -0500
+
+    edited signin
+
+commit 3e9f8dd8e041e120eab9dcfc86e3f617eb3bfbd3
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 15:46:41 2021 -0500
+
+    Created Sign in page, created button for signin and signout
+
+commit 18b3e72e6496d617a7d1ee518dbf66da9ee759d6
+Merge: 7c94a89 25b5b43
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 15:35:07 2021 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 7c94a89f6b6436a30a6307b4539043c965876c99
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Tue Mar 9 15:34:46 2021 -0500
+
+    Added my name(Alex Johannesson) to the README.md file
+
+commit 25b5b43c57eb16c5c7600e3672e1e0b09b4be303
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 15:25:10 2021 -0500
+
+    Merge
+
+commit c2be66b0f1edf703592db6784244b9ec2120b7f9
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 15:15:17 2021 -0500
+
+    Added web interface state machine for S1 alone
+
+commit 6c4c8c4083ecb7b844b4cb1732cd3b7a5268c6d4
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 14:13:53 2021 -0500
+
+    Replace domain model placeholder with actual domain model
+
+commit 15b18702e1da5a6fdc6cddc1c6e30ce5fb41bf9a
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 14:11:30 2021 -0500
+
+    Update ATP
+
+commit b0d36709a3eff73571f5d3b2886845b345b36eab
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 13:44:55 2021 -0500
+
+    Replaced web interface placeholder with state machine image
+
+commit 6b3b132d7ece0528ff71701e0a2a8b7122034f4c
+Author: Michael Merlino <mtm1783@rit.edu>
+Date:   Tue Mar 9 13:41:26 2021 -0500
+
+    Added files from importing as a VS project
+
+commit 39fa349c803fb33be605c55c2d0d0cd05513a3a4
+Merge: b2614f1 dcf258f
+Author: Michael <mtm1783@g.rit.edu>
+Date:   Mon Mar 1 21:29:27 2021 -0500
+
+    Merge branch 'master' of https://github.com/RIT-SWEN-261-01/team-project-2205-swen-261-01-a-original
+
+commit b2614f181679c85182c074ae5c5e36d19e97080f
+Author: Michael <mtm1783@g.rit.edu>
+Date:   Mon Mar 1 21:28:31 2021 -0500
+
+    Michael's name change
+
+commit dcf258f636a9c74db410476e7026f2f15497fd90
+Author: bcq5933 <dogsquad@DESKTOP-9S8UAAG.localdomain>
+Date:   Mon Mar 1 21:02:07 2021 -0500
+
+    edited README
+
+commit 75b46ce7d89d92a60551dc0e165d6edc92317864
+Author: Alex Johannesson <arj6153@rit.edu>
+Date:   Mon Mar 1 20:44:22 2021 -0500
+
+    Added my name(Alex Johannesson) to the README.md file
+
+commit 9ca64eecccfd9c9f9d5bb6788c30c66164c84422
+Author: Truong Anh Tuan Hoang <tath2701@gmail.com>
+Date:   Mon Mar 1 20:34:07 2021 -0500
+
+    replacing placeholder with name
+
+commit 8bcd8e691d5cce3dda23a17ff43ff6b711a4c885
+Author: github-classroom[bot] <66690702+github-classroom[bot]@users.noreply.github.com>
+Date:   Tue Mar 2 01:20:19 2021 +0000
+
+    Initial commit
