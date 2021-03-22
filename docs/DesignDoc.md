@@ -12,7 +12,7 @@ geometry: margin=1in
 * Team name: TEAMNAME
 * Team members
   * MEMBER1
-  * MEMBER2
+  * Truong Anh Tuan Hoang
   * MEMBER3
   * MEMBER4
 
