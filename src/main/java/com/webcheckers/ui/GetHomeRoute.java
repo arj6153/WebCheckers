@@ -3,8 +3,8 @@ package com.webcheckers.ui;
 import java.util.*;
 import java.util.logging.Logger;
 
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.appl.Lobby;
 import com.webcheckers.model.Player;
 import spark.*;
 
@@ -74,7 +74,7 @@ public class GetHomeRoute implements Route {
     if(player != null) {
       if(player.isPlaying()) {
         String gameID = "";
-        for (Lobby.Game game: gameCenter.getGameMap().values()) {
+        for (Game game: gameCenter.getGameMap().values()) {
           if(game.isPlayerInGame(player) && !game.isGameOver()) {
             game.setPlayerTurn(player);
             gameID = String.valueOf(game.getID());

@@ -17,7 +17,7 @@ public class GameCenter {
     private static final Logger LOG = Logger.getLogger(GameCenter.class.getName());
 
     // Attributes
-    private HashMap<Integer, Lobby.Game> gameMap;
+    private HashMap<Integer, Game> gameMap;
     private final Lobby lobby;
 
     /**
@@ -37,7 +37,7 @@ public class GameCenter {
      */
     public synchronized int addGame(Player challenger, Player recipient)
     {
-        Lobby.Game coolNewGame = new Lobby.Game(challenger, challenger, recipient);
+        Game coolNewGame = new Game(challenger, challenger, recipient);
         System.out.println(coolNewGame.getID());
         gameMap.put(coolNewGame.getID(), coolNewGame);
         challenger.setPlaying(true);
@@ -54,7 +54,7 @@ public class GameCenter {
     }
 
 
-    public HashMap<Integer, Lobby.Game> getGameMap() {
+    public HashMap<Integer, Game> getGameMap() {
         return this.gameMap;
     }
     /**
@@ -87,7 +87,7 @@ public class GameCenter {
      * @param gameID ID of the game
      * @return current game
      */
-    public synchronized Lobby.Game getGame(int gameID) {
+    public synchronized Game getGame(int gameID) {
        return this.gameMap.get(gameID);
     }
 

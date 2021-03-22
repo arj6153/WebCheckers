@@ -1,6 +1,6 @@
 package com.webcheckers.model;
 
-import com.webcheckers.appl.Lobby;
+import com.webcheckers.appl.Game;
 
 /**
  * Class for types of pieces in a checker game.
@@ -13,7 +13,7 @@ public class Piece {
     }
 
 
-    private Lobby.Game.Color color;
+    private Game.Color color;
     private Type type;
 
     /**
@@ -22,7 +22,7 @@ public class Piece {
      * @param color
      *      red or white
      */
-    public Piece(Type type, Lobby.Game.Color color) {
+    public Piece(Type type, Game.Color color) {
         this.type = type;
         this.color = color;
     }
@@ -44,7 +44,7 @@ public class Piece {
      * @return
      *      red or white
      */
-    public Lobby.Game.Color getColor() {
+    public Game.Color getColor() {
         return this.color;
     }
 

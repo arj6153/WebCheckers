@@ -1,12 +1,12 @@
 package com.webcheckers.model;
 
-import com.webcheckers.appl.Lobby;
+import com.webcheckers.appl.Game;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.webcheckers.appl.Lobby.Game.Color.NONE;
+import static com.webcheckers.appl.Game.Color.NONE;
 
 /**
  * Class represents the rows of the checker board.
@@ -29,7 +29,7 @@ public class Row implements Iterable<Space>{
      *      true puts a checker piece on the tile, and
      *      tile is empty if false
      */
-    public Row(int index, Lobby.Game.Color color, boolean flag){
+    public Row(int index, Game.Color color, boolean flag){
         this.spaces = new ArrayList<>();
         this.index = index;
         initialize(color, flag);
@@ -44,7 +44,7 @@ public class Row implements Iterable<Space>{
      *      true puts a checker piece on the tile, and
      *             tile is empty if false
      */
-    public void initialize(Lobby.Game.Color color, boolean flag) {
+    public void initialize(Game.Color color, boolean flag) {
         for(int col = 0; col < 8; col++) {
             if(flag && color != NONE) {
                 spaces.add(new Space( col,new Piece(Piece.Type.SINGLE, color),true));
