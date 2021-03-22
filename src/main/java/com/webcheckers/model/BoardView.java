@@ -3,7 +3,7 @@ package com.webcheckers.model;
 import java.util.*;
 import java.util.List;
 
-import static com.webcheckers.model.Game.Color.*;
+import static com.webcheckers.appl.Lobby.Game.Color.*;
 
 /**
  * Class that contains the board, tiles, and checker pieces.

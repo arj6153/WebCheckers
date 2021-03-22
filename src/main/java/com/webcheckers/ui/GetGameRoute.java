@@ -2,8 +2,8 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.Lobby;
 import com.webcheckers.model.BoardView;
-import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -107,7 +107,7 @@ public class GetGameRoute implements Route {
                    return null;
                }
                vm.put(VIEWMODE_ATTR, Mode.PLAY);
-               Game game = gameCenter.getGame(Integer.parseInt(gameID));
+               Lobby.Game game = gameCenter.getGame(Integer.parseInt(gameID));
                BoardView board = game.getBoard();
                options.put("isGameOver", false);
                options.put("gameOverMessage", "YOU LOSE");

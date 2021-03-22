@@ -2,7 +2,7 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.Game;
+import com.webcheckers.appl.Lobby;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -59,10 +59,10 @@ public class PostTurnRoute implements Route {
         LOG.finer("PostTurnRoute has been invoked.");
         final Session httpSession = request.session();
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
-        Game board = gameCenter.getGame(Integer.parseInt(GAMEID_ATTR));
+        Lobby.Game board = gameCenter.getGame(Integer.parseInt(GAMEID_ATTR));
 
-        LOG.finer("The Red Players Pieces: " + board.getNumPieces(Game.Color.RED));
-        LOG.finer("The White Players Pieces: " + board.getNumPieces(Game.Color.RED));
+        LOG.finer("The Red Players Pieces: " + board.getNumPieces(Lobby.Game.Color.RED));
+        LOG.finer("The White Players Pieces: " + board.getNumPieces(Lobby.Game.Color.RED));
         String json;
         if(board.isRedTurn()) {
             json = gson.toJson(Message.info("true"));
