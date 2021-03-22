@@ -38,6 +38,11 @@ public class Game{
         gameOver = false;
     }
 
+
+
+
+
+
     /**
      * Get red player, this is the user.
      *
