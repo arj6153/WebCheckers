@@ -109,6 +109,7 @@ public class Game{
     public boolean isPlayerInGame(Player player) {
         return player.equals(redPlayer) || player.equals(whitePlayer);
     }
+    
     /**
      * Gets the game session's ID.
      *
