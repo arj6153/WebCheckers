@@ -64,7 +64,7 @@ public class PostTurnRoute implements Route {
         LOG.finer("The Red Players Pieces: " + board.getNumPieces(Game.Color.RED));
         LOG.finer("The White Players Pieces: " + board.getNumPieces(Game.Color.RED));
         String json;
-        if(board.isRedTurn(player)) {
+        if(board.isRedTurn()) {
             json = gson.toJson(Message.info("true"));
         } else {
             json = gson.toJson(Message.info("false"));

@@ -29,9 +29,9 @@ public class Game{
      * @param white
      *      opponent color
      */
-    public Game(Player currPlayer, Player red, Player white)
+    public Game(Player playerTurn, Player red, Player white)
     {
-        playerTurn = currPlayer;
+        this.playerTurn = playerTurn;
         this.redPlayer = red;
         this.whitePlayer = white;
         this.board = new BoardView();
@@ -139,7 +139,7 @@ public class Game{
      * @return
      *      True if it is currently the red player's turn
      */
-    public boolean isRedTurn(Player player) {
+    public boolean isRedTurn() {
         return redTurn;
     }
 
