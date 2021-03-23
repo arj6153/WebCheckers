@@ -41,15 +41,16 @@ public class PostSignOutRouteTest {
     }
 
     @Test
-    public void valid_home() throws Exception {
+    public void valid_home()  {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
         when(templateEngine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
         when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(player);
-        CuT.handle(request, response);
+        try {
+            CuT.handle(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         assertNull(gameCenter.getPlayer(player.getName()));
         assertTrue(session.attributes().isEmpty());
-
-
-
     }
 }

@@ -33,33 +33,44 @@ public class GetSignInRouteTester {
     private Request request;
     private Response response;
     private String person = "TEST";
+    private GetSignInRoute CuT;
+    private Player player;
 
 
     @BeforeEach
-    public void GetSignInRoute() {
+    public void setup() {
         gameCenter = new GameCenter();
         templateEngine = mock(TemplateEngine.class);
         request = mock(Request.class);
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
         response = mock(Response.class);
+        player = mock(Player.class);
         person = this.person;
-
+        CuT = new GetSignInRoute(gameCenter, templateEngine);
     }
 
     @Test
     public void CheckSignIn() throws Exception {
+        final TemplateEngineTester testHelper = new TemplateEngineTester();
+        when(templateEngine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
         when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(null);
-        final TemplateEngineTester helper = new TemplateEngineTester();
-        helper.assertViewModelExists();
-        helper.assertViewModelIsaMap();
-        helper.assertViewName(GetSignInRoute.VIEW_NAME);
+        CuT.handle(request, response);
+        testHelper.assertViewModelExists();
+        testHelper.assertViewModelIsaMap();
+        testHelper.assertViewModelAttribute(GetHomeRoute.TITLE_ATTR, GetSignInRoute.DESCRIPTION);
+        testHelper.assertViewName(GetSignInRoute.VIEW_NAME);
     }
 
     @Test
     public void FailedSignIn() throws Exception {
-        gameCenter.addPlayer(this.person);
-        Player player = gameCenter.getPlayer(this.person);
+        gameCenter.addPlayer(player.getName());
+        when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(player);
+        try {
+            CuT.handle(request, response);
+        } catch (HaltException e) {
+            //
+        }
         doReturn(player).when(session.attribute(GetHomeRoute.CURRENT_USER));
         verify(response).redirect(WebServer.HOME_URL);
 
