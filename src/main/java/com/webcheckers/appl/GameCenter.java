@@ -30,19 +30,19 @@ public class GameCenter {
 
     /**
      * Adds a game to the master list
-     * @param challenger
+     * @param redPlayer
      *      The player that sent the game request.
-     * @param recipient
+     * @param whitePlayer
      *      The player that received the game request.
      */
-    public synchronized int addGame(Player challenger, Player recipient)
+    public synchronized int addGame(Player redPlayer, Player whitePlayer)
     {
-        Game coolNewGame = new Game(challenger, challenger, recipient);
-        System.out.println(coolNewGame.getID());
-        gameMap.put(coolNewGame.getID(), coolNewGame);
-        challenger.setPlaying(true);
-        recipient.setPlaying(true);
-        return coolNewGame.getID();
+        Game newGame = new Game(redPlayer, redPlayer, whitePlayer);
+        System.out.println(newGame.getID());
+        gameMap.put(newGame.getID(), newGame);
+        redPlayer.setPlaying(true);
+        whitePlayer.setPlaying(true);
+        return newGame.getID();
     }
 
     /**
