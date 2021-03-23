@@ -9,6 +9,7 @@ public class Space {
     private int cellIdx;
     private Piece piece;
     private boolean valid;
+    private boolean urmom;
 
     /**
      * Constructor of Tile.
@@ -22,6 +23,7 @@ public class Space {
         this.valid = valid;
         this.cellIdx = cellIdx;
         this.piece = currentPiece;
+        this.urmom = urmom;
     }
     /**
      * Gets cell column.
