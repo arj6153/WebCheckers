@@ -51,6 +51,16 @@ public class BoardView implements Iterable<Row>{
     }
 
     /**
+     * Given index, get the row from boards
+     * @param rowIdx of the row
+     * @return
+     *      the specifed row
+     */
+    public Row getRow(int rowIdx) {
+        return this.board.get(rowIdx);
+    }
+
+    /**
      * @return
      *      Iterator for the board
      */
