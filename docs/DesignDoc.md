@@ -55,12 +55,12 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-> ![img.png](domain-model.png)  
-> The Application hosts the Checkers Game which users may log into to play or
-> watch others play as a Spectator. They are also given the option to watch Replays of their
-> previously played games. Every game is played by 2 Players who take turns
-> controlling 12 pieces each on a 8x8 Board. Pieces start as normal pieces and
-> may become King pieces during the process of the game.
+![img.png](domain-model.png)  
+The Application hosts the Checkers Game which users may log into to play or
+watch others play as a Spectator. They are also given the option to watch
+Replays of their previously played games. Every game is played by 2 Players
+who take turns controlling 12 pieces each on a 8x8 Board. Pieces start as
+normal pieces and may become King pieces during the process of the game.
 
 
 ## Architecture and Design
@@ -89,12 +89,12 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-> ![img_1.png](statechart.png)  
-> The interface is made up of 3 main pages: Home, Game, Login. The user will
-> get to the Home page and Login. Logging in will render the new Home page
-> where players are able to challenge other logged in players. Playing a game
-> will render the Game page and after the game is complete, the players return
-> to the Home page with the lobby.
+![img_1.png](statechart.png)  
+The interface is made up of 3 main pages: Home, Game, Login. The user will
+get to the Home page and Login. Logging in will render the new Home page
+where players are able to challenge other logged in players. Playing a game
+will render the Game page and after the game is complete, the players return
+to the Home page with the lobby.
 
 
 ### UI Tier
