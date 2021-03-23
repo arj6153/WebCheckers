@@ -39,11 +39,11 @@ public class GetSignInRouteTester {
 
     @BeforeEach
     public void setup() {
-        gameCenter = new GameCenter();
-        templateEngine = mock(TemplateEngine.class);
         request = mock(Request.class);
         session = mock(Session.class);
         when(request.session()).thenReturn(session);
+        gameCenter = new GameCenter();
+        templateEngine = mock(TemplateEngine.class);
         response = mock(Response.class);
         player = mock(Player.class);
         person = this.person;
@@ -53,9 +53,9 @@ public class GetSignInRouteTester {
     @Test
     public void CheckSignIn() throws Exception {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
+        CuT.handle(request, response);
         when(templateEngine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
         when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(null);
-        CuT.handle(request, response);
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
         testHelper.assertViewModelAttribute(GetHomeRoute.TITLE_ATTR, GetSignInRoute.DESCRIPTION);
