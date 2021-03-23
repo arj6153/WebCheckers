@@ -45,8 +45,6 @@ public class GetSignInRouteTester {
         response = mock(Response.class);
         person = this.person;
 
-
-
     }
 
     @Test
