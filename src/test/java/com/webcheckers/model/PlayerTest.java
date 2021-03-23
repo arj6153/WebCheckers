@@ -1,6 +1,7 @@
 package com.webcheckers.model;
 import org.junit.jupiter.api.Test;
 import com.webcheckers.model.Player;
+import org.mockito.internal.matchers.Not;
 import spark.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,8 +43,8 @@ public class PlayerTest {
     public void equalsTest() {
         Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
-        boolean equals = player1.equals(player2);
-        assertTrue(equals);
+        boolean notEquals = player1.equals(player2);
+        assertFalse(notEquals);
     }
 
 }
