@@ -2,9 +2,6 @@ package com.webcheckers.model;
 
 import static com.webcheckers.appl.Game.Color.*;
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -15,9 +12,10 @@ public class BoardViewTest {
     private final int RED_NUM = 12;
     private final int WHITE_NUM = 12;
     private final int BLANK_NUM = 40;
-    @Test
+    private final BoardView CuT = new BoardView();
+    @BeforeEach
     public void test_make_board_view() {
-        final BoardView CuT = new BoardView();
+        assertNotNull(CuT);
         List<Row> board = CuT.getBoard();
         // check if the board exists
         assertNotNull(board);
@@ -64,7 +62,6 @@ public class BoardViewTest {
 
     @Test
     public void test_get_row() {
-        final BoardView CuT = new BoardView();
         assertThrows(IndexOutOfBoundsException.class, () -> CuT.getRow(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> CuT.getRow(10));
         assertThrows(IndexOutOfBoundsException.class, () -> CuT.getRow(-5));

@@ -33,6 +33,7 @@ public class GetHomeRoute implements Route {
   static final String MESSAGE_TYPE_ATTR = "messageType";
   static final String ERROR_ATTR = "error";
   static final String TITLE_ATTR = "title";
+  static final String PLAYER_LIST_ATTR = "playerList";
 
   private final TemplateEngine templateEngine;
   private final GameCenter gameCenter;
@@ -43,7 +44,7 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetHomeRoute(GameCenter gameCenter, final TemplateEngine templateEngine) {
+  public GetHomeRoute(final GameCenter gameCenter, final TemplateEngine templateEngine) {
     this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
     this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
     //
@@ -92,7 +93,7 @@ public class GetHomeRoute implements Route {
         vm.put(MESSAGE_ATTR, Message.info("Choose a Player"));
       }
       vm.put(CURRENT_USER, player);
-      vm.put("playerList", gameCenter.getLobby().getMap());
+      vm.put(PLAYER_LIST_ATTR, gameCenter.getLobby().getMap());
     } else {
       // display a user message in the Home page
 
