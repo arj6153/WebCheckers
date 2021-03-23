@@ -15,7 +15,7 @@ import static com.webcheckers.appl.Game.Color.NONE;
  */
 public class Row implements Iterable<Space>{
 
-    private int index;
+    private final int index;
     private final List<Space> spaces;
 
     /**
