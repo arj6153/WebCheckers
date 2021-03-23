@@ -14,7 +14,7 @@ import static com.webcheckers.appl.Game.Color.*;
  */
 public class BoardView implements Iterable<Row>{
     private final List<Row> board;
-
+    static final int DIM= 8;
     /**
      * Constructor of the checker board.
      */
@@ -28,7 +28,7 @@ public class BoardView implements Iterable<Row>{
      */
     public void initializeBoard() {
         boolean flag = false;
-        for( int row = 7; row >=0; row--) {
+        for( int row = DIM-1; row >= 0; row--) {
             if (row <= 2) {
                 board.add(new Row(row, RED, flag));
             } else if (row >= 5) {
@@ -54,9 +54,12 @@ public class BoardView implements Iterable<Row>{
      * Given index, get the row from boards
      * @param rowIdx of the row
      * @return
-     *      the specifed row
+     *      the specified row
      */
     public Row getRow(int rowIdx) {
+        if (rowIdx >= DIM || rowIdx < 0) {
+            throw new IndexOutOfBoundsException();
+        }
         return this.board.get(rowIdx);
     }
 
