@@ -53,9 +53,10 @@ public class GetSignInRouteTester {
     @Test
     public void CheckSignIn() throws Exception {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
+        String playerName = "TEST";
         CuT.handle(request, response);
         when(templateEngine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
-        when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(null);
+        when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(playerName);
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
         testHelper.assertViewModelAttribute(GetHomeRoute.TITLE_ATTR, GetSignInRoute.DESCRIPTION);
