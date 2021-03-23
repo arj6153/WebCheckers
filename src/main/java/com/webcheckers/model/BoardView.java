@@ -28,7 +28,7 @@ public class BoardView implements Iterable<Row>{
      */
     public void initializeBoard() {
         boolean flag = false;
-        for( int row = 7; row >= 0; row--) {
+        for( int row = 7; row >=0; row--) {
             if (row <= 2) {
                 board.add(new Row(row, RED, flag));
             } else if (row >= 5) {
