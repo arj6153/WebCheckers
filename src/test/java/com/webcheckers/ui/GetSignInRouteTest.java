@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
  * @author Alex Johannesson
  */
 
-public class GetSignInRouteTester {
+public class GetSignInRouteTest {
     private TemplateEngine templateEngine;
     private GameCenter gameCenter;
     private Session session;
@@ -53,18 +53,23 @@ public class GetSignInRouteTester {
     @Test
     public void CheckSignIn() throws Exception {
         final TemplateEngineTester testHelper = new TemplateEngineTester();
-        CuT.handle(request, response);
         when(templateEngine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
         when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(null);
+        CuT.handle(request, response);
         testHelper.assertViewModelExists();
         testHelper.assertViewModelIsaMap();
         testHelper.assertViewModelAttribute(GetHomeRoute.TITLE_ATTR, GetSignInRoute.DESCRIPTION);
-        testHelper.assertViewName(GetSignInRoute.VIEW_NAME);
+        testHelper.assertViewModelAttribute(GetHomeRoute.CURRENT_USER, null);
     }
 
     @Test
     public void FailedSignIn() throws Exception {
-        CuT.handle(request, response);
+        final TemplateEngineTester testHelper = new TemplateEngineTester();
+        try {
+            CuT.handle(request, response);
+        } catch(HaltException e) {
+            //
+        }
         verify(response, never()).redirect(any());
     }
 }
