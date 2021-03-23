@@ -15,13 +15,13 @@ import static com.webcheckers.appl.Game.Color.NONE;
  */
 public class Row implements Iterable<Space>{
 
-    private int index;
+    private int rowIdx;
     private final List<Space> spaces;
 
     /**
      * Constructor of Row.
      *
-     * @param index
+     * @param rowIdx
      *      row number
      * @param color
      *      tile color
@@ -29,9 +29,9 @@ public class Row implements Iterable<Space>{
      *      true puts a checker piece on the tile, and
      *      tile is empty if false
      */
-    public Row(int index, Game.Color color, boolean flag){
+    public Row(int rowIdx, Game.Color color, boolean flag){
         this.spaces = new ArrayList<>();
-        this.index = index;
+        this.rowIdx = rowIdx;
         initialize(color, flag);
     }
 
@@ -66,13 +66,23 @@ public class Row implements Iterable<Space>{
     }
 
     /**
+     * Given index, get the Space inside the Row
+     * @return
+     *      the specified Space
+     */
+    public Space getSpace(int cellIdx) {
+       return this.spaces.get(cellIdx);
+    }
+
+
+    /**
      * Gets the row number.
      *
      * @return
      *      row number
      */
-    public int getIndex() {
-        return index;
+    public int getRowIdx() {
+        return rowIdx;
     }
 
 }
