@@ -18,7 +18,8 @@ geometry: margin=1in
 
 ## Executive Summary
 
-This is a summary of the project.
+Webcheckers application allows players to play checkers via the Java Spark 
+framework. A player must sign in to the application to play with another player.
 
 ### Purpose
 > _Provide a very brief statement about the project and the most
@@ -54,11 +55,12 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](domain-model-placeholder.png)
-
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+![img.png](domain-model.png)  
+The Application hosts the Checkers Game which users may log into to play or
+watch others play as a Spectator. They are also given the option to watch
+Replays of their previously played games. Every game is played by 2 Players
+who take turns controlling 12 pieces each on a 8x8 Board. Pieces start as
+normal pieces and may become King pieces during the process of the game.
 
 
 ## Architecture and Design
@@ -87,10 +89,12 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](web-interface-placeholder.png)
-
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
+![img_1.png](statechart.png)  
+The interface is made up of 3 main pages: Home, Game, Login. The user will
+get to the Home page and Login. Logging in will render the new Home page
+where players are able to challenge other logged in players. Playing a game
+will render the Game page and after the game is complete, the players return
+to the Home page with the lobby.
 
 
 ### UI Tier
@@ -121,7 +125,6 @@ with the WebCheckers application.
 > _Provide a summary of the Application tier of your architecture. This
 > section will follow the same instructions that are given for the UI
 > Tier above._
-
 
 ### Model Tier
 > _Provide a summary of the Application tier of your architecture. This
