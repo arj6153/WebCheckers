@@ -1,4 +1,5 @@
 package com.webcheckers.model;
+
 import static com.webcheckers.appl.Game.Color.*;
 import static org.junit.jupiter.api.Assertions.*;
 
