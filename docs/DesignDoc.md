@@ -55,7 +55,7 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-> ![img.png](domain-model.png)
+> ![img.png](domain-model.png)  
 > The Application hosts the Checkers Game which users may log into to play or
 > watch others play as a Spectator. They are also given the option to watch Replays of their
 > previously played games. Every game is played by 2 Players who take turns
@@ -89,7 +89,7 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-> ![img_1.png](statechart.png)
+> ![img_1.png](statechart.png)  
 > The interface is made up of 3 main pages: Home, Game, Login. The user will
 > get to the Home page and Login. Logging in will render the new Home page
 > where players are able to challenge other logged in players. Playing a game
