@@ -64,16 +64,7 @@ public class GetSignInRouteTester {
 
     @Test
     public void FailedSignIn() throws Exception {
-        gameCenter.addPlayer(player.getName());
-        when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(player);
-        try {
-            CuT.handle(request, response);
-        } catch (HaltException e) {
-            //
-        }
-        doReturn(player).when(session.attribute(GetHomeRoute.CURRENT_USER));
-        verify(response).redirect(WebServer.HOME_URL);
-
+        CuT.handle(request, response);
+        verify(response, never()).redirect(any());
     }
-
 }
