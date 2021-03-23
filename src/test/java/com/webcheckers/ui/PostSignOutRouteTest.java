@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 import com.webcheckers.appl.Game;
@@ -11,10 +12,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spark.*;
 
-import javax.swing.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 
 @Tag("UI-Tier")
-public class GetSignOutRouteTest {
+public class PostSignOutRouteTest {
 
     private Request request;
     private Session session;
@@ -23,7 +26,7 @@ public class GetSignOutRouteTest {
     private Game game;
     private Player player;
     private GameCenter gameCenter;
-    private PostSignOutRoute getSignOutRoute;
+    private PostSignOutRoute CuT;
 
     @BeforeEach
     public void setup() {
@@ -32,14 +35,21 @@ public class GetSignOutRouteTest {
         when(request.session()).thenReturn(session);
         response = mock(Response.class);
         gameCenter = mock(GameCenter.class);
+        player = mock(Player.class);
         templateEngine = mock(TemplateEngine.class);
-        getSignOutRoute = new PostSignOutRoute(gameCenter);
+        CuT = new PostSignOutRoute(gameCenter);
     }
 
-//    @Test
-//    public void valid_home() {
-//        when(request.session().attributes(PostSignInRoute)).
-//                thenReturn(player);
-//        when(game.isPlayerInGame(player))
-   // }
+    @Test
+    public void valid_home() throws Exception {
+        final TemplateEngineTester testHelper = new TemplateEngineTester();
+        when(templateEngine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
+        when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(player);
+        CuT.handle(request, response);
+        assertNull(gameCenter.getPlayer(player.getName()));
+        assertTrue(session.attributes().isEmpty());
+
+
+
+    }
 }
