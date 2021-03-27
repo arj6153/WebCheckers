@@ -75,15 +75,19 @@ public class GetHomeRoute implements Route {
     if(player != null) {
       if(player.isPlaying()) {
         String gameID = "";
+        boolean foundGame = false;
         for (Game game: gameCenter.getGameMap().values()) {
           if(game.isPlayerInGame(player) && !game.isGameOver()) {
             game.setPlayerTurn(player);
             gameID = String.valueOf(game.getID());
+            foundGame = true;
             break;
           }
         }
-        response.redirect(WebServer.GAME_URL + "?gameID="+ gameID);
-        halt();
+        if (foundGame) {
+          response.redirect(WebServer.GAME_URL + "?gameID=" + gameID);
+        }
+        //halt();
         return null;
       }
       if(message != null) {

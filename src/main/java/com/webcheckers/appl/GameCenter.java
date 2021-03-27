@@ -38,7 +38,6 @@ public class GameCenter {
     public synchronized int addGame(Player redPlayer, Player whitePlayer)
     {
         Game newGame = new Game(redPlayer, redPlayer, whitePlayer);
-        System.out.println(newGame.getID());
         gameMap.put(newGame.getID(), newGame);
         redPlayer.setPlaying(true);
         whitePlayer.setPlaying(true);

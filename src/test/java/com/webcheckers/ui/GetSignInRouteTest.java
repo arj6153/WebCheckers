@@ -15,7 +15,7 @@ import spark.*;
 
 import javax.swing.text.DefaultEditorKit;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -64,12 +64,14 @@ public class GetSignInRouteTest {
 
     @Test
     public void FailedSignIn() throws Exception {
-        final TemplateEngineTester testHelper = new TemplateEngineTester();
+        gameCenter.addPlayer(player.getName());
+        when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(player);
         try {
-            CuT.handle(request, response);
-        } catch(HaltException e) {
+            CuT.handle(request,response);
+        } catch (HaltException e) {
             //
         }
-        verify(response, never()).redirect(any());
+        verify(response).redirect(WebServer.HOME_URL);
+
     }
 }
