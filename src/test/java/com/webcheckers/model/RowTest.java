@@ -38,14 +38,5 @@ public class RowTest {
     }
 
 
-    @Test
-    public void testInitialize() {
-        Space newSpace = new Space(3, null, true);
-        this.space = (List<Space>) newSpace;
-        if(space.isEmpty()) {
-            assertEquals(space, newSpace);
-        }else
-            assertFalse(true);
-
-    }
 }
+

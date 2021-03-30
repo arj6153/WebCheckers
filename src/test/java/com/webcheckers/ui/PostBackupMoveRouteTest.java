@@ -16,9 +16,7 @@ import java.util.UUID;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- * @author Ash Nguyen
- */
+
 @Tag("UI-tier")
 class PostBackupMoveRouteTest {
     private PostBackupMoveRoute BackUpMoveRoute;
