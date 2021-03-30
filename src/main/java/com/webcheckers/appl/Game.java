@@ -292,17 +292,16 @@ public class Game {
         int startRow = move.getStart().getRow();
         int endCol = move.getEnd().getCell();
         int startCol = move.getStart().getCell();
+        Piece capture = board.getRow((endRow + startRow) / 2).getSpace((endCol + startCol) / 2).getPiece();
         if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
-            if (playerTurn.equals(redPlayer) &&
-                    endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2) &&
-                    (board.getRow((endRow+startRow)/2).getSpace((endCol+startCol)/2).getPiece().getColor()
-                            == Color.WHITE)) {
-                return true;
-            } else if (playerTurn.equals(whitePlayer) &&
-                    endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2) &&
-                    (board.getRow((endRow+startRow)/2).getSpace((endCol+startCol)/2).getPiece().getColor()
-                            == Color.RED)) {
-                return true;
+            if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
+                if(capture != null && capture.getColor() == Color.WHITE) {
+                    return true;
+                } return false;
+            } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
+                if(capture != null && capture.getColor() == Color.RED) {
+                    return true;
+                } return false;
             } else {
                 return false;
             }
