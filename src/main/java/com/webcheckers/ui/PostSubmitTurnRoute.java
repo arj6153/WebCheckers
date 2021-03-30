@@ -35,6 +35,7 @@ public class PostSubmitTurnRoute implements Route {
         } else {
             game.setPlayerTurn(game.getRedPlayer());
         }
+        game.clearActiveMove();
         return gson.toJson(new Message("valid", Message.Type.INFO));
     }
 }
