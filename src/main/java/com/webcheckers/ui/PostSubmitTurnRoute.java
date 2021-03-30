@@ -3,7 +3,6 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.Move;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -12,33 +11,25 @@ import java.util.logging.Logger;
 
 import static spark.Spark.halt;
 
-public class PostValidateMove implements Route {
-
-
-    //Attributes
+public class PostSubmitTurnRoute implements Route {
     private final GameCenter gameCenter;
     private final TemplateEngine templateEngine;
     private final Gson gson;
     private static final Logger LOG = Logger.getLogger(PostSignInRoute.class.getName());
-
-
-    public PostValidateMove(GameCenter gameCenter, TemplateEngine templateEngine, Gson gson) {
-        this.gameCenter = gameCenter;
+    public PostSubmitTurnRoute(GameCenter gamecenter, TemplateEngine templateEngine, Gson gson) {
+        this.gameCenter = gamecenter;
         this.templateEngine = templateEngine;
         this.gson = gson;
         LOG.config("PostValidateMove is initialized.");
-
     }
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        LOG.finer("PostTurnRoute has been invoked.");
+        LOG.finer("PostSubmitTurnRoute has been invoked.");
         final Session httpSession = request.session();
-        final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
-        String param = request.queryParams("actionData");
-        Game game = gameCenter.getGame(player);
-        Move move = gson.fromJson(param, Move.class);
-        Message message = game.isValidMove(move);
-        return new Gson().toJson(message);
+        String gameID = request.queryParams("gameID");
+        Game game = gameCenter.getGame(Integer.parseInt(gameID));
+        game.move(game.getActiveMove());
+        return gson.toJson(new Message("valid", Message.Type.INFO));
     }
 }

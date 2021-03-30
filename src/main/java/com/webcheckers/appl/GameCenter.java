@@ -90,4 +90,17 @@ public class GameCenter {
        return this.gameMap.get(gameID);
     }
 
+    /**
+     *
+     * NEED DOCSTRING
+     */
+    public synchronized Game getGame(Player player) {
+       for(Game game: this.gameMap.values())  {
+           if( game.isPlayerInGame(player)) {
+               return game;
+           }
+       }
+       return null;
+    }
+
 }

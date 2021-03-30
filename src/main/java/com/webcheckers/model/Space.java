@@ -42,12 +42,9 @@ public class Space {
      * @return
      *      boolean if successful set or not
      */
-    public boolean setPiece(Piece piece) {
-        if (this.piece == null) {
-            this.piece = piece;
-            return true;
-        }
-        return false;
+    public void setPiece(Piece piece) {
+        this.piece = piece;
+
     }
     /**
      * Checks if the tile is valid.
