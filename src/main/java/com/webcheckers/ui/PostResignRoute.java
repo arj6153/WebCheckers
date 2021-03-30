@@ -30,7 +30,6 @@ public class PostResignRoute implements Route {
     }
 
 
-
     @Override
     public Object handle(Request request, Response response) throws Exception {
         Session httpSession = request.session();
