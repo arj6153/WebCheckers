@@ -221,7 +221,7 @@ public class Game {
     public void resignGame(Player player) {
          resigned = true;
          player.setPlaying(false);
-         resignMessage = gameOverMessage + ", " + player.getName() + "has resigned the game";
+         resignMessage = gameOverMessage + "," + player.getName() + "has resigned the game";
     }
 
     private boolean isResigned() {
