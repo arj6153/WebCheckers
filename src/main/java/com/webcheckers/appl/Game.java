@@ -183,11 +183,14 @@ public class Game {
      *
      */
      public Message isValidMove(Move move) {
-         activeMove = move;
-         if(simpleMoveCheck(move)) {
-             return new Message("move is valid", Message.Type.INFO);
+         if(activeMove == null) {
+             activeMove = move;
+             if (simpleMoveCheck(move)) {
+                 return new Message("move is valid", Message.Type.INFO);
+             }
+             return new Message("move is invalid", Message.Type.ERROR);
          }
-         return new Message("move is invalid", Message.Type.ERROR);
+         return new Message("you already moved", Message.Type.ERROR);
      }
 
      public BoardView getRedBoardView() {
