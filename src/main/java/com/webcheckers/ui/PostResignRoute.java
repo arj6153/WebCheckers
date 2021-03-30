@@ -40,7 +40,17 @@ public class PostResignRoute implements Route {
     }
 
 
-
+    /**
+     * Handles Resigning and routes you back to homepage
+     *
+     * @param request
+     *      the request
+     * @param response
+     *      the response
+     * @return
+     *      json containing message
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         LOG.config("PostResignRoute Initialized");
@@ -57,6 +67,5 @@ public class PostResignRoute implements Route {
             json = gson.toJson(Message.error(resignError));
         }
         return json;
-
     }
 }
