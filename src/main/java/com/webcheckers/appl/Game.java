@@ -262,7 +262,7 @@ public class Game {
          return resigned;
     }
 
-    private void endResignGame() {
+    public void endResignGame() {
         redPlayer.setPlaying(false);
         whitePlayer.setPlaying(false);
         setGameOver();
