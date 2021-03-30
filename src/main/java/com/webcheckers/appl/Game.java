@@ -233,4 +233,8 @@ public class Game {
         whitePlayer.setPlaying(false);
         setGameOver();
     }
+
+    public void clearActiveMove() {
+         activeMove = null;
+    }
 }

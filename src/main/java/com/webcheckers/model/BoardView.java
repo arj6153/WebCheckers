@@ -98,4 +98,5 @@ public class BoardView implements Iterable<Row>{
             System.out.println();
         }
     }
+
 }
