@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 import static com.webcheckers.ui.GetHomeRoute.*;
 import static spark.Spark.halt;
+import static spark.route.HttpMethod.options;
 
 /**
  * The UI controller to GET the game page
@@ -76,7 +77,7 @@ public class GetGameRoute implements Route {
         LOG.finer("GetGameRoute is invoked");
         final Session httpSession = request.session();
         Map<String,Object> vm = new HashMap<>();
-        final Map<String, Object> options = new HashMap<>(2);
+        final Map<String, Object> modeOptions = new HashMap<>(2);
         vm.put(TITLE_ATTR, DESCRIPTION);
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         if (player == null) {
@@ -108,12 +109,14 @@ public class GetGameRoute implements Route {
                }
                vm.put(VIEWMODE_ATTR, Mode.PLAY);
                Game game = gameCenter.getGame(Integer.parseInt(gameID));
-               options.put("isGameOver", false);
-               options.put("gameOverMessage", "YOU LOSE");
-               vm.put(MODEOPTIONS_ATTR, gson.toJson(options));
                vm.put(RED_PLAYER_ATTR, game.getRedPlayer());
                vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
                BoardView board = game.getRedBoardView();
+               if (game.isGameOver()) {
+                    modeOptions.put("isGameOver", true);
+                    modeOptions.put("gameOverMessage", Message.info("game is over"));
+                   vm.put(MODEOPTIONS_ATTR, gson.toJson(modeOptions));
+               }
                if(game.isWhitePlayer(player)) {
                   board = game.getWhiteBoardView();
                } else if (game.isRedPlayer(player)) {
