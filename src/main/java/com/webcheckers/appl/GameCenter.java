@@ -82,14 +82,6 @@ public class GameCenter {
         lobby.removePlayer(name);
     }
 
-    /**
-     * Gets the String value of gameID
-     * @param gameID ID of the game
-     * @return current game
-     */
-    public synchronized Game getGame(String gameID) {
-       return this.gameMap.get(gameID);
-    }
 
     /**
      *
@@ -112,4 +104,15 @@ public class GameCenter {
     public synchronized Game getGame(int gameID) {
         return this.gameMap.get(gameID);
     }
+
+    public Player getOpponent(Player player) {
+        Game game = getGame(player);
+        if(game.getRedPlayer() == player){
+            return game.getWhitePlayer();
+        } else {
+            return game.getRedPlayer();
+        }
+
+    }
+
 }

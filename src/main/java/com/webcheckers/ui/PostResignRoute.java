@@ -3,6 +3,7 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.Lobby;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -56,19 +57,27 @@ public class PostResignRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostResignRoute has been invoked");
         Session httpSession = request.session();
-        Game game = httpSession.attribute(GetGameRoute.GAMEID_ATTR);
-        Game board = gameCenter.getGame(Integer.parseInt(GAMEID_ATTR));
-        if(game == null)
+        String gameID = httpSession.attribute(GetGameRoute.GAMEID_ATTR);
+        Game game = gameCenter.getGame(Integer.parseInt(gameID));
+        if(gameID == null)
             return gson.toJson(new Message("game doesn't exist", Message.Type.ERROR));
+        Player resigner = httpSession.attribute(GetHomeRoute.CURRENT_USER);
+        Player player = gameCenter.getOpponent(resigner);
 
-        Player player1 = httpSession.attribute(GetHomeRoute.CURRENT_USER);
-
-        if(board.isResigned() && player1.isPlaying()) {
+        if(game.isPlayerInGame(player) && game.isPlayerInGame(resigner)) {
+            game.endResignGame();
+            httpSession.attribute(RESIGNED_ATTR, true);
+            json = gson.toJson(Message.info("true"));
+        }
+        else {
+            httpSession.attribute(RESIGNED_ATTR, true);
+        }
+        if(game.isResigned() && player.isPlaying()) {
             return gson.toJson(Message.error(resignError));
         }
-        board.resignGame(player1);
-        board.endResignGame();
-        if(board.isResigned()) {
+        game.resignGame(player);
+        game.endResignGame();
+        if(game.isResigned()) {
             json = gson.toJson(Message.info("true"));
         } else {
             json = gson.toJson(Message.error(resignError));
