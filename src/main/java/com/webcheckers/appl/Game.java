@@ -235,9 +235,11 @@ public class Game {
         int endCol = move.getEnd().getCell();
         int startCol = move.getStart().getCell();
         if (playerTurn.equals(redPlayer) && (endRow == startRow + 1) &&
+                (activeMove != null) &&
                 (endCol == startCol + 1) || (endCol == startCol - 1)) {
             return true;
         } else if (playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
+                (activeMove != null) &&
                 (endCol == startCol + 1) || (endCol == startCol - 1)) {
             return true;
         } else {
