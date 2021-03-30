@@ -54,7 +54,7 @@ public class PostResignRoute implements Route {
     @Override
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostResignRoute has been invoked");
-        final Session httpSession = request.session();
+        Session httpSession = request.session();
         Player player1 = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         Game game = gameCenter.getGame(request.queryParams(GetGameRoute.GAMEID_ATTR));
         if(game.isResigned() && player1.isPlaying()) {
