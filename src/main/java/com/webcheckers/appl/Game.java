@@ -1,10 +1,7 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.*;
-import com.webcheckers.util.Message;
-
-import java.lang.reflect.Array;
-import java.util.*;
+import com.webcheckers.model.BoardView;
+import com.webcheckers.model.Player;
 
 /**
  * Game logic of Webcheckers.
@@ -20,7 +17,6 @@ public class Game {
     private Player playerTurn;
     private int redPieces = 12;
     private int whitePieces = 12;
-    private Move activeMove;
     private boolean gameOver;
 
     public enum Color {RED, WHITE, NONE}
@@ -196,44 +192,5 @@ public class Game {
 =======
 
 
-    /**
-     *
-     * NEED DOCSTRING
-     *
-     *
-     */
-     public Message isValidMove(Move move) {
-         activeMove = move;
-         return new Message("valid", Message.Type.INFO);
-     }
-
-     public BoardView getRedBoardView() {
-         List<Row> board = this.board.getBoard();
-         List<Row> redBoard = new ArrayList<>(board);
-         return new BoardView(redBoard);
-     }
-    public BoardView getWhiteBoardView() {
-        List<Row> whiteBoard = new ArrayList<>(this.board.getBoard());
-        Collections.reverse(whiteBoard);
-        for(Row row : whiteBoard) {
-            row.reverseSpace();
-        }
-        BoardView whiteBoardView = new BoardView(whiteBoard);
-        return whiteBoardView;
-    }
-    public Move getActiveMove() {
-        return activeMove;
-    }
-    public void move(Move move){
-        int startRow = move.getStart().getRow();
-        int startCell = move.getStart().getCell();
-        int endRow = move.getEnd().getRow();
-        int endCell = move.getEnd().getCell();
-
-        Space space = board.getRow(startRow).getSpace(startCell);
-        Piece piece = space.getPiece();
-        board.getRow(startRow).getSpace(startCell).setPiece(null);
-        board.getRow(endRow).getSpace(endCell).setPiece(piece);
-    }
 }
 >>>>>>> 9da3dabbf4b83cc283e5710fa05b787949678036
