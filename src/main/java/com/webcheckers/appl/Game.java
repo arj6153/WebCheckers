@@ -26,6 +26,8 @@ public class Game {
     private String gameOverMessage = " game is over";
     private boolean resigned = false;
     private String resignMessage = "";
+    private Piece redKing = new Piece(Piece.Type.KING, Color.RED);
+    private Piece whiteKing = new Piece(Piece.Type.KING, Color.WHITE);
 
     public enum Color {RED, WHITE, NONE}
 
@@ -307,6 +309,30 @@ public class Game {
         }
         return false;
     }
+
+    public Piece kingCheck(Move move) {
+        int endRow = move.getEnd().getRow();
+        int startRow = move.getStart().getRow();
+        int startCol = move.getStart().getCell();
+        Piece piece = new Piece(board.getRow(startRow).getSpace(startCol).getPiece().getType(), getPlayerColor());
+        if( board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
+            if (playerTurn.equals(redPlayer)){
+                if(endRow == 7) {
+                    piece = redKing;
+                } else {
+                    return piece;
+                }
+            } else if (playerTurn.equals(whitePlayer)) {
+                if(endRow == 0) {
+                    piece = whiteKing;
+                } else {
+                    return piece;
+                }
+            }
+        }
+        return piece;
+    }
+
 
     public void resignGame(Player player) {
          resigned = true;
