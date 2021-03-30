@@ -166,14 +166,13 @@ by WebServer.
 
 
 ### Application Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+The application tier is made up of components that handle the server-wide
+interactions between the players and the application using GRASP.
 
 ### Model Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+The model tier shows the board of the checker game depending on the player.
+It encompasses the two players, checker pieces, and spaces which with interact
+together to make a move.
 
 ### Design Improvements
 > _Discuss design improvements that you would make if the project were
