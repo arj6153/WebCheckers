@@ -114,12 +114,15 @@ public class GetGameRoute implements Route {
                vm.put(MODEOPTIONS_ATTR, gson.toJson(options));
                vm.put(RED_PLAYER_ATTR, game.getRedPlayer());
                vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
+<<<<<<< HEAD
                BoardView board = game.getRedBoardView();
                if(player.equals(game.getWhitePlayer())) {
                   board = game.getWhiteBoardView();
                } else if (game.isRedPlayer(player)) {
                    board = game.getRedBoardView();
                }
+=======
+>>>>>>> parent of 9da3dab... implementing PostValidateMove and PostSubmitTurnRoute
                vm.put(BOARD_ATTR, board);
                vm.put(ACTIVE_COLOR_ATTR, game.getPlayerColor());
            }
