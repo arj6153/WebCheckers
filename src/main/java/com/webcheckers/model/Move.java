@@ -12,11 +12,11 @@ public class Move {
     /**
      * Global Variables
      */
-    public enum moveType{Single,Capture, Invalid, None}
+    public enum MoveType {SINGLE_MOVE, CAPTURE_MOVE, INVALID_MOVE}
 
     private Position start;
     private Position end;
-    public moveType Type;
+    public MoveType Type;
 
 
     /**
@@ -30,7 +30,7 @@ public class Move {
     public Move(Position start, Position end) {
         this.start = start;
         this.end = end;
-        Type = moveType.Invalid;
+        Type = MoveType.INVALID_MOVE;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Move {
      * @return
      *      move type
      */
-    public moveType getType() {
+    public MoveType getType() {
         return Type;
     }
 
@@ -69,7 +69,7 @@ public class Move {
      * @param type
      *      move type
      */
-    public void setType(moveType type) {
+    public void setType(MoveType type) {
         Type = type;
     }
 

@@ -29,7 +29,7 @@ public class PostSubmitTurnRoute implements Route {
         final Session httpSession = request.session();
         String gameID = request.queryParams("gameID");
         Game game = gameCenter.getGame(Integer.parseInt(gameID));
-        game.move(game.getActiveMove());
+        game.move(game.getActiveMove(), game.getActiveMove().getType());
         if(game.isRedTurn()) {
             game.setPlayerTurn(game.getWhitePlayer());
         } else {

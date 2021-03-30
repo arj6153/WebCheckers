@@ -2,9 +2,7 @@ package com.webcheckers.appl;
 
 import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
-import org.eclipse.jetty.server.session.DefaultSessionIdManager;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import static com.webcheckers.model.BoardView.DIM;
@@ -184,14 +182,19 @@ public class Game {
      */
      public Message isValidMove(Move move) {
          if(activeMove == null) {
+             if (jumpCheck(move)) {
+                 activeMove = move;
+                 activeMove.setType((Move.MoveType.CAPTURE_MOVE));
+                 return new Message("Jump is available, please make a jump move.", Message.Type.INFO);
+             }
              if (simpleMoveCheck(move)) {
                  activeMove = move;
-                 return new Message("move is valid", Message.Type.INFO);
-
+                 activeMove.setType(Move.MoveType.SINGLE_MOVE);
+                 return new Message("Move is valid.", Message.Type.INFO);
              }
-             return new Message("move is invalid", Message.Type.ERROR);
+             return new Message("Move is invalid.", Message.Type.ERROR);
          }
-         return new Message("you already moved", Message.Type.ERROR);
+         return new Message("You already moved.", Message.Type.ERROR);
      }
 
      public BoardView getRedBoardView() {
@@ -222,15 +225,30 @@ public class Game {
         return activeMove;
     }
 
-    public void move(Move move){
+    public void move(Move move, Move.MoveType type){
         int startRow = move.getStart().getRow();
         int startCell = move.getStart().getCell();
         int endRow = move.getEnd().getRow();
         int endCell = move.getEnd().getCell();
-        Space space = board.getRow(startRow).getSpace(startCell);
-        Piece piece = space.getPiece();
-        board.getRow(startRow).getSpace(startCell).setPiece(null);
-        board.getRow(endRow).getSpace(endCell).setPiece(piece);
+        if (type == Move.MoveType.SINGLE_MOVE) {
+            Space space = board.getRow(startRow).getSpace(startCell);
+            Piece piece = space.getPiece();
+            space.setPiece(null);
+            board.getRow(endRow).getSpace(endCell).setPiece(piece);
+        }
+        else if(type == Move.MoveType.CAPTURE_MOVE) {
+            Space space = board.getRow(startRow).getSpace(startCell);
+            Piece piece = space.getPiece();
+            space.setPiece(null);
+            board.getRow(endRow).getSpace(endCell).setPiece(piece);
+            board.getRow((endRow+startRow)/2).getSpace((endCell+startCell)/2).setPiece(null);
+            if(isRedPlayer(playerTurn)) {
+                whitePieces--;
+            }
+            else if(isWhitePlayer(playerTurn)) {
+                redPieces--;
+            }
+        }
     }
 
     public boolean simpleMoveCheck(Move move) {
@@ -252,6 +270,29 @@ public class Game {
         else if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.KING) {
             if(((endRow == startRow + 1) || (endRow == startRow - 1)) &&
                     ((endCol == startCol + 1) || (endCol == startCol - 1))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean jumpCheck(Move move) {
+        int endRow = move.getEnd().getRow();
+        int startRow = move.getStart().getRow();
+        int endCol = move.getEnd().getCell();
+        int startCol = move.getStart().getCell();
+        if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
+            if (playerTurn.equals(redPlayer) &&
+                    endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2) &&
+                    (board.getRow((endRow+startRow)/2).getSpace((endCol+startCol)/2).getPiece().getColor()
+                            == Color.WHITE)) {
+                return true;
+            } else if (playerTurn.equals(whitePlayer) &&
+                    endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2) &&
+                    (board.getRow((endRow+startRow)/2).getSpace((endCol+startCol)/2).getPiece().getColor()
+                            == Color.RED)) {
                 return true;
             } else {
                 return false;

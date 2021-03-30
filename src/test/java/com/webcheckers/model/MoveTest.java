@@ -21,6 +21,6 @@ public class MoveTest {
 
     @Test
     public void testMoveType() {
-        Move.moveType expectedMoveType = Move.moveType.Invalid;
+        Move.MoveType expectedMoveType = Move.MoveType.INVALID_MOVE;
     }
 }
