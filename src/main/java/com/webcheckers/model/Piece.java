@@ -8,6 +8,7 @@ import com.webcheckers.appl.Game;
  * @author Michael Merlino
  */
 public class Piece {
+
     public enum Type {
         SINGLE, KING
     }
