@@ -183,11 +183,15 @@ public class Game {
      *
      */
      public Message isValidMove(Move move) {
-         activeMove = move;
-         if(simpleMoveCheck(move)) {
-             return new Message("move is valid", Message.Type.INFO);
+         if(activeMove == null) {
+             if (simpleMoveCheck(move)) {
+                 activeMove = move;
+                 return new Message("move is valid", Message.Type.INFO);
+
+             }
+             return new Message("move is invalid", Message.Type.ERROR);
          }
-         return new Message("move is invalid", Message.Type.ERROR);
+         return new Message("you already moved", Message.Type.ERROR);
      }
 
      public BoardView getRedBoardView() {
@@ -253,7 +257,7 @@ public class Game {
          resignMessage = gameOverMessage + ", " + player.getName() + "has resigned the game";
     }
 
-    private boolean isResigned() {
+    public boolean isResigned() {
          return resigned;
     }
 
@@ -261,5 +265,9 @@ public class Game {
         redPlayer.setPlaying(false);
         whitePlayer.setPlaying(false);
         setGameOver();
+    }
+
+    public void clearActiveMove() {
+         activeMove = null;
     }
 }
