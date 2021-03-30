@@ -20,13 +20,14 @@ geometry: margin=1in
 
 Webcheckers application allows players to play checkers via the Java Spark 
 framework. A player must sign in to the application to play with another player.
+Once a game is started, the application supports a drag and drop game experience
+for making moves.
 
 ### Purpose
-> _Provide a very brief statement about the project and the most
-> important user group and user goals._
+Users are allowed to play American checkers with other users that are signed in.
+
 
 ### Glossary and Acronyms
-> _Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
@@ -34,18 +35,44 @@ framework. A player must sign in to the application to play with another player.
 
 
 ## Requirements
+Players must be able to sign in to the application in order to start a game of
+checkers against other signed in players. Using drag and drop interface, players are
+able to move their pieces to capture opponent pieces to win. If a player's piece
+reaches the opponent's end of the board, that piece will become a king piece. The
+king piece is able to move to either side of the board. Players also have the option
+to resign when they do not want to continue the game.
 
-This section describes the features of the application.
-
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
 
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+Users are able to sign in, start a game by challenging an opponent, and play the game
+using American Checker rules.
+
 
 ### MVP Features
-> _Provide a list of top-level Epics and/or Stories of the MVP._
+* Sign In and Out
+  * As a Player, I want to sign in so that I can play a game of checkers.
+  * As a Player, I want to sign out so that I can leave the Webcheckers
+  application.
+* Start Game
+  * As a Player, I want to start a game so that I can play checkers with
+  opponent.
+* Simple Move
+  * As a Player, I want to perform a simple move so that I can advance my
+  pieces in a game of checkers.
+* Single Jump Move
+  * As a Player, I want to make a single jump move so that I can capture my
+  opponent's piece.
+* Multiple Jump Move
+  * As a Player, I want to make a multiple jump move so that I can capture
+  several of my opponent's pieces in one turn.
+* Kings
+  * As a Player, I want to get king pieces so tha tI have better pieces to
+  use against my opponent.
+* Resign
+  * As a Player, I want to resign from a game so that I can stop playing checkers.
+* Undo
+  * As a Player, I want to undo my previous move so that I can make a different move.
+
 
 ### Roadmap of Enhancements
 > _Provide a list of top-level features in the order you plan to consider them._
