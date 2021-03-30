@@ -176,7 +176,6 @@ public class Game {
         gameOver = true;
     }
 
-
     /**
      *
      * NEED DOCSTRING
@@ -185,13 +184,17 @@ public class Game {
      */
      public Message isValidMove(Move move) {
          activeMove = move;
-         return new Message("valid", Message.Type.INFO);
+         if(simpleMoveCheck(move)) {
+             return new Message("move is valid", Message.Type.INFO);
+         }
+         return new Message("move is invalid", Message.Type.ERROR);
      }
 
      public BoardView getRedBoardView() {
          return this.board;
      }
-    public BoardView getWhiteBoardView() {
+
+     public BoardView getWhiteBoardView() {
         List<Row> whiteBoard = new ArrayList<>();
         for(int r = 0; r < DIM; r++) {
             Row row = new Row(board.getRow(r).getIndex());
@@ -204,9 +207,17 @@ public class Game {
         BoardView whiteBoardView = new BoardView(whiteBoard);
         return whiteBoardView;
     }
+
+    /**
+     * Gets the valid move to be submitted to the game.
+     *
+     * @return
+     *      A valid move.
+     */
     public Move getActiveMove() {
         return activeMove;
     }
+
     public void move(Move move){
         int startRow = move.getStart().getRow();
         int startCell = move.getStart().getCell();
@@ -216,6 +227,22 @@ public class Game {
         Piece piece = space.getPiece();
         board.getRow(startRow).getSpace(startCell).setPiece(null);
         board.getRow(endRow).getSpace(endCell).setPiece(piece);
+    }
+
+    public boolean simpleMoveCheck(Move move) {
+        int endRow = move.getEnd().getRow();
+        int startRow = move.getStart().getRow();
+        int endCol = move.getEnd().getCell();
+        int startCol = move.getStart().getCell();
+        if (playerTurn.equals(redPlayer) && (endRow == startRow + 1) &&
+                (endCol == startCol + 1) || (endCol == startCol - 1)) {
+            return true;
+        } else if (playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
+                (endCol == startCol + 1) || (endCol == startCol - 1)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void resignGame(Player player) {

@@ -30,6 +30,11 @@ public class PostSubmitTurnRoute implements Route {
         String gameID = request.queryParams("gameID");
         Game game = gameCenter.getGame(Integer.parseInt(gameID));
         game.move(game.getActiveMove());
+        if(game.isRedTurn()) {
+            game.setPlayerTurn(game.getWhitePlayer());
+        } else {
+            game.setPlayerTurn(game.getRedPlayer());
+        }
         return gson.toJson(new Message("valid", Message.Type.INFO));
     }
 }
