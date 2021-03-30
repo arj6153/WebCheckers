@@ -1,7 +1,10 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.BoardView;
-import com.webcheckers.model.Player;
+import com.webcheckers.model.*;
+import com.webcheckers.util.Message;
+
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Game logic of Webcheckers.
@@ -17,6 +20,7 @@ public class Game {
     private Player playerTurn;
     private int redPieces = 12;
     private int whitePieces = 12;
+    private Move activeMove;
     private boolean gameOver;
 
     public enum Color {RED, WHITE, NONE}
@@ -24,10 +28,8 @@ public class Game {
     /**
      * Constructor of Game.
      *
-     * @param red
-     *      Player color
-     * @param white
-     *      Opponent color
+     * @param red   player color
+     * @param white opponent color
      */
     public Game(Player playerTurn, Player red, Player white) {
         this.playerTurn = playerTurn;
@@ -38,11 +40,11 @@ public class Game {
         gameOver = false;
     }
 
+
     /**
      * Get red player, this is the user.
      *
-     * @return
-     *      Red player
+     * @return red player
      */
     public Player getRedPlayer() {
         return redPlayer;
@@ -51,8 +53,7 @@ public class Game {
     /**
      * Get white player, this is the opponent.
      *
-     * @return
-     *      White player
+     * @return white player
      */
     public Player getWhitePlayer() {
         return whitePlayer;
@@ -61,8 +62,7 @@ public class Game {
     /**
      * Gets current player color.
      *
-     * @return
-     *      Red player on red's turn, White player on white's turn.
+     * @return Red player on red's turn, White player on white's turn.
      */
     public Color getPlayerColor() {
         if (playerTurn == redPlayer) {
@@ -76,10 +76,8 @@ public class Game {
     /**
      * Checks if player is white player, opponent.
      *
-     * @param player
-     *      White player
-     * @return
-     *      True if player is white player, else false
+     * @param player white player
+     * @return true if player is white player, else false
      */
     public boolean isWhitePlayer(Player player) {
         return player.equals(this.whitePlayer);
@@ -88,10 +86,8 @@ public class Game {
     /**
      * Checks if player is red player, user.
      *
-     * @param player
-     *      Red player
-     * @return
-     *      True if player is red player, else false
+     * @param player red player
+     * @return true if player is red player, else false
      */
     public boolean isRedPlayer(Player player) {
         return player.equals(this.redPlayer);
@@ -100,10 +96,8 @@ public class Game {
     /**
      * Checks if a given player object is participating in this game.
      *
-     * @param player
-     *      The player to check
-     * @return
-     *      True if the player is in the game, false otherwise
+     * @param player The player to check
+     * @return True if the player is in the game, false otherwise
      */
     public boolean isPlayerInGame(Player player) {
         return player.equals(redPlayer) || player.equals(whitePlayer);
@@ -112,38 +106,29 @@ public class Game {
     /**
      * Gets the game session's ID.
      *
-     * @return
-     *      Game ID
+     * @return game ID
      */
     public int getID() {
         return this.ID;
     }
 
     /**
-     * Boolean for checking if the game is over.
-     *
-     * @return
-     *      True if the game has ended, false otherwise
+     * @return True if the game has ended, false otherwise
      */
     public boolean isGameOver() {
         return gameOver;
     }
 
+
     /**
-     * Boolean for checking if it is the red player's turn.
-     *
-     * @return
-     *      True if it is currently the red player's turn
+     * @return True if it is currently the red player's turn
      */
     public boolean isRedTurn() {
         return playerTurn == redPlayer;
     }
 
     /**
-     * Finds whose turn it is.
-     *
-     * @return
-     *      The player whose turn it is
+     * @return The player whose turn it is
      */
     public Player getPlayerTurn() {
         return playerTurn;
@@ -157,10 +142,9 @@ public class Game {
     }
 
     /**
-     * Get the board.
+     * Get board
      *
-     * @return
-     *      The board
+     * @return the board
      */
     public BoardView getBoard() {
         return this.board;
@@ -169,10 +153,8 @@ public class Game {
     /**
      * Get the number of pieces players has
      *
-     * @param color
-     *      The color of the player to get num pieces from
-     * @return
-     *      The number of pieces
+     * @param color: the color of the player to get num pieces from
+     * @return The num pieces
      */
     public int getNumPieces(Color color) {
         if (color == Color.RED) {
@@ -182,15 +164,50 @@ public class Game {
     }
 
     /**
-     * Sets the status of the game to game over.
+     *
      */
     public void setGameOver() {
         gameOver = true;
     }
-<<<<<<< HEAD
-}
-=======
 
 
+    /**
+     *
+     * NEED DOCSTRING
+     *
+     *
+     */
+     public Message isValidMove(Move move) {
+         activeMove = move;
+         return new Message("valid", Message.Type.INFO);
+     }
+
+     public BoardView getRedBoardView() {
+         List<Row> board = this.board.getBoard();
+         List<Row> redBoard = new ArrayList<>(board);
+         return new BoardView(redBoard);
+     }
+    public BoardView getWhiteBoardView() {
+        List<Row> whiteBoard = new ArrayList<>(this.board.getBoard());
+        Collections.reverse(whiteBoard);
+        for(Row row : whiteBoard) {
+            row.reverseSpace();
+        }
+        BoardView whiteBoardView = new BoardView(whiteBoard);
+        return whiteBoardView;
+    }
+    public Move getActiveMove() {
+        return activeMove;
+    }
+    public void move(Move move){
+        int startRow = move.getStart().getRow();
+        int startCell = move.getStart().getCell();
+        int endRow = move.getEnd().getRow();
+        int endCell = move.getEnd().getCell();
+
+        Space space = board.getRow(startRow).getSpace(startCell);
+        Piece piece = space.getPiece();
+        board.getRow(startRow).getSpace(startCell).setPiece(null);
+        board.getRow(endRow).getSpace(endCell).setPiece(piece);
+    }
 }
->>>>>>> 9da3dabbf4b83cc283e5710fa05b787949678036

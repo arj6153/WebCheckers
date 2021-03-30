@@ -29,8 +29,7 @@ public class GameCenter {
     }
 
     /**
-     * Adds a game to the master list.
-     *
+     * Adds a game to the master list
      * @param redPlayer
      *      The player that sent the game request.
      * @param whitePlayer
@@ -47,29 +46,19 @@ public class GameCenter {
 
     /**
      * Gets the Lobby of the game.
-     *
-     * @return
-     *      Lobby
+     * @return lobby
      */
     public Lobby getLobby() {
         return this.lobby;
     }
 
-    /**
-     * Gets the hash map of the game board.
-     *
-     * @return
-     *      Map game coordinates
-     */
+
     public HashMap<Integer, Game> getGameMap() {
         return this.gameMap;
     }
-
     /**
-     * Adds a player to the hashmap.
-     *
-     * @param name
-     *      Name of player
+     * Adds a player to the hashmap
+     * @param name name of player
      */
     public void addPlayer(String name) {
        this.lobby.addPlayer(name);
@@ -77,11 +66,8 @@ public class GameCenter {
 
     /**
      * Gets the name of the player.
-     *
-     * @param name
-     *      Name of player
-     * @return
-     *      String name of player
+     * @param name name of player
+     * @return string name of player
      */
     public Player getPlayer(String name) {
         return this.lobby.getPlayer(name);
@@ -89,9 +75,7 @@ public class GameCenter {
 
     /**
      * Removes player from hashmap when signed out.
-     *
-     * @param name
-     *      Name of player
+     * @param name name of player
      */
     public synchronized void removePlayer(String name) {
         lobby.removePlayer(name);
@@ -99,21 +83,13 @@ public class GameCenter {
 
     /**
      * Gets the current game.
-     *
-     * @param gameID
-     *      ID of the game
-     * @return
-     *      Current game
+     * @param gameID ID of the game
+     * @return current game
      */
     public synchronized Game getGame(int gameID) {
        return this.gameMap.get(gameID);
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 759778c1b93d0059f3690341dff988dc65e4a000
     /**
      *
      * NEED DOCSTRING
@@ -126,11 +102,5 @@ public class GameCenter {
        }
        return null;
     }
-=======
->>>>>>> parent of 9da3dab... implementing PostValidateMove and PostSubmitTurnRoute
-<<<<<<< HEAD
-=======
->>>>>>> parent of 9da3dab... implementing PostValidateMove and PostSubmitTurnRoute
-=======
->>>>>>> 759778c1b93d0059f3690341dff988dc65e4a000
+
 }

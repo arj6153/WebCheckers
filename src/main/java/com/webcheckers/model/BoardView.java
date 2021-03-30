@@ -1,5 +1,8 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.Game;
+
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
@@ -23,6 +26,10 @@ public class BoardView implements Iterable<Row>{
        initializeBoard();
     }
 
+    public BoardView(List<Row> board) {
+       this.board = board;
+    }
+
     /**
      * Create a new standard board based on checkers rules.
      */
@@ -44,34 +51,51 @@ public class BoardView implements Iterable<Row>{
      * Gets the checker board.
      *
      * @return
-     *      Checker board
+     *      checker board
      */
-    public List<Row> getBoard() {
+     public List<Row> getBoard() {
         return board;
     }
 
     /**
-     * Given index, get the row from boards.
-     *
-     * @param rowIdx
-     *      Index of the row
+     * Given index, get the row from boards
+     * @param rowIdx of the row
      * @return
-     *      The specified row
+     *      the specified row
      */
     public Row getRow(int rowIdx) {
         if (rowIdx >= DIM || rowIdx < 0) {
             throw new IndexOutOfBoundsException();
         }
-        return this.board.get(rowIdx);
+        for(Row row: board) {
+            if (row.getIndex() == rowIdx) {
+                return row;
+            }
+        }
+        return null;
     }
 
     /**
-     * Iterates the board.
-     *
      * @return
      *      Iterator for the board
      */
     public Iterator<Row> iterator() {
         return this.board.iterator();
+    }
+
+    public void printBoard() {
+        for(Row row: board) {
+            System.out.print(row.getIndex()+" ");
+            for(Space space: row) {
+                if(space.getPiece() == null) {
+                    System.out.print(". ");
+                } else if(space.getPiece().getColor()==RED) {
+                    System.out.print("R ");
+                } else if (space.getPiece().getColor()== WHITE) {
+                    System.out.print("W ");
+                }
+            }
+            System.out.println();
+        }
     }
 }

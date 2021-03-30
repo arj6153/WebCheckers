@@ -12,6 +12,7 @@ public class Piece {
         SINGLE, KING
     }
 
+
     private Game.Color color;
     private Type type;
 
@@ -19,7 +20,7 @@ public class Piece {
      * Constructor of Piece.
      *
      * @param color
-     *      Red or white
+     *      red or white
      */
     public Piece(Type type, Game.Color color) {
         this.type = type;
@@ -30,7 +31,7 @@ public class Piece {
      * Checks if a checker piece is a king piece.
      *
      * @return
-     *      True if a checker piece is a king, else false
+     *      true if a checker piece is a king, else false
      */
     public boolean isKing()
     {
@@ -41,7 +42,7 @@ public class Piece {
      * Gets the color of a checker piece.
      *
      * @return
-     *      Red or white
+     *      red or white
      */
     public Game.Color getColor() {
         return this.color;

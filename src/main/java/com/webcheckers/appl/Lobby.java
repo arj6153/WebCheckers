@@ -1,5 +1,6 @@
 package com.webcheckers.appl;
 
+import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Player;
 
 import java.util.HashMap;
@@ -25,9 +26,7 @@ public class Lobby {
 
     /**
      * Add player to hashmap.
-     *
-     * @param name
-     *      Player name
+     * @param name player name
      */
     public synchronized void addPlayer(String name) {
         Player player = new Player(name);
@@ -36,11 +35,8 @@ public class Lobby {
 
     /**
      * Gets player in hashmap.
-     *
-     * @param name
-     *      Player name
-     * @return
-     *      Player
+     * @param name player name
+     * @return player
      */
     public synchronized Player getPlayer(String name) {
        return this.map.get(name);
@@ -48,9 +44,7 @@ public class Lobby {
 
     /**
      * Hashmap of the players and their names.
-     *
-     * @return
-     *      Hashmap
+     * @return hashmap
      */
     public synchronized HashMap<String,Player> getMap () {
         return this.map;
@@ -58,9 +52,7 @@ public class Lobby {
 
     /**
      * Gets the size of the hashmap.
-     *
-     * @return
-     *      Lobby size
+     * @return lobby size
      */
     public synchronized int getLobbySize() {
         return this.map.size();
@@ -68,9 +60,7 @@ public class Lobby {
 
     /**
      * Removes player from hashmap.
-     *
-     * @param name
-     *      Player name
+     * @param name player name
      */
     public synchronized void removePlayer(String name) {
         this.map.remove(name);
@@ -78,13 +68,11 @@ public class Lobby {
 
     /**
      * Checks if player exists in hashmap.
-     *
-     * @param name
-     *      Player name
-     * @return
-     *      True if player exists, else false
+     * @param name player name
+     * @return true if player exists, else false
      */
     public synchronized boolean playerExists(String name) {
         return this.map.containsKey(name);
     }
+
 }
