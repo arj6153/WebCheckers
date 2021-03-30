@@ -108,4 +108,21 @@ public class GameCenter {
     public synchronized Game getGame(int gameID) {
        return this.gameMap.get(gameID);
     }
+<<<<<<< HEAD
+=======
+
+    /**
+     *
+     * NEED DOCSTRING
+     */
+    public synchronized Game getGame(Player player) {
+       for(Game game: this.gameMap.values())  {
+           if( game.isPlayerInGame(player)) {
+               return game;
+           }
+       }
+       return null;
+    }
+
+>>>>>>> 9da3dabbf4b83cc283e5710fa05b787949678036
 }
