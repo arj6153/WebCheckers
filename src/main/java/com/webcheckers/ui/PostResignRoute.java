@@ -33,13 +33,13 @@ public class PostResignRoute implements Route {
      *      The http session
      */
     public PostResignRoute(GameCenter gameCenter, Gson gson, Session httpSession) {
-        LOG.config("PostResignRoute Initialized");
+        this.gameCenter = gameCenter;
         this.gson = gson;
     }
 
 
     /**
-     * Handles Resigning and routes you back to homepage
+     * Handles Resigning Ajax requests
      *
      * @param request
      *      the request
@@ -51,7 +51,7 @@ public class PostResignRoute implements Route {
      */
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        LOG.config("PostResignRoute Initialized");
+        LOG.finer("PostResignRoute has been invoked");
         Session httpSession = request.session();
         Player player1 = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         Game game = gameCenter.getGame(request.queryParams(GetGameRoute.GAMEID_ATTR));
