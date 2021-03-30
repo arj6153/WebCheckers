@@ -45,18 +45,14 @@ class PostBackupMoveRouteTest {
         gameCenter = new GameCenter();
         gameCenter.addPlayer(PLAYER1);
         gameCenter.addPlayer(PLAYER2);
-        gameID = UUID.randomUUID().toString();
+        Player player1 = gameCenter.getPlayer(PLAYER1);
         gameCenter.addGame(gameCenter.getPlayer(PLAYER1), gameCenter.getPlayer(PLAYER2));
         player = gameCenter.getPlayer(PLAYER1);
         player.setPlaying(true);
-
         opponent = gameCenter.getPlayer(PLAYER2);
         opponent.setPlaying(true);
-
-        //creating and adding the game with gameID into the game center
-        gameID = UUID.randomUUID().toString();
         gameCenter.addGame(player, opponent);
-        game = gameCenter.getGame(Integer.parseInt(gameID));
+        game = gameCenter.getGame(player1);
         when(request.queryParams(GetGameRoute.GAMEID_ATTR)).thenReturn(gameID);
 
         BackUpMoveRoute = new PostBackupMoveRoute(gameCenter, gson);

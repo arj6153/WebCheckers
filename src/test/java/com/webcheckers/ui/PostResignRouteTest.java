@@ -3,6 +3,7 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spark.Request;
@@ -36,9 +37,9 @@ public class PostResignRouteTest {
         gson = new Gson();
         gameCenter.addPlayer(PLAYER1);
         gameCenter.addPlayer(PLAYER2);
-        gameID = UUID.randomUUID().toString();
+        Player player1 = gameCenter.getPlayer(PLAYER1);
         gameCenter.addGame(gameCenter.getPlayer(PLAYER1), gameCenter.getPlayer(PLAYER2));
-        gameCenter = gameCenter.getGame(Integer.parseInt(gameID));
+        game = gameCenter.getGame(player1);
         when(request.queryParams(GetGameRoute.GAMEID_ATTR)).thenReturn(gameID);
         resignRoute = new PostResignRoute(gameCenter, gson);
 
