@@ -259,6 +259,9 @@ public class Game {
                 redPieces--;
             }
         }
+        if (whitePieces == 0 || redPieces == 0) {
+            setGameOver();
+        }
     }
 
     public boolean simpleMoveCheck(Move move) {
