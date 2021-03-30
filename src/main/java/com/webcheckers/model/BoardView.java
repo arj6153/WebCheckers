@@ -51,17 +51,19 @@ public class BoardView implements Iterable<Row>{
      * Gets the checker board.
      *
      * @return
-     *      checker board
+     *      Checker board
      */
      public List<Row> getBoard() {
         return board;
     }
 
     /**
-     * Given index, get the row from boards
-     * @param rowIdx of the row
+     * Given index, get the row from boards.
+     *
+     * @param rowIdx
+     *      Index of the row
      * @return
-     *      the specified row
+     *      The specified row
      */
     public Row getRow(int rowIdx) {
         if (rowIdx >= DIM || rowIdx < 0) {
@@ -76,6 +78,8 @@ public class BoardView implements Iterable<Row>{
     }
 
     /**
+     * Iterates the board.
+     *
      * @return
      *      Iterator for the board
      */

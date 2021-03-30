@@ -28,8 +28,10 @@ public class Game {
     /**
      * Constructor of Game.
      *
-     * @param red   player color
-     * @param white opponent color
+     * @param red
+     *      Player color
+     * @param white
+     *      Opponent color
      */
     public Game(Player playerTurn, Player red, Player white) {
         this.playerTurn = playerTurn;
@@ -40,11 +42,11 @@ public class Game {
         gameOver = false;
     }
 
-
     /**
      * Get red player, this is the user.
      *
-     * @return red player
+     * @return
+     *      Red player
      */
     public Player getRedPlayer() {
         return redPlayer;
@@ -53,7 +55,8 @@ public class Game {
     /**
      * Get white player, this is the opponent.
      *
-     * @return white player
+     * @return
+     *      White player
      */
     public Player getWhitePlayer() {
         return whitePlayer;
@@ -62,7 +65,8 @@ public class Game {
     /**
      * Gets current player color.
      *
-     * @return Red player on red's turn, White player on white's turn.
+     * @return
+     *      Red player on red's turn, White player on white's turn.
      */
     public Color getPlayerColor() {
         if (playerTurn == redPlayer) {
@@ -76,8 +80,10 @@ public class Game {
     /**
      * Checks if player is white player, opponent.
      *
-     * @param player white player
-     * @return true if player is white player, else false
+     * @param player
+     *      White player
+     * @return
+     *      True if player is white player, else false
      */
     public boolean isWhitePlayer(Player player) {
         return player.equals(this.whitePlayer);
@@ -86,8 +92,10 @@ public class Game {
     /**
      * Checks if player is red player, user.
      *
-     * @param player red player
-     * @return true if player is red player, else false
+     * @param player
+     *      Red player
+     * @return
+     *      True if player is red player, else false
      */
     public boolean isRedPlayer(Player player) {
         return player.equals(this.redPlayer);
@@ -96,8 +104,10 @@ public class Game {
     /**
      * Checks if a given player object is participating in this game.
      *
-     * @param player The player to check
-     * @return True if the player is in the game, false otherwise
+     * @param player
+     *      The player to check
+     * @return
+     *      True if the player is in the game, false otherwise
      */
     public boolean isPlayerInGame(Player player) {
         return player.equals(redPlayer) || player.equals(whitePlayer);
@@ -106,29 +116,38 @@ public class Game {
     /**
      * Gets the game session's ID.
      *
-     * @return game ID
+     * @return
+     *      Game ID
      */
     public int getID() {
         return this.ID;
     }
 
     /**
-     * @return True if the game has ended, false otherwise
+     * Boolean for checking if the game is over.
+     *
+     * @return
+     *      True if the game has ended, false otherwise
      */
     public boolean isGameOver() {
         return gameOver;
     }
 
-
     /**
-     * @return True if it is currently the red player's turn
+     * Boolean for checking if it is the red player's turn.
+     *
+     * @return
+     *      True if it is currently the red player's turn
      */
     public boolean isRedTurn() {
         return playerTurn == redPlayer;
     }
 
     /**
-     * @return The player whose turn it is
+     * Finds whose turn it is.
+     *
+     * @return
+     *      The player whose turn it is
      */
     public Player getPlayerTurn() {
         return playerTurn;
@@ -142,9 +161,10 @@ public class Game {
     }
 
     /**
-     * Get board
+     * Get the board.
      *
-     * @return the board
+     * @return
+     *      The board
      */
     public BoardView getBoard() {
         return this.board;
@@ -153,8 +173,10 @@ public class Game {
     /**
      * Get the number of pieces players has
      *
-     * @param color: the color of the player to get num pieces from
-     * @return The num pieces
+     * @param color
+     *      The color of the player to get num pieces from
+     * @return
+     *      The number of pieces
      */
     public int getNumPieces(Color color) {
         if (color == Color.RED) {
@@ -164,11 +186,14 @@ public class Game {
     }
 
     /**
-     *
+     * Sets the status of the game to game over.
      */
     public void setGameOver() {
         gameOver = true;
     }
+<<<<<<< HEAD
+}
+=======
 
 
     /**
@@ -211,3 +236,4 @@ public class Game {
         board.getRow(endRow).getSpace(endCell).setPiece(piece);
     }
 }
+>>>>>>> 9da3dabbf4b83cc283e5710fa05b787949678036
