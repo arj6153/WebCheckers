@@ -154,11 +154,12 @@ public class Game {
         return this.board;
     }
 
-    public void undoMove(){
-        if(this.playerTurn != null) {
-            activeMove.getEnd();
-            return;
+    public boolean undoMove(){
+        if (this.activeMove != null) {
+             activeMove = null;
+             return true;
         }
+        return false;
     }
 
     /**
@@ -188,6 +189,7 @@ public class Game {
      *
      */
      public Message isValidMove(Move move) {
+
          if(activeMove == null) {
              if (jumpCheck(move)) {
                  activeMove = move;
@@ -218,8 +220,7 @@ public class Game {
             }
             whiteBoard.add(row);
         }
-        BoardView whiteBoardView = new BoardView(whiteBoard);
-        return whiteBoardView;
+        return new BoardView(whiteBoard);
     }
 
     /**
@@ -263,24 +264,17 @@ public class Game {
         int startRow = move.getStart().getRow();
         int endCol = move.getEnd().getCell();
         int startCol = move.getStart().getCell();
-        if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
+        Space space = board.getRow(startRow).getSpace(startCol);
+        if(space.getPiece() != null && space.getPiece().getType() == Piece.Type.SINGLE) {
             if (playerTurn.equals(redPlayer) && (endRow == startRow + 1) &&
                     ((endCol == startCol + 1) || (endCol == startCol - 1))) {
                 return true;
-            } else if (playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
-                    ((endCol == startCol + 1) || (endCol == startCol - 1))) {
-                return true;
-            } else {
-                return false;
-            }
+            } else return playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
+                    ((endCol == startCol + 1) || (endCol == startCol - 1));
         }
-        else if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.KING) {
-            if(((endRow == startRow + 1) || (endRow == startRow - 1)) &&
-                    ((endCol == startCol + 1) || (endCol == startCol - 1))) {
-                return true;
-            } else {
-                return false;
-            }
+        else if(space.getPiece() != null && space.getPiece().getType() == Piece.Type.KING) {
+            return ((endRow == startRow + 1) || (endRow == startRow - 1)) &&
+                    ((endCol == startCol + 1) || (endCol == startCol - 1));
         }
         return false;
     }
@@ -290,16 +284,13 @@ public class Game {
         int startRow = move.getStart().getRow();
         int endCol = move.getEnd().getCell();
         int startCol = move.getStart().getCell();
-        Piece capture = board.getRow((endRow + startRow) / 2).getSpace((endCol + startCol) / 2).getPiece();
-        if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
+        Space capture = board.getRow((endRow + startRow) / 2).getSpace((endCol + startCol) / 2);
+        Space space = board.getRow(startRow).getSpace(startCol);
+        if(space.getPiece() != null && space.getPiece().getType()== Piece.Type.SINGLE) {
             if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                if(capture != null && capture.getColor() == Color.WHITE) {
-                    return true;
-                } return false;
+                return capture.getPiece() != null && capture.getPiece().getColor() == Color.WHITE;
             } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                if(capture != null && capture.getColor() == Color.RED) {
-                    return true;
-                } return false;
+                return capture.getPiece() != null && capture.getPiece().getColor() == Color.RED;
             } else {
                 return false;
             }

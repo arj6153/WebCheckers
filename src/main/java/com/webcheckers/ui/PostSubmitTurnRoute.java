@@ -27,8 +27,8 @@ public class PostSubmitTurnRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostSubmitTurnRoute has been invoked.");
         final Session httpSession = request.session();
-        String gameID = request.queryParams("gameID");
-        Game game = gameCenter.getGame(Integer.parseInt(gameID));
+        Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
+        Game game = gameCenter.getGame(player);
         game.move(game.getActiveMove(), game.getActiveMove().getType());
         if(game.isRedTurn()) {
             game.setPlayerTurn(game.getWhitePlayer());

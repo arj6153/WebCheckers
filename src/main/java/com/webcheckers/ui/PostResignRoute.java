@@ -33,10 +33,8 @@ public class PostResignRoute implements Route {
      *      the gamecenter
      * @param gson
      *      the instance of the gson
-     * @param httpSession
-     *      The http session
      */
-    public PostResignRoute(GameCenter gameCenter, Gson gson, Session httpSession) {
+    public PostResignRoute(GameCenter gameCenter, Gson gson) {
         this.gameCenter = gameCenter;
         this.gson = gson;
     }
@@ -57,11 +55,11 @@ public class PostResignRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostResignRoute has been invoked");
         Session httpSession = request.session();
-        String gameID = httpSession.attribute(GetGameRoute.GAMEID_ATTR);
-        Game game = gameCenter.getGame(Integer.parseInt(gameID));
-        if(gameID == null)
-            return gson.toJson(new Message("game doesn't exist", Message.Type.ERROR));
         Player resigner = httpSession.attribute(GetHomeRoute.CURRENT_USER);
+        Game game = gameCenter.getGame(resigner);
+        if(game == null) {
+            return gson.toJson(new Message("game doesn't exist", Message.Type.ERROR));
+        }
         Player player = gameCenter.getOpponent(resigner);
 
         if(game.isPlayerInGame(player) && game.isPlayerInGame(resigner)) {

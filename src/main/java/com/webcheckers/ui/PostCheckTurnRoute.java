@@ -31,14 +31,14 @@ public class PostCheckTurnRoute implements Route {
         Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         Game game = gameCenter.getGame(player);
         String json;
-        if(game.isGameOver()) {
-            json = gson.toJson(Message.info("true"));
-        } else {
+        if (game.isGameOver()) {
             if(game.getPlayerTurn().equals(player)) {
                 json = gson.toJson(Message.info("true"));
             } else {
                 json = gson.toJson(Message.info("false"));
             }
+        } else {
+            json = gson.toJson(Message.info("true"));
         }
         return json;
     }
