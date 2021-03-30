@@ -13,7 +13,7 @@ import static com.webcheckers.model.BoardView.DIM;
  * @author Michael Merlino
  * @author Truong Anh Tuan Hoang
  */
-public class Game {
+public class Game extends GameCenter {
     private final Player redPlayer;
     private final Player whitePlayer;
     private final BoardView board;

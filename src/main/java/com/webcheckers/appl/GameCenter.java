@@ -101,7 +101,7 @@ public class GameCenter {
      * @param gameID ID of the game
      * @return current game
      */
-    public synchronized Game getGame(int gameID) {
+    public synchronized Game getGame(String gameID) {
         return this.gameMap.get(gameID);
     }
 
@@ -114,5 +114,6 @@ public class GameCenter {
         }
 
     }
+
 
 }
