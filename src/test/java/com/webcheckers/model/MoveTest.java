@@ -1,5 +1,8 @@
 package com.webcheckers.model;
 
+import com.webcheckers.appl.Game;
+import com.webcheckers.appl.GameCenter;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -9,14 +12,42 @@ import org.junit.jupiter.api.Test;
  */
 public class MoveTest {
 
+    private static final int START_ROW = 1;
+    private static final int START_CELL = 1;
+    private static final int END_ROW = 3;
+    private static final int END_CELL = 3;
+    private Row actualRow;
 
-    @Test
-    public void testStart() {
+    private Position start;
+    private Position end;
+    private Move move;
+
+
+    @BeforeEach
+    public void setup() {
+        start = new Position(START_ROW, START_CELL);
+        end = new Position(END_ROW, END_CELL);
 
     }
 
     @Test
-    public void testEnd() {
+    public boolean testStart() {
+        if(start.getRow() == START_ROW && start.getCell() == START_CELL) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Test
+    public boolean testEnd() {
+        if(end.getRow() == START_ROW && end.getCell() == START_CELL) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Test
