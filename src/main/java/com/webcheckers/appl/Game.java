@@ -238,15 +238,26 @@ public class Game {
         int startRow = move.getStart().getRow();
         int endCol = move.getEnd().getCell();
         int startCol = move.getStart().getCell();
-        if (playerTurn.equals(redPlayer) && (endRow == startRow + 1) &&
-                ((endCol == startCol + 1) || (endCol == startCol - 1))) {
-            return true;
-        } else if (playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
-                ((endCol == startCol + 1) || (endCol == startCol - 1))) {
-            return true;
-        } else {
-            return false;
+        if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
+            if (playerTurn.equals(redPlayer) && (endRow == startRow + 1) &&
+                    ((endCol == startCol + 1) || (endCol == startCol - 1))) {
+                return true;
+            } else if (playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
+                    ((endCol == startCol + 1) || (endCol == startCol - 1))) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        else if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.KING) {
+            if(((endRow == startRow + 1) || (endRow == startRow - 1)) &&
+                    ((endCol == startCol + 1) || (endCol == startCol - 1))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
     }
 
     public void resignGame(Player player) {
