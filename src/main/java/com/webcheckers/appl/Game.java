@@ -25,6 +25,9 @@ public class Game {
     private int whitePieces = 12;
     private Move activeMove;
     private boolean gameOver;
+    private String gameOverMessage = " game is over";
+    private boolean resigned = false;
+    private String resignMessage = "";
 
     public enum Color {RED, WHITE, NONE}
 
@@ -173,7 +176,6 @@ public class Game {
         gameOver = true;
     }
 
-
     /**
      *
      * NEED DOCSTRING
@@ -183,9 +185,9 @@ public class Game {
      public Message isValidMove(Move move) {
          activeMove = move;
          if(simpleMoveCheck(move)) {
-             return new Message("valid", Message.Type.INFO);
+             return new Message("move is valid", Message.Type.INFO);
          }
-         return new Message("invalid", Message.Type.ERROR);
+         return new Message("move is invalid", Message.Type.ERROR);
      }
 
      public BoardView getRedBoardView() {
@@ -232,15 +234,30 @@ public class Game {
         int startRow = move.getStart().getRow();
         int endCol = move.getEnd().getCell();
         int startCol = move.getStart().getCell();
-        if(playerTurn.equals(redPlayer) && (endRow == startRow+1) &&
-                (endCol == startCol+1) || (endCol == startCol-1)) {
+        if (playerTurn.equals(redPlayer) && (endRow == startRow + 1) &&
+                (endCol == startCol + 1) || (endCol == startCol - 1)) {
             return true;
-        }
-        else if(playerTurn.equals(whitePlayer) && (endRow == startRow-1) &&
-                (endCol == startCol+1) || (endCol == startCol-1)) {
+        } else if (playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
+                (endCol == startCol + 1) || (endCol == startCol - 1)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public void resignGame(Player player) {
+         resigned = true;
+         player.setPlaying(false);
+         resignMessage = gameOverMessage + ", " + player.getName() + "has resigned the game";
+    }
+
+    private boolean isResigned() {
+         return resigned;
+    }
+
+    private void endResignGame() {
+        redPlayer.setPlaying(false);
+        whitePlayer.setPlaying(false);
+        setGameOver();
     }
 }
