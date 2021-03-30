@@ -242,8 +242,7 @@ public class Game {
             Piece piece = space.getPiece();
             space.setPiece(null);
             board.getRow(endRow).getSpace(endCell).setPiece(piece);
-        }
-        else if(type == Move.MoveType.CAPTURE_MOVE) {
+        } else if(type == Move.MoveType.CAPTURE_MOVE) {
             Space space = board.getRow(startRow).getSpace(startCell);
             Piece piece = space.getPiece();
             space.setPiece(null);
@@ -267,20 +266,12 @@ public class Game {
             if (playerTurn.equals(redPlayer) && (endRow == startRow + 1) &&
                     ((endCol == startCol + 1) || (endCol == startCol - 1))) {
                 return true;
-            } else if (playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
-                    ((endCol == startCol + 1) || (endCol == startCol - 1))) {
-                return true;
-            } else {
-                return false;
-            }
+            } else return playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
+                    ((endCol == startCol + 1) || (endCol == startCol - 1));
         }
         else if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.KING) {
-            if(((endRow == startRow + 1) || (endRow == startRow - 1)) &&
-                    ((endCol == startCol + 1) || (endCol == startCol - 1))) {
-                return true;
-            } else {
-                return false;
-            }
+            return ((endRow == startRow + 1) || (endRow == startRow - 1)) &&
+                    ((endCol == startCol + 1) || (endCol == startCol - 1));
         }
         return false;
     }
@@ -293,13 +284,9 @@ public class Game {
         Piece capture = board.getRow((endRow + startRow) / 2).getSpace((endCol + startCol) / 2).getPiece();
         if(board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
             if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                if(capture != null && capture.getColor() == Color.WHITE) {
-                    return true;
-                } return false;
+                return capture != null && capture.getColor() == Color.WHITE;
             } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                if(capture != null && capture.getColor() == Color.RED) {
-                    return true;
-                } return false;
+                return capture != null && capture.getColor() == Color.RED;
             } else {
                 return false;
             }
