@@ -240,16 +240,18 @@ public class Game {
         int startCell = move.getStart().getCell();
         int endRow = move.getEnd().getRow();
         int endCell = move.getEnd().getCell();
+        Space space = board.getRow(startRow).getSpace(startCell);
+        Piece piece = space.getPiece();
+        if (isWhitePlayer(playerTurn) && board.getRow(endRow).getIndex() == 0) {
+            piece.setKing();
+        } else if (isRedPlayer(playerTurn) && board.getRow(endRow).getIndex()== DIM-1) {
+            piece.setKing();
+        }
+        space.setPiece(null);
         if (type == Move.MoveType.SINGLE_MOVE) {
-            Space space = board.getRow(startRow).getSpace(startCell);
-            Piece piece = space.getPiece();
-            space.setPiece(null);
             board.getRow(endRow).getSpace(endCell).setPiece(piece);
         }
         else if(type == Move.MoveType.CAPTURE_MOVE) {
-            Space space = board.getRow(startRow).getSpace(startCell);
-            Piece piece = space.getPiece();
-            space.setPiece(null);
             board.getRow(endRow).getSpace(endCell).setPiece(piece);
             board.getRow((endRow+startRow)/2).getSpace((endCell+startCell)/2).setPiece(null);
             if(isRedPlayer(playerTurn)) {

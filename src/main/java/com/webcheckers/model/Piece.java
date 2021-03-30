@@ -39,6 +39,10 @@ public class Piece {
         return this.type == Type.KING;
     }
 
+    public void setKing() {
+        this.type = Type.KING;
+    }
+
     /**
      * Gets the color of a checker piece.
      *
