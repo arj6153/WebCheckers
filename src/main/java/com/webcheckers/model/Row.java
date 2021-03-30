@@ -2,6 +2,7 @@ package com.webcheckers.model;
 
 import com.webcheckers.appl.Game;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import static com.webcheckers.appl.Game.Color.NONE;
  *
  * @author Truong Anh Tuan Hoang
  */
-public class Row implements Iterable<Space>{
+public class Row implements Iterable<Space> {
 
     private final int index;
     private final List<Space> spaces;
@@ -35,7 +36,10 @@ public class Row implements Iterable<Space>{
         this.index = index;
         initialize(color, flag);
     }
-
+    public Row(int index) {
+        this.spaces = new ArrayList<>();
+        this.index = index;
+    }
     /**
      * Initializes a board based on the color of the tiles.
      *
@@ -66,8 +70,10 @@ public class Row implements Iterable<Space>{
         return this.spaces.iterator();
     }
 
-    public void reverseSpace() {
-        Collections.reverse(spaces);
+    public List<Space> reverseSpace() {
+        List<Space> revSpaces = new ArrayList<>(this.spaces);
+        Collections.reverse(revSpaces);
+        return revSpaces;
     }
     /**
      * Given index, get the Space inside the Row
@@ -83,7 +89,13 @@ public class Row implements Iterable<Space>{
         return null;
     }
 
+    public List<Space> getSpaces() {
+        return this.spaces;
+    }
 
+    public void add(Space space) {
+        this.spaces.add(space);
+    }
     /**
      * Gets the row number.
      *

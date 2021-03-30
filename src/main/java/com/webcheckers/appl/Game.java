@@ -2,9 +2,12 @@ package com.webcheckers.appl;
 
 import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
+import org.eclipse.jetty.server.session.DefaultSessionIdManager;
 
 import java.lang.reflect.Array;
 import java.util.*;
+
+import static com.webcheckers.model.BoardView.DIM;
 
 /**
  * Game logic of Webcheckers.
@@ -183,15 +186,17 @@ public class Game {
      }
 
      public BoardView getRedBoardView() {
-         List<Row> board = this.board.getBoard();
-         List<Row> redBoard = new ArrayList<>(board);
-         return new BoardView(redBoard);
+         return this.board;
      }
     public BoardView getWhiteBoardView() {
-        List<Row> whiteBoard = new ArrayList<>(this.board.getBoard());
-        Collections.reverse(whiteBoard);
-        for(Row row : whiteBoard) {
-            row.reverseSpace();
+        List<Row> whiteBoard = new ArrayList<>();
+        for(int r = 0; r < DIM; r++) {
+            Row row = new Row(board.getRow(r).getIndex());
+            for (int c = DIM-1; c >=0; c--) {
+                Space space = board.getRow(r).getSpace(c);
+                row.add(space);
+            }
+            whiteBoard.add(row);
         }
         BoardView whiteBoardView = new BoardView(whiteBoard);
         return whiteBoardView;
@@ -204,7 +209,6 @@ public class Game {
         int startCell = move.getStart().getCell();
         int endRow = move.getEnd().getRow();
         int endCell = move.getEnd().getCell();
-
         Space space = board.getRow(startRow).getSpace(startCell);
         Piece piece = space.getPiece();
         board.getRow(startRow).getSpace(startCell).setPiece(null);

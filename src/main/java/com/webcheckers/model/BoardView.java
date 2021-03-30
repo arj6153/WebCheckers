@@ -17,7 +17,7 @@ import static com.webcheckers.appl.Game.Color.*;
  */
 public class BoardView implements Iterable<Row>{
     private final List<Row> board;
-    static final int DIM= 8;
+    public static final int DIM= 8;
     /**
      * Constructor of the checker board.
      */
