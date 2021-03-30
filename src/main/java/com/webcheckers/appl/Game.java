@@ -25,6 +25,9 @@ public class Game {
     private int whitePieces = 12;
     private Move activeMove;
     private boolean gameOver;
+    private String gameOverMessage = " game is over";
+    private boolean resigned = false;
+    private String resignMessage = "";
 
     public enum Color {RED, WHITE, NONE}
 
@@ -213,5 +216,21 @@ public class Game {
         Piece piece = space.getPiece();
         board.getRow(startRow).getSpace(startCell).setPiece(null);
         board.getRow(endRow).getSpace(endCell).setPiece(piece);
+    }
+
+    public void resignGame(Player player) {
+         resigned = true;
+         player.setPlaying(false);
+         resignMessage = gameOverMessage + ", " + player.getName() + "has resigned the game";
+    }
+
+    private boolean isResigned() {
+         return resigned;
+    }
+
+    private void endResignGame() {
+        redPlayer.setPlaying(false);
+        whitePlayer.setPlaying(false);
+        setGameOver();
     }
 }
