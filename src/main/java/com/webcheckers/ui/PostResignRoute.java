@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  */
 public class PostResignRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostResignRoute.class.getName());
+    static final String GAMEID_ATTR = "gameID";
     private GameCenter gameCenter;
     private Gson gson;
     private String json;
@@ -54,12 +55,12 @@ public class PostResignRoute implements Route {
         LOG.finer("PostResignRoute has been invoked");
         Session httpSession = request.session();
         Player player1 = httpSession.attribute(GetHomeRoute.CURRENT_USER);
-        Game game = gameCenter.getGame(request.queryParams(GetGameRoute.GAMEID_ATTR));
-        if(game.isResigned() && player1.isPlaying()) {
+        Game board = gameCenter.getGame(Integer.parseInt(GAMEID_ATTR));
+        if(board.isResigned() && player1.isPlaying()) {
             return gson.toJson(Message.error(resignError));
         }
-        game.resignGame(player1);
-        if(game.isResigned() && !(player1.isPlaying())) {
+        board.resignGame(player1);
+        if(board.isResigned() && !(player1.isPlaying())) {
             json = gson.toJson(Message.info("true"));
         } else {
             json = gson.toJson(Message.error(resignError));
