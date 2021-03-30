@@ -7,6 +7,8 @@ package com.webcheckers.model;
  * @author: Bin Qiu
  */
 public class Move {
+
+
     /**
      * Global Variables
      */
