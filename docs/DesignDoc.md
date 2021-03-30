@@ -125,10 +125,27 @@ to the Home page with the lobby.
 
 
 ### UI Tier
-> _Provide a summary of the Server-side UI tier of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
+The server-side UI tier is responsible for mapping the HTTP and Routes to the
+Controller that is responsible for handling the interaction. This is accomplished
+by WebServer.
+
+###Controllers for ViewModel and Redirecting
+| Controller | FreeMarker | Function |
+| --- | --- | --- |
+| GetSignInRoute | signin.ftl | Displays sign-in page |
+| GetHomeRoute | home.ftl | Displays home page and player lobby |
+| GetGameRoute | game.ftl | Displays game page and sets up the game |
+| PostSignInRoute | redirects page | Redirects to home page when sign-in is a success |
+| PostSignOutRoute | redirects page | Redirects to sign out page |
+
+###Controllers for AJAX and JSON POJO
+| Controller | Request | Response |
+| --- | --- | --- |
+| PostBackupMoveRoute | NA | Backup message |
+| PostCheckTurnRoute | NA | Check turn message |
+| PostSubmitTurnRoute | NA | Submit turn message |
+| PostResignRoute | NA | Resign message |
+| PostValidateMove | Move | Valid move message |
 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class structure or object diagrams) with some
