@@ -224,7 +224,7 @@ public class Game {
          resignMessage = gameOverMessage + ", " + player.getName() + "has resigned the game";
     }
 
-    private boolean isResigned() {
+    public boolean isResigned() {
          return resigned;
     }
 
