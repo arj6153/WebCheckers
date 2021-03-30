@@ -23,7 +23,7 @@ public class PostResignRoute implements Route {
     private String json;
 
 
-    public PostResignRoute(GameCenter, Gson gson, Session httpSession) {
+    public PostResignRoute(GameCenter gameCenter, Gson gson, Session httpSession) {
         LOG.config("PostResignRoute Initialized");
         this.gameCenter = gameCenter;
         this.gson = gson;
@@ -35,7 +35,7 @@ public class PostResignRoute implements Route {
     public Object handle(Request request, Response response) throws Exception {
         Session httpSession = request.session();
         Player player1 = httpSession.attribute(GetHomeRoute.CURRENT_USER);
-        GameCenter game = gameCenter.
+        return null;
 
     }
 }
