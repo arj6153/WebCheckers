@@ -59,10 +59,9 @@ class PostBackupMoveRouteTest {
     }
 
     @Test
-    public void backupSuccess() throws Exception {
-
-        if (game.undoMove() == true)
-            when(request.session().attribute(GetHomeRoute.CURRENT_USER)).thenReturn(PLAYER1);
-        BackUpMoveRoute.handle(request, response);
+    public void backupMove() throws Exception {
+       game.getActiveMove();
+       game.clearActiveMove();
+       game.undoMove();
     }
 }
