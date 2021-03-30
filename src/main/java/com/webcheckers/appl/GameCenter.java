@@ -83,11 +83,11 @@ public class GameCenter {
     }
 
     /**
-     * Gets the current game.
+     * Gets the String value of gameID
      * @param gameID ID of the game
      * @return current game
      */
-    public synchronized Game getGame(int gameID) {
+    public synchronized Game getGame(String gameID) {
        return this.gameMap.get(gameID);
     }
 
@@ -104,4 +104,12 @@ public class GameCenter {
        return null;
     }
 
+    /**
+     * Gets the current game.
+     * @param gameID ID of the game
+     * @return current game
+     */
+    public synchronized Game getGame(int gameID) {
+        return this.gameMap.get(gameID);
+    }
 }

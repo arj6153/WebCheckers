@@ -184,9 +184,10 @@ public class Game {
      */
      public Message isValidMove(Move move) {
          if(activeMove == null) {
-             activeMove = move;
              if (simpleMoveCheck(move)) {
+                 activeMove = move;
                  return new Message("move is valid", Message.Type.INFO);
+
              }
              return new Message("move is invalid", Message.Type.ERROR);
          }
@@ -254,7 +255,7 @@ public class Game {
          resignMessage = gameOverMessage + ", " + player.getName() + "has resigned the game";
     }
 
-    private boolean isResigned() {
+    public boolean isResigned() {
          return resigned;
     }
 
