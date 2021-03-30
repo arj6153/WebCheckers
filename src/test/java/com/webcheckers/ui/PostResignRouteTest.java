@@ -38,7 +38,7 @@ public class PostResignRouteTest {
         gameCenter.addPlayer(PLAYER2);
         gameID = UUID.randomUUID().toString();
         gameCenter.addGame(gameCenter.getPlayer(PLAYER1), gameCenter.getPlayer(PLAYER2));
-        gameCenter = gameCenter.getGame(gameID);
+        gameCenter = gameCenter.getGame(Integer.parseInt(gameID));
         when(request.queryParams(GetGameRoute.GAMEID_ATTR)).thenReturn(gameID);
         resignRoute = new PostResignRoute(gameCenter, gson);
 
