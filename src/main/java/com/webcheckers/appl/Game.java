@@ -182,9 +182,12 @@ public class Game {
      */
      public Message isValidMove(Move move) {
          activeMove = move;
-         simpleMoveCheck(move);
-         return new Message("valid", Message.Type.INFO);
+         if(simpleMoveCheck(move)) {
+             return new Message("valid", Message.Type.INFO);
+         }
+         return new Message("invalid", Message.Type.ERROR);
      }
+
      public BoardView getRedBoardView() {
          return this.board;
      }
