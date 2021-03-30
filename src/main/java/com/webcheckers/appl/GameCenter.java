@@ -28,6 +28,7 @@ public class GameCenter {
         this.gameMap = new HashMap<>();
     }
 
+
     /**
      * Adds a game to the master list
      * @param redPlayer
