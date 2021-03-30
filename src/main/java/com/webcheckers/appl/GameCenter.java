@@ -108,8 +108,6 @@ public class GameCenter {
     public synchronized Game getGame(int gameID) {
        return this.gameMap.get(gameID);
     }
-<<<<<<< HEAD
-=======
 
     /**
      *
@@ -123,6 +121,4 @@ public class GameCenter {
        }
        return null;
     }
-
->>>>>>> 9da3dabbf4b83cc283e5710fa05b787949678036
 }
