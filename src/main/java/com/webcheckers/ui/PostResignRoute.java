@@ -3,6 +3,7 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.appl.Lobby;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
@@ -16,6 +17,9 @@ import java.util.logging.Logger;
  */
 public class PostResignRoute implements Route {
     private static final Logger LOG = Logger.getLogger(PostResignRoute.class.getName());
+    static final String GAMEID_ATTR = "gameID";
+    static final String RESIGNED_ATTR = "resigned";
+
     private GameCenter gameCenter;
     private Gson gson;
     private String json;
@@ -33,13 +37,13 @@ public class PostResignRoute implements Route {
      *      The http session
      */
     public PostResignRoute(GameCenter gameCenter, Gson gson, Session httpSession) {
-        LOG.config("PostResignRoute Initialized");
+        this.gameCenter = gameCenter;
         this.gson = gson;
     }
 
 
     /**
-     * Handles Resigning and routes you back to homepage
+     * Handles Resigning Ajax requests
      *
      * @param request
      *      the request
@@ -51,15 +55,29 @@ public class PostResignRoute implements Route {
      */
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        LOG.config("PostResignRoute Initialized");
+        LOG.finer("PostResignRoute has been invoked");
         Session httpSession = request.session();
-        Player player1 = httpSession.attribute(GetHomeRoute.CURRENT_USER);
-        Game game = gameCenter.getGame(request.queryParams(GetGameRoute.GAMEID_ATTR));
-        if(game.isResigned() && player1.isPlaying()) {
+        String gameID = httpSession.attribute(GetGameRoute.GAMEID_ATTR);
+        Game game = gameCenter.getGame(Integer.parseInt(gameID));
+        if(gameID == null)
+            return gson.toJson(new Message("game doesn't exist", Message.Type.ERROR));
+        Player resigner = httpSession.attribute(GetHomeRoute.CURRENT_USER);
+        Player player = gameCenter.getOpponent(resigner);
+
+        if(game.isPlayerInGame(player) && game.isPlayerInGame(resigner)) {
+            game.endResignGame();
+            httpSession.attribute(RESIGNED_ATTR, true);
+            json = gson.toJson(Message.info("true"));
+        }
+        else {
+            httpSession.attribute(RESIGNED_ATTR, true);
+        }
+        if(game.isResigned() && player.isPlaying()) {
             return gson.toJson(Message.error(resignError));
         }
-        game.resignGame(player1);
-        if(game.isResigned() && !(player1.isPlaying())) {
+        game.resignGame(player);
+        game.endResignGame();
+        if(game.isResigned()) {
             json = gson.toJson(Message.info("true"));
         } else {
             json = gson.toJson(Message.error(resignError));

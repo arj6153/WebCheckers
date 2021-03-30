@@ -154,6 +154,13 @@ public class Game {
         return this.board;
     }
 
+    public void undoMove(){
+        if(this.playerTurn != null) {
+            activeMove.getEnd();
+            return;
+        }
+    }
+
     /**
      * Get the number of pieces players has
      *
@@ -311,7 +318,7 @@ public class Game {
          return resigned;
     }
 
-    private void endResignGame() {
+    public void endResignGame() {
         redPlayer.setPlaying(false);
         whitePlayer.setPlaying(false);
         setGameOver();
@@ -320,4 +327,6 @@ public class Game {
     public void clearActiveMove() {
          activeMove = null;
     }
+
+
 }
