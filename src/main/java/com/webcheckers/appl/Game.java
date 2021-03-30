@@ -295,13 +295,17 @@ public class Game {
         Space space = board.getRow(startRow).getSpace(startCol);
         if(space.getPiece() != null && space.getPiece().getType()== Piece.Type.SINGLE) {
             if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                return capture != null && capture.getPiece().getColor() == Color.WHITE;
-            } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                return capture != null && capture.getPiece().getColor() == Color.RED;
+                return capture.getPiece() != null && capture.getPiece().getColor() == Color.WHITE;
             } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
                 return capture.getPiece() != null && capture.getPiece().getColor() == Color.RED;
             } else {
                 return false;
+            }
+        }
+        else if(space.getPiece() != null && space.getPiece().getType() == Piece.Type.KING) {
+            if(((endRow == startRow + 2) || (endRow == startRow - 2)) &&
+                    ((endCol == startCol + 2) || (endCol == startCol - 2))) {
+                return capture.getPiece() != null && capture.getPiece().getColor() != getPlayerColor();
             }
         }
         return false;
