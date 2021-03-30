@@ -114,7 +114,7 @@ public class GetGameRoute implements Route {
                vm.put(RED_PLAYER_ATTR, game.getRedPlayer());
                vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
                BoardView board = game.getRedBoardView();
-               if(game.isWhitePlayer(player)) {
+               if(player.equals(game.getWhitePlayer())) {
                   board = game.getWhiteBoardView();
                } else if (game.isRedPlayer(player)) {
                    board = game.getRedBoardView();
