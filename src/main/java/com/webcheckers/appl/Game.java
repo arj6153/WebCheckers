@@ -156,6 +156,13 @@ public class Game {
         return this.board;
     }
 
+    public void undoMove(){
+        if(this.playerTurn != null) {
+            activeMove.getEnd();
+            return;
+        }
+    }
+
     /**
      * Get the number of pieces players has
      *
