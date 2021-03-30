@@ -108,9 +108,12 @@ public class GameCenter {
     public synchronized Game getGame(int gameID) {
        return this.gameMap.get(gameID);
     }
+
+<<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
-
+>>>>>>> 759778c1b93d0059f3690341dff988dc65e4a000
     /**
      *
      * NEED DOCSTRING
@@ -123,6 +126,11 @@ public class GameCenter {
        }
        return null;
     }
-
->>>>>>> 9da3dabbf4b83cc283e5710fa05b787949678036
+=======
+>>>>>>> parent of 9da3dab... implementing PostValidateMove and PostSubmitTurnRoute
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 9da3dab... implementing PostValidateMove and PostSubmitTurnRoute
+=======
+>>>>>>> 759778c1b93d0059f3690341dff988dc65e4a000
 }

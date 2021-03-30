@@ -3,7 +3,6 @@ package com.webcheckers.model;
 import com.webcheckers.appl.Game;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -66,21 +65,13 @@ public class Row implements Iterable<Space>{
         return this.spaces.iterator();
     }
 
-    public void reverseSpace() {
-        Collections.reverse(spaces);
-    }
     /**
      * Given index, get the Space inside the Row
      * @return
      *      the specified Space
      */
     public Space getSpace(int cellIdx) {
-        for(Space space: spaces) {
-            if (space.getCellIdx() == cellIdx) {
-                return space;
-            }
-        }
-        return null;
+       return this.spaces.get(cellIdx);
     }
 
 
