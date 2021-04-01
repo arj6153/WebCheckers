@@ -16,12 +16,12 @@ public class SpaceTest {
     @Test
     public void isSpaceValid() {
         Space space = new Space(cellSpace, null, true );
-        assertTrue(space.isBlackSpace(), "Not a Valid space");
+        assertTrue(space.isValid(), "Not a Valid space");
         space.setPiece(new Piece(Piece.Type.SINGLE, Game.Color.RED));
-        assertFalse(space.isBlackSpace(), "Space should not be legal");
+        assertFalse(space.isValid(), "Space should not be legal");
         Space nextSpace = new Space(cellSpace, null, false);
-        assertFalse(nextSpace.isBlackSpace(), "Space should not be legal");
+        assertFalse(nextSpace.isValid(), "Space should not be legal");
         nextSpace.setPiece(new Piece(Piece.Type.SINGLE, Game.Color.RED));
-        assertFalse(nextSpace.isBlackSpace(), "space should not be legal");
+        assertFalse(nextSpace.isValid(), "space should not be legal");
     }
 }

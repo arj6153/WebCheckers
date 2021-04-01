@@ -51,7 +51,7 @@ public class Space {
      *      True if the space is black and there is not piece already there,
      *      otherwise false
      */
-    public boolean isBlackSpace() {
+    public boolean isValid() {
         return valid && piece == null;
     }
 

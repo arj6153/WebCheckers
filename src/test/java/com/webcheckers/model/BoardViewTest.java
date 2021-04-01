@@ -31,7 +31,7 @@ public class BoardViewTest {
                     //Check pieces color and validity
                     if(piece != null) {
                         assertSame(piece.getColor(), WHITE);
-                        assertFalse(space.isBlackSpace());
+                        assertFalse(space.isValid());
                         whitePieces++;
                     } else {
                         blankSpaces++;
@@ -39,14 +39,14 @@ public class BoardViewTest {
                 } else if ( r >= 5) {
                     if(piece != null) {
                         assertSame(piece.getColor(), RED);
-                        assertFalse(space.isBlackSpace());
+                        assertFalse(space.isValid());
                         redPieces++;
                     } else {
                         blankSpaces++;
                     }
                 } else {
                     assertNull(piece);
-                    assertEquals(flag,space.isBlackSpace());
+                    assertEquals(flag,space.isValid());
                     flag = !flag;
                     blankSpaces++;
                 }

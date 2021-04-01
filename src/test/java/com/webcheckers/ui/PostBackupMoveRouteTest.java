@@ -11,8 +11,6 @@ import spark.Request;
 import spark.Response;
 import spark.Session;
 
-import java.util.UUID;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -62,6 +60,6 @@ class PostBackupMoveRouteTest {
     public void backupMove() throws Exception {
        game.getActiveMove();
        game.clearActiveMove();
-       game.undoMove();
+       game.backupMove();
     }
 }
