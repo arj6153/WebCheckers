@@ -1,10 +1,7 @@
 package com.webcheckers.model;
 
 import com.webcheckers.appl.Game;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,42 +18,50 @@ public class Row implements Iterable<Space> {
     private final List<Space> spaces;
 
     /**
-     * Constructor of Row.
+     * Constructor of Row for initial rows.
      *
      * @param index
-     *      row number
+     *      The row number
      * @param color
-     *      tile color
-     * @param flag
-     *      true puts a checker piece on the tile, and
-     *      tile is empty if false
+     *      The space color
+     * @param isBlackSpace
+     *      True puts a checker piece on the space, and
+     *      false does not put a checker piece on the space
      */
-    public Row(int index, Game.Color color, boolean flag){
+    public Row(int index, Game.Color color, boolean isBlackSpace){
         this.spaces = new ArrayList<>();
         this.index = index;
-        initialize(color, flag);
+        initialize(color, isBlackSpace);
     }
+
+    /**
+     * Constructor of Row for empty rows.
+     *
+     * @param index
+     *      The row number
+     */
     public Row(int index) {
         this.spaces = new ArrayList<>();
         this.index = index;
     }
+
     /**
-     * Initializes a board based on the color of the tiles.
+     * Initializes a board based on the color of the spaces.
      *
      * @param color
-     *      tile colors
-     * @param flag
-     *      true puts a checker piece on the tile, and
+     *      The player's color
+     * @param isBlackSpace
+     *      True puts a checker piece on the tile, and
      *             tile is empty if false
      */
-    public void initialize(Game.Color color, boolean flag) {
-        for(int col = 0; col < 8; col++) {
-            if(flag && color != NONE) {
+    public void initialize(Game.Color color, boolean isBlackSpace) {
+        for(int col = 0; col < BoardView.DIM; col++) {
+            if(isBlackSpace && color != NONE) {
                 spaces.add(new Space( col,new Piece(Piece.Type.SINGLE, color),true));
             } else {
-                spaces.add(new Space(col, null, flag));
+                spaces.add(new Space(col, null, isBlackSpace));
             }
-            flag = !flag;
+            isBlackSpace = !isBlackSpace;
         }
     }
 
@@ -64,21 +69,20 @@ public class Row implements Iterable<Space> {
      * Iterator for the space in the row.
      *
      * @return
-     *      iterator of the row
+     *      Iterator of the row
      */
     public Iterator<Space> iterator() {
         return this.spaces.iterator();
     }
 
-    public List<Space> reverseSpace() {
-        List<Space> revSpaces = new ArrayList<>(this.spaces);
-        Collections.reverse(revSpaces);
-        return revSpaces;
-    }
     /**
-     * Given index, get the Space inside the Row
+     * Given index, get the space inside the row.
+     *
+     * @param cellIdx
+     *      The column number of game board
+     *
      * @return
-     *      the specified Space
+     *      The specified space
      */
     public Space getSpace(int cellIdx) {
         for(Space space: spaces) {
@@ -89,21 +93,21 @@ public class Row implements Iterable<Space> {
         return null;
     }
 
-    public List<Space> getSpaces() {
-        return this.spaces;
-    }
-
+    /**
+     * Adds a space into the current row.
+     *
+     * @param space
+     *      The specified space
+     */
     public void add(Space space) {
         this.spaces.add(space);
     }
+
     /**
-     * Gets the row number.
-     *
      * @return
-     *      row number
+     *      The row number
      */
     public int getIndex() {
         return index;
     }
-
 }

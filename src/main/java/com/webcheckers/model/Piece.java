@@ -6,13 +6,16 @@ import com.webcheckers.appl.Game;
  * Class for types of pieces in a checker game.
  *
  * @author Michael Merlino
+ * @author Alex Johannesson
+ * @author Truong Anh Tuan Hoang
+ * @author Bin Qiu
  */
+
 public class Piece {
 
     public enum Type {
         SINGLE, KING
     }
-
 
     private Game.Color color;
     private Type type;
@@ -21,7 +24,7 @@ public class Piece {
      * Constructor of Piece.
      *
      * @param color
-     *      red or white
+     *      Red or white
      */
     public Piece(Type type, Game.Color color) {
         this.type = type;
@@ -32,13 +35,16 @@ public class Piece {
      * Checks if a checker piece is a king piece.
      *
      * @return
-     *      true if a checker piece is a king, else false
+     *      True if a checker piece is a king, else false
      */
     public boolean isKing()
     {
         return this.type == Type.KING;
     }
 
+    /**
+     * Sets a checker piece to king type.
+     */
     public void setKing() {
         this.type = Type.KING;
     }
@@ -47,14 +53,14 @@ public class Piece {
      * Gets the color of a checker piece.
      *
      * @return
-     *      red or white
+     *      Red or white
      */
     public Game.Color getColor() {
         return this.color;
     }
 
     /**
-     * Gets the Piece type.
+     * Gets the piece type.
      *
      * @return
      *      Piece Type

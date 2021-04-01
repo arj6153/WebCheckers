@@ -4,7 +4,6 @@ import static com.webcheckers.appl.Game.Color.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class BoardViewTest {
                     //Check pieces color and validity
                     if(piece != null) {
                         assertSame(piece.getColor(), WHITE);
-                        assertFalse(space.isValid());
+                        assertFalse(space.isBlackSpace());
                         whitePieces++;
                     } else {
                         blankSpaces++;
@@ -40,14 +39,14 @@ public class BoardViewTest {
                 } else if ( r >= 5) {
                     if(piece != null) {
                         assertSame(piece.getColor(), RED);
-                        assertFalse(space.isValid());
+                        assertFalse(space.isBlackSpace());
                         redPieces++;
                     } else {
                         blankSpaces++;
                     }
                 } else {
                     assertNull(piece);
-                    assertEquals(flag,space.isValid());
+                    assertEquals(flag,space.isBlackSpace());
                     flag = !flag;
                     blankSpaces++;
                 }
