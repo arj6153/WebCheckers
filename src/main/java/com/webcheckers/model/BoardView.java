@@ -1,8 +1,5 @@
 package com.webcheckers.model;
 
-import com.webcheckers.appl.Game;
-
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.List;
 
@@ -85,13 +82,13 @@ public class BoardView implements Iterable<Row>{
 
     public void printBoard() {
         for(Row row: board) {
-            System.out.print(row.getIndex()+" ");
+            System.out.print(row.getIndex()+ " ");
             for(Space space: row) {
                 if(space.getPiece() == null) {
                     System.out.print(". ");
-                } else if(space.getPiece().getColor()==RED) {
+                } else if(space.getPiece().getColor() == RED) {
                     System.out.print("R ");
-                } else if (space.getPiece().getColor()== WHITE) {
+                } else if (space.getPiece().getColor() == WHITE) {
                     System.out.print("W ");
                 }
             }
