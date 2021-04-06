@@ -41,8 +41,8 @@ public class PostSignInRoute implements Route {
      *      template engine
      */
     public <templateEngine> PostSignInRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
-        this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
-        this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
+        this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required.");
+        this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required.");
         LOG.config("PostSignInRoute has been initialized.");
     }
 
@@ -71,17 +71,17 @@ public class PostSignInRoute implements Route {
             Pattern p = Pattern.compile("^[a-zA-Z0-9]+$");
             ModelAndView mv;
             if(name.isBlank()) {
-                mv = error(vm, "Username is empty. Try again");
+                mv = error(vm, "Username is empty. Try again.");
                 return templateEngine.render(mv);
             } else if (name.charAt(0) == ' ') {
-                mv = error(vm, "Username should not contains spaces in front of the name. Try again");
+                mv = error(vm, "Username should not contain spaces. Try again.");
                 return  templateEngine.render(mv);
             } else if (!p.matcher(name).find()) {
-                mv = error(vm, "Username should contains " +
-                        "alphanumeric value and optional spaces only. Try again");
+                mv = error(vm, "Username should contain alphanumeric values only. " +
+                        "Spaces and special characters are not allowed. Try again.");
                 return templateEngine.render(mv);
             } else if(gameCenter.getLobby().playerExists(name)) {
-                mv = error(vm, "Username is taken. Try again");
+                mv = error(vm, "Username is taken. Try again.");
                 return templateEngine.render(mv);
             }
             gameCenter.addPlayer(name);
