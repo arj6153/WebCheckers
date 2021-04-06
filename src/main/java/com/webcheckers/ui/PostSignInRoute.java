@@ -68,16 +68,15 @@ public class PostSignInRoute implements Route {
         vm.put(MESSAGE_ATTR, GetSignInRoute.SIGN_IN_MSG);
         if (player == null) {
             String name = request.queryParams(USER_ID);
-            Pattern p = Pattern.compile("^[a-zA-Z0-9 ]+$");
+            Pattern p = Pattern.compile("^[a-zA-Z0-9]+$");
             ModelAndView mv;
             if(name.isBlank()) {
                 mv = error(vm, "Username is empty. Try again");
                 return templateEngine.render(mv);
-            } else if (name.charAt(0) == ' ' || name.charAt(name.length()-1) == ' ') {
-                mv = error(vm, "Username should not contains spaces in front or at the end of name. Try again");
+            } else if (name.charAt(0) == ' ') {
+                mv = error(vm, "Username should not contains spaces in front of the name. Try again");
                 return  templateEngine.render(mv);
-            }
-            else if (!p.matcher(name).find()) {
+            } else if (!p.matcher(name).find()) {
                 mv = error(vm, "Username should contains " +
                         "alphanumeric value and optional spaces only. Try again");
                 return templateEngine.render(mv);
