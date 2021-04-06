@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.Player;
 import spark.*;
@@ -53,6 +54,10 @@ public class PostSignOutRoute implements Route{
         LOG.finer("PostSignInRoute has been invoked.");
         final Session httpSession = request.session();
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
+        Game game = gameCenter.getGame(player);
+        if(game != null) {
+            game.setGameOver();
+        }
         gameCenter.removePlayer(player.getName());
         httpSession.attribute(GetHomeRoute.CURRENT_USER, null);
         response.redirect(WebServer.HOME_URL);
