@@ -2,7 +2,6 @@ package com.webcheckers.appl;
 
 import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
-
 import java.util.*;
 
 import static com.webcheckers.model.BoardView.DIM;
@@ -12,8 +11,13 @@ import static com.webcheckers.model.BoardView.DIM;
  *
  * @author Michael Merlino
  * @author Truong Anh Tuan Hoang
+ * @author Bin Qiu
+ * @author Alex Johannesson
  */
 public class Game extends GameCenter {
+
+    public enum Color {RED, WHITE, NONE}
+
     private final Player redPlayer;
     private final Player whitePlayer;
     private final BoardView board;
@@ -24,18 +28,17 @@ public class Game extends GameCenter {
     private Move activeMove;
     private boolean gameOver;
     private String gameOverMessage = " game is over";
-    private boolean resigned = false;
     private String resignMessage = "";
-    private Piece redKing = new Piece(Piece.Type.KING, Color.RED);
-    private Piece whiteKing = new Piece(Piece.Type.KING, Color.WHITE);
-
-    public enum Color {RED, WHITE, NONE}
+//    private Piece redKing = new Piece(Piece.Type.KING, Color.RED);
+//    private Piece whiteKing = new Piece(Piece.Type.KING, Color.WHITE);
 
     /**
-     * Constructor of Game.
+     * Constructor of a Game.
      *
-     * @param red   player color
-     * @param white opponent color
+     * @param red
+     *      The red player
+     * @param white
+     *      The white player
      */
     public Game(Player playerTurn, Player red, Player white) {
         this.playerTurn = playerTurn;
@@ -46,95 +49,98 @@ public class Game extends GameCenter {
         gameOver = false;
     }
 
-
     /**
-     * Get red player, this is the user.
-     *
-     * @return red player
+     * @return
+     *      The red player
      */
     public Player getRedPlayer() {
         return redPlayer;
     }
 
     /**
-     * Get white player, this is the opponent.
-     *
-     * @return white player
+     * @return
+     *      The white player
      */
     public Player getWhitePlayer() {
         return whitePlayer;
     }
 
     /**
-     * Gets current player color.
-     *
-     * @return Red player on red's turn, White player on white's turn.
+     * @return
+     *      The red player on red's turn, the white player on white's turn
      */
     public Color getPlayerColor() {
-        if (playerTurn == redPlayer) {
+        if(isRedPlayer(playerTurn)) {
             return Color.RED;
-        } else if (playerTurn == whitePlayer) {
+        } else if(isWhitePlayer(playerTurn)) {
             return Color.WHITE;
         }
         return null;
     }
 
     /**
-     * Checks if player is white player, opponent.
+     * Checks if player is white player.
      *
-     * @param player white player
-     * @return true if player is white player, else false
+     * @param player
+     *      The white player
+     * @return
+     *      True if player is the white player, else false
      */
     public boolean isWhitePlayer(Player player) {
         return player.equals(this.whitePlayer);
     }
 
     /**
-     * Checks if player is red player, user.
+     * Checks if player is red player.
      *
-     * @param player red player
-     * @return true if player is red player, else false
+     * @param player
+     *      The red player
+     * @return
+     *      True if player is red player, else false
      */
     public boolean isRedPlayer(Player player) {
         return player.equals(this.redPlayer);
     }
 
     /**
-     * Checks if a given player object is participating in this game.
+     * Checks if a given player is participating in this game.
      *
-     * @param player The player to check
-     * @return True if the player is in the game, false otherwise
+     * @param player
+     *      The player being checked
+     * @return
+     *      True if the player is in this game, false otherwise
      */
     public boolean isPlayerInGame(Player player) {
-        return player.equals(redPlayer) || player.equals(whitePlayer);
+        return isRedPlayer(player) || isWhitePlayer(player);
     }
 
     /**
-     * Gets the game session's ID.
-     *
-     * @return game ID
+     * @return
+     *      The game ID of this game
      */
     public int getID() {
         return this.ID;
     }
 
     /**
-     * @return True if the game has ended, false otherwise
+     * @return
+     *      True if this game has ended, false otherwise
      */
     public boolean isGameOver() {
         return gameOver;
     }
 
-
     /**
-     * @return True if it is currently the red player's turn
+     * @return
+     *      True if it is currently the red player's turn
      */
     public boolean isRedTurn() {
-        return playerTurn == redPlayer;
+        return playerTurn.equals(redPlayer);
     }
 
     /**
-     * @return The player whose turn it is
+     * @return
+     *      The player whose turn it is
      */
     public Player getPlayerTurn() {
         return playerTurn;
@@ -142,21 +148,21 @@ public class Game extends GameCenter {
 
     /**
      * Sets which player's turn it is.
+     *
+     * @param player
+     *      The player
      */
     public void setPlayerTurn(Player player) {
         this.playerTurn = player;
     }
 
     /**
-     * Get board
+     * Backup the piece to the previous position.
      *
-     * @return the board
+     * @return
+     *      True if there is a position to backup to, else false
      */
-    public BoardView getBoard() {
-        return this.board;
-    }
-
-    public boolean undoMove(){
+    public boolean backupMove(){
         if (this.activeMove != null) {
              activeMove = null;
              return true;
@@ -165,10 +171,12 @@ public class Game extends GameCenter {
     }
 
     /**
-     * Get the number of pieces players has
+     * Get the number of pieces a player has on the game board.
      *
-     * @param color: the color of the player to get num pieces from
-     * @return The num pieces
+     * @param color
+     *      The color of the player to get number pieces
+     * @return
+     *      The num pieces
      */
     public int getNumPieces(Color color) {
         if (color == Color.RED) {
@@ -177,21 +185,26 @@ public class Game extends GameCenter {
         return this.whitePieces;
     }
 
+
     /**
-     *
+     * Sets the game to game over.
      */
     public void setGameOver() {
+        redPlayer.setPlaying(false);
+        whitePlayer.setPlaying(false);
         gameOver = true;
     }
 
     /**
+     * Checks if a move is valid according to American Checker Rules.
      *
-     * NEED DOCSTRING
-     *
-     *
+     * @param move
+     *      The move being checked
+     * @return
+     *      True if move is valid and a valid message is sent to the player,
+     *      false otherwise and an error messageis sent to the player
      */
      public Message isValidMove(Move move) {
-
          if(activeMove == null) {
              if (jumpCheck(move)) {
                  activeMove = move;
@@ -208,11 +221,19 @@ public class Game extends GameCenter {
          return new Message("You already moved.", Message.Type.ERROR);
      }
 
-     public BoardView getRedBoardView() {
+    /**
+     * @return
+     *      The red player's board view
+     */
+     public BoardView redBoardView() {
          return this.board;
      }
 
-     public BoardView getWhiteBoardView() {
+    /**
+     * @return
+     *      The white player's board view
+     */
+    public BoardView whiteBoardView() {
         List<Row> whiteBoard = new ArrayList<>();
         for(int r = 0; r < DIM; r++) {
             Row row = new Row(board.getRow(r).getIndex());
@@ -226,15 +247,21 @@ public class Game extends GameCenter {
     }
 
     /**
-     * Gets the valid move to be submitted to the game.
-     *
      * @return
-     *      A valid move.
+     *      A valid move submitted to the game.
      */
     public Move getActiveMove() {
         return activeMove;
     }
 
+    /**
+     * The move made by a player in the game.
+     *
+     * @param move
+     *      The move made on the game board
+     * @param type
+     *      The type of move (simple, single jump, multiple jump)
+     */
     public void move(Move move, Move.MoveType type){
         int startRow = move.getStart().getRow();
         int startCell = move.getStart().getCell();
@@ -266,17 +293,25 @@ public class Game extends GameCenter {
         }
     }
 
+    /**
+     * Checks if a move is a simple move.
+     *
+     * @param move
+     *      The move made
+     * @return
+     *      True if the move is a simple move, false otherwise
+     */
     public boolean simpleMoveCheck(Move move) {
         int endRow = move.getEnd().getRow();
         int startRow = move.getStart().getRow();
         int endCol = move.getEnd().getCell();
         int startCol = move.getStart().getCell();
-        Space space = board.getRow(startRow).getSpace(startCol);
+        Space space = getSpace(startRow, startCol);
         if(space.getPiece() != null && space.getPiece().getType() == Piece.Type.SINGLE) {
-            if (playerTurn.equals(redPlayer) && (endRow == startRow + 1) &&
+            if (isRedPlayer(playerTurn) && (endRow == startRow + 1) &&
                     ((endCol == startCol + 1) || (endCol == startCol - 1))) {
                 return true;
-            } else return playerTurn.equals(whitePlayer) && (endRow == startRow - 1) &&
+            } else return isWhitePlayer(playerTurn) && (endRow == startRow - 1) &&
                     ((endCol == startCol + 1) || (endCol == startCol - 1));
         }
         else if(space.getPiece() != null && space.getPiece().getType() == Piece.Type.KING) {
@@ -286,6 +321,28 @@ public class Game extends GameCenter {
         return false;
     }
 
+    /**
+     * Gets the space using specified row and column number of the game board.
+     *
+     * @param rowIdx
+     *      The row number
+     * @param cellIdx
+     *      The column number
+     * @return
+     *      The space specified by the row and column number
+     */
+    public Space getSpace(int rowIdx, int cellIdx) {
+        return this.board.getRow(rowIdx).getSpace(cellIdx);
+    }
+
+    /**
+     * Checks if a move is a jump move.
+     *
+     * @param move
+     *      The move made
+     * @return
+     *      True if the move is a jump move, false otherwise
+     */
     public boolean jumpCheck(Move move) {
         int endRow = move.getEnd().getRow();
         int startRow = move.getStart().getRow();
@@ -311,49 +368,47 @@ public class Game extends GameCenter {
         return false;
     }
 
-    public Piece kingCheck(Move move) {
-        int endRow = move.getEnd().getRow();
-        int startRow = move.getStart().getRow();
-        int startCol = move.getStart().getCell();
-        Piece piece = new Piece(board.getRow(startRow).getSpace(startCol).getPiece().getType(), getPlayerColor());
-        if( board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
-            if (playerTurn.equals(redPlayer)){
-                if(endRow == 7) {
-                    piece = redKing;
-                } else {
-                    return piece;
-                }
-            } else if (playerTurn.equals(whitePlayer)) {
-                if(endRow == 0) {
-                    piece = whiteKing;
-                } else {
-                    return piece;
-                }
-            }
-        }
-        return piece;
-    }
-
-
-    public void resignGame(Player player) {
-         resigned = true;
+    /**
+     * Resign from the game.
+     *
+     * @param player
+     *      The player that resigns
+     * @return
+     *      A message stating that the player has resigned
+     */
+    public Message resignGame(Player player) {
+         this.gameOver = true;
          player.setPlaying(false);
-         resignMessage = gameOverMessage + ", " + player.getName() + "has resigned the game";
+         return Message.info(gameOverMessage + ", " + player.getName() + "has resigned the game");
     }
 
-    public boolean isResigned() {
-         return resigned;
-    }
-
-    public void endResignGame() {
-        redPlayer.setPlaying(false);
-        whitePlayer.setPlaying(false);
-        setGameOver();
-    }
-
+    /**
+     * Clears the current active move and set it to null.
+     */
     public void clearActiveMove() {
          activeMove = null;
     }
 
-
+//    public Piece kingCheck(Move move) {
+//        int endRow = move.getEnd().getRow();
+//        int startRow = move.getStart().getRow();
+//        int startCol = move.getStart().getCell();
+//        Piece piece = new Piece(board.getRow(startRow).getSpace(startCol).getPiece().getType(), getPlayerColor());
+//        if( board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
+//            if (playerTurn.equals(redPlayer)){
+//                if(endRow == 7) {
+//                    piece = redKing;
+//                } else {
+//                    return piece;
+//                }
+//            } else if (playerTurn.equals(whitePlayer)) {
+//                if(endRow == 0) {
+//                    piece = whiteKing;
+//                } else {
+//                    return piece;
+//                }
+//            }
+//        }
+//        return piece;
+//    }
 }

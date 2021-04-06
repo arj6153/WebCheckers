@@ -1,9 +1,7 @@
 package com.webcheckers.appl;
 
 import com.webcheckers.model.*;
-
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 /**
  * Central communication of the game server for the model and UI.
@@ -14,30 +12,27 @@ import java.util.logging.Logger;
  * @author Michael Merlino
  */
 public class GameCenter {
-    private static final Logger LOG = Logger.getLogger(GameCenter.class.getName());
 
-    // Attributes
-    private HashMap<Integer, Game> gameMap;
+    private final HashMap<Integer, Game> gameMap;
     private final Lobby lobby;
 
     /**
-     * Constructor of GameCenter
+     * Constructor of GameCenter.
      */
     public GameCenter() {
         this.lobby = new Lobby();
         this.gameMap = new HashMap<>();
     }
 
-
     /**
-     * Adds a game to the master list
+     * Adds a game to the game map.
+     *
      * @param redPlayer
-     *      The player that sent the game request.
+     *      The player that sends the game request
      * @param whitePlayer
-     *      The player that received the game request.
+     *      The player that receives the game request
      */
-    public synchronized int addGame(Player redPlayer, Player whitePlayer)
-    {
+    public synchronized int addGame(Player redPlayer, Player whitePlayer) {
         Game newGame = new Game(redPlayer, redPlayer, whitePlayer);
         gameMap.put(newGame.getID(), newGame);
         redPlayer.setPlaying(true);
@@ -46,46 +41,60 @@ public class GameCenter {
     }
 
     /**
-     * Gets the Lobby of the game.
-     * @return lobby
+     * @return
+     *      The lobby of the active players
      */
     public Lobby getLobby() {
         return this.lobby;
     }
 
-
+    /**
+     * @return
+     *      The map of the games in session
+     */
     public HashMap<Integer, Game> getGameMap() {
         return this.gameMap;
     }
+
     /**
-     * Adds a player to the hashmap
-     * @param name name of player
+     * Adds a player to the lobby.
+     *
+     * @param name
+     *      The name of the player
      */
     public void addPlayer(String name) {
        this.lobby.addPlayer(name);
     }
 
     /**
-     * Gets the name of the player.
-     * @param name name of player
-     * @return string name of player
+     * Gets the name of the player from the lobby.
+     *
+     * @param name
+     *      The name of player
+     * @return
+     *      The player
      */
     public Player getPlayer(String name) {
         return this.lobby.getPlayer(name);
     }
 
     /**
-     * Removes player from hashmap when signed out.
-     * @param name name of player
+     * Removes player from the lobby.
+     *
+     * @param name
+     *      The player name
      */
     public synchronized void removePlayer(String name) {
         lobby.removePlayer(name);
     }
 
-
     /**
+     * Get the game using the player.
      *
-     * NEED DOCSTRING
+     * @param player
+     *      The player
+     * @return
+     *      The game containing the player
      */
     public synchronized Game getGame(Player player) {
        for(Game game: this.gameMap.values())  {
@@ -97,23 +106,30 @@ public class GameCenter {
     }
 
     /**
-     * Gets the current game.
-     * @param gameID ID of the game
-     * @return current game
+     * Gets the current game using the gameID.
+     *
+     * @param gameID
+     *      The ID of the game
+     * @return
+     *      The game associated to the gameID
      */
     public synchronized Game getGame(int gameID) {
         return this.gameMap.get(gameID);
     }
 
+    /**
+     * Gets the opposing player of teh game.
+     *
+     * @param player
+     *      The current player
+     * @return
+     *      The opposing player
+     */
     public Player getOpponent(Player player) {
         Game game = getGame(player);
-        if(game.getRedPlayer() == player){
+        if(game.getRedPlayer().equals(player)) {
             return game.getWhitePlayer();
-        } else {
-            return game.getRedPlayer();
         }
-
+        return game.getRedPlayer();
     }
-
-
 }

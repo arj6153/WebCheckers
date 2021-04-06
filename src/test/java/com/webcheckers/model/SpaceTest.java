@@ -1,12 +1,7 @@
 package com.webcheckers.model;
 import com.webcheckers.appl.Game;
-import net.bytebuddy.jar.asm.Type;
 import org.junit.jupiter.api.Test;
-import com.webcheckers.model.Player;
-import org.mockito.internal.matchers.Equality;
-import org.mockito.internal.matchers.Equals;
-import org.mockito.internal.matchers.Not;
-import spark.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 

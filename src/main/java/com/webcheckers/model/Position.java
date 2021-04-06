@@ -1,14 +1,23 @@
 package com.webcheckers.model;
 
+/**
+ * Class for the position on the game board.
+ *
+ * @author Truong Anh Tuan Hoang
+ * @author Alex Johannesson
+ */
 public class Position  {
+
     private final int row;
     private final int cell;
 
     /**
-     * Instantiates row and position parameters
+     * Constructor for the position.
      *
-     * @param row the row
-     * @param cell the cell
+     * @param row
+     *      The row
+     * @param cell
+     *      The cell
      */
     public Position(int row, int cell) {
         this.row = row;
@@ -16,18 +25,16 @@ public class Position  {
     }
 
     /**
-     * Gets the row
-     *
-     * @return row
+     * @return
+     *      The row
      */
     public int getRow() {
         return this.row;
     }
 
     /**
-     * Gets the Cell
-     *
-     * @return cell
+     * @return
+     *      The cell
      */
     public int getCell() {
         return this.cell;

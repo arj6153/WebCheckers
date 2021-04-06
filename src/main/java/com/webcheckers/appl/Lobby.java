@@ -1,8 +1,6 @@
 package com.webcheckers.appl;
 
-import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Player;
-
 import java.util.HashMap;
 
 /**
@@ -14,7 +12,6 @@ import java.util.HashMap;
  */
 public class Lobby {
 
-    // lobby holds the username of a player as a key and the Player as the value
     private final HashMap<String, Player> map;
 
     /**
@@ -26,7 +23,9 @@ public class Lobby {
 
     /**
      * Add player to hashmap.
-     * @param name player name
+     *
+     * @param name
+     *      The player name
      */
     public synchronized void addPlayer(String name) {
         Player player = new Player(name);
@@ -34,25 +33,28 @@ public class Lobby {
     }
 
     /**
-     * Gets player in hashmap.
-     * @param name player name
-     * @return player
+     * Gets a player in hashmap.
+     *
+     * @param name
+     *      The player name
+     * @return
+     *      A player
      */
     public synchronized Player getPlayer(String name) {
        return this.map.get(name);
     }
 
     /**
-     * Hashmap of the players and their names.
-     * @return hashmap
+     * @return
+     *      The hashmap of the players using their names as the key
      */
     public synchronized HashMap<String,Player> getMap () {
         return this.map;
     }
 
     /**
-     * Gets the size of the hashmap.
-     * @return lobby size
+     * @return
+     *      The lobby size of the hashmap
      */
     public synchronized int getLobbySize() {
         return this.map.size();
@@ -60,21 +62,25 @@ public class Lobby {
 
     /**
      * Removes player from hashmap.
-     * @param name player name
+     *
+     * @param name
+     *      The player name
      */
     public synchronized void removePlayer(String name) {
         this.map.remove(name);
     }
 
     /**
-     * Checks if player exists in hashmap.
-     * @param name player name
-     * @return true if player exists, else false
+     * Checks if player exists in the hashmap.
+     *
+     * @param name
+     *      The player name
+     * @return
+     *      True if player exists in the hashmap, else false
      */
     public synchronized boolean playerExists(String name) {
         return this.map.containsKey(name);
     }
-
 }
 
 

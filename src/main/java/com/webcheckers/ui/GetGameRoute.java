@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 
 import static com.webcheckers.ui.GetHomeRoute.*;
 import static spark.Spark.halt;
-import static spark.route.HttpMethod.options;
 
 /**
  * The UI controller to GET the game page
@@ -111,16 +110,16 @@ public class GetGameRoute implements Route {
                Game game = gameCenter.getGame(Integer.parseInt(gameID));
                vm.put(RED_PLAYER_ATTR, game.getRedPlayer());
                vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
-               BoardView board = game.getRedBoardView();
+               BoardView board = game.redBoardView();
                if (game.isGameOver()) {
                     modeOptions.put("isGameOver", true);
                     modeOptions.put("gameOverMessage", Message.info("game is over"));
                    vm.put(MODEOPTIONS_ATTR, gson.toJson(modeOptions));
                }
                if(game.isWhitePlayer(player)) {
-                  board = game.getWhiteBoardView();
+                  board = game.whiteBoardView();
                } else if (game.isRedPlayer(player)) {
-                   board = game.getRedBoardView();
+                   board = game.redBoardView();
                }
                vm.put(BOARD_ATTR, board);
                vm.put(ACTIVE_COLOR_ATTR, game.getPlayerColor());
