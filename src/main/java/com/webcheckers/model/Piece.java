@@ -17,7 +17,7 @@ public class Piece {
         SINGLE, KING
     }
 
-    private Game.Color color;
+    private final Game.Color color;
     private Type type;
 
     /**
