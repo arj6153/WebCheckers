@@ -7,21 +7,15 @@ import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.Player;
 import spark.*;
-
 import com.webcheckers.util.Message;
-
-import static spark.Spark.halt;
 
 /**
  * The UI Controller to GET the Home page.
  *
- * @author:Truong Anh Tuan Hoang
+ * @author: Truong Anh Tuan Hoang
  */
 public class GetHomeRoute implements Route {
 
-  /**
-   * Global Variables
-   */
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
@@ -42,7 +36,7 @@ public class GetHomeRoute implements Route {
    * Create the Spark Route (UI controller) to handle all {@code GET /} HTTP requests.
    *
    * @param templateEngine
-   *   the HTML template rendering engine
+   *      The HTML template rendering engine
    */
   public GetHomeRoute(final GameCenter gameCenter, final TemplateEngine templateEngine) {
     this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
@@ -55,12 +49,12 @@ public class GetHomeRoute implements Route {
    * Render the WebCheckers Home page.
    *
    * @param request
-   *   the HTTP request
+   *      The HTTP request
    * @param response
-   *   the HTTP response
+   *      The HTTP response
    *
    * @return
-   *   the rendered HTML for the Home page
+   *      The rendered HTML for the Home page
    */
   @Override
   public Object handle(Request request, Response response) {
@@ -86,7 +80,6 @@ public class GetHomeRoute implements Route {
         if (foundGame) {
           response.redirect(WebServer.GAME_URL + "?gameID=" + gameID);
         }
-        //halt();
         return null;
       }
       if(message != null) {
@@ -99,7 +92,6 @@ public class GetHomeRoute implements Route {
       vm.put(PLAYER_LIST_ATTR, gameCenter.getLobby().getMap());
     } else {
       // display a user message in the Home page
-
       vm.put(LOBBY_COUNT, gameCenter.getLobby().getLobbySize());
     }
     // render the View

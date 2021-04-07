@@ -19,10 +19,10 @@ import static spark.Spark.halt;
 /**
  * The UI controller to GET the game page
  *
- * @author:Truong Anh Tuan Hoang
+ * @author: Truong Anh Tuan Hoang
  */
 public class GetGameRoute implements Route {
-    //Attributes
+
     final String VIEW_NAME = "game.ftl";
     static final String PLAYER_ATTR = "player";
     static final String GAMEID_ATTR = "gameID";
@@ -36,7 +36,6 @@ public class GetGameRoute implements Route {
 
     private static final Logger LOG = Logger.getLogger(GetGameRoute.class.getName());
 
-
     private final TemplateEngine templateEngine;
     private final GameCenter gameCenter;
     private final Gson gson;
@@ -44,17 +43,18 @@ public class GetGameRoute implements Route {
     public enum Mode {
         PLAY
     }
+
     /**
      * Constructor of GetGameRoute.
      *
      * @param gameCenter
-     *      the instance of the game center
+     *      The instance of the game center
      * @param templateEngine
-     *      the HTML template rendering engine
+     *      The HTML template rendering engine
      */
     public GetGameRoute(GameCenter gameCenter, TemplateEngine templateEngine, final Gson gson) {
-        this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required");
-        this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
+        this.gameCenter = Objects.requireNonNull(gameCenter, "GameCenter is required.");
+        this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required.");
         this.gson = gson;
         LOG.config("GetGameRoute is initialized.");
     }
@@ -68,12 +68,13 @@ public class GetGameRoute implements Route {
      *      HTTP response
      *
      * @return
-     *      rendered HTML
+     *      The rendered HTML
+     *
      * @throws Exception
      */
     @Override
     public Object handle(Request request, Response response) throws Exception {
-        LOG.finer("GetGameRoute is invoked");
+        LOG.finer("GetGameRoute is invoked.");
         final Session httpSession = request.session();
         Map<String,Object> vm = new HashMap<>();
         final Map<String, Object> modeOptions = new HashMap<>(2);
@@ -90,7 +91,7 @@ public class GetGameRoute implements Route {
                if(!player.isPlaying()) {
                    final Player opponent = gameCenter.getPlayer(request.queryParams(PLAYER_ATTR));
                    if(opponent.isPlaying()) {
-                       httpSession.attribute(MESSAGE_ATTR, Message.error("Player is in game. Choose another"));
+                       httpSession.attribute(MESSAGE_ATTR, Message.error("Player is in game. Choose a different player."));
                        response.redirect(WebServer.HOME_URL);
                    } else {
                        gameID = String.valueOf(gameCenter.addGame(player, opponent));
@@ -100,7 +101,7 @@ public class GetGameRoute implements Route {
                }
            } else {
                if(gameID.equals("")) {
-                   httpSession.attribute(MESSAGE_ATTR, Message.error("Not in a game"));
+                   httpSession.attribute(MESSAGE_ATTR, Message.error("Not in a game."));
                    player.setPlaying(false);
                    response.redirect(WebServer.HOME_URL);
                    halt();
@@ -113,7 +114,7 @@ public class GetGameRoute implements Route {
                BoardView board = game.redBoardView();
                if (game.isGameOver()) {
                     modeOptions.put("isGameOver", true);
-                    modeOptions.put("gameOverMessage", Message.info("game is over"));
+                    modeOptions.put("gameOverMessage", Message.info("Game Over"));
                    vm.put(MODEOPTIONS_ATTR, gson.toJson(modeOptions));
                }
                if(game.isWhitePlayer(player)) {
@@ -127,5 +128,4 @@ public class GetGameRoute implements Route {
         }
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
     }
-
 }

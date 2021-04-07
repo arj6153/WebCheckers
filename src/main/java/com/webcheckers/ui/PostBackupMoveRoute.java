@@ -7,7 +7,6 @@ import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
-
 import java.util.logging.Logger;
 
 
@@ -23,7 +22,19 @@ public class PostBackupMoveRoute implements Route {
         this.gson = gson;
     }
 
-
+    /**
+     * Handles a POST /backup, a player backing up from their move.
+     *
+     * @param request
+     *      The HTTP request
+     * @param response
+     *      The HTTP response
+     *
+     * @return
+     *      The previous position of the checker piece
+     *
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         LOG.finer("PostBackupMoveRoute invoked");
@@ -34,14 +45,13 @@ public class PostBackupMoveRoute implements Route {
         if (player.equals(game.getPlayerTurn())) {
             boolean flag = game.backupMove();
             if (flag) {
-                message = new Message("Move has been undone", Message.Type.INFO);
+                message = new Message("Move has been undone.", Message.Type.INFO);
             } else {
-                message = new Message("no Move to be undone", Message.Type.ERROR);
+                message = new Message("No move to be undone.", Message.Type.ERROR);
             }
         } else {
-            message = new Message("not your turn", Message.Type.ERROR);
+            message = new Message("Not your turn.", Message.Type.ERROR);
         }
-
         Gson gson = new GsonBuilder().create();
         return gson.toJson(message);
     }

@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import static spark.Spark.halt;
-
 /**
  * UI controller for the signin page.
  *
@@ -19,10 +17,6 @@ import static spark.Spark.halt;
  */
 public class GetSignInRoute implements Route {
 
-    /**
-     * Global Variables
-     */
-    //Attributes
     private static final Logger LOG = Logger.getLogger(GetSignInRoute.class.getName());
 
     static final String VIEW_NAME = "signin.ftl";
@@ -33,12 +27,12 @@ public class GetSignInRoute implements Route {
     private final GameCenter gameCenter;
 
     /**
-     * Creates the UI controller to handle The {@code Get /signin} route handler
+     * Creates the UI controller to handle The {@code Get /signin} route handler.
      *
      * @param gameCenter
-     *      the instance of the game center
+     *      The instance of the game center
      * @param templateEngine
-     *      the HTML template rendering engine
+     *      The HTML template rendering engine
      */
     public GetSignInRoute(GameCenter gameCenter, TemplateEngine templateEngine) {
         this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
@@ -47,15 +41,16 @@ public class GetSignInRoute implements Route {
     }
 
     /**
-     * Renders the sign in page
+     * Renders the sign in page.
      *
      * @param request
-     *      the HTTP request
+     *      The HTTP request
      * @param response
-     *      the HTTP response
+     *      The HTTP response
      *
      * @return
-     *      the rendered sing in page
+     *      The rendered sign in page
+     *
      * @throws Exception // doesn't actually throw
      */
     @Override
@@ -67,11 +62,9 @@ public class GetSignInRoute implements Route {
             Map<String,Object> vm = new HashMap<>();
             vm.put(GetHomeRoute.TITLE_ATTR, DESCRIPTION);
             vm.put(GetHomeRoute.MESSAGE_ATTR, SIGN_IN_MSG);
-
             return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
         }
         response.redirect(WebServer.HOME_URL);
-        //halt();
         return null;
     }
 }
