@@ -31,12 +31,17 @@ public class PostSubmitTurnRoute implements Route {
         Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         Game game = gameCenter.getGame(player);
         game.move(game.getActiveMove(), game.getActiveMove().getType());
+
+        if (game.getActiveMove().getType() == Move.MoveType.CAPTURE_MOVE &&
+                game.canJump(game.getActiveMove())) {
+            return gson.toJson(new Message("You must continue jumping.", Message.Type.ERROR));
+        }
         if(game.isRedTurn()) {
             game.setPlayerTurn(game.getWhitePlayer());
         } else {
             game.setPlayerTurn(game.getRedPlayer());
         }
         game.clearActiveMove();
-        return gson.toJson(new Message("valid", Message.Type.INFO));
+        return gson.toJson(new Message("Valid move.", Message.Type.INFO));
     }
 }

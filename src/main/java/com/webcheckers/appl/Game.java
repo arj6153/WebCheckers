@@ -209,9 +209,12 @@ public class Game extends GameCenter {
              if (jumpCheck(move)) {
                  activeMove = move;
                  activeMove.setType((Move.MoveType.CAPTURE_MOVE));
-                 return new Message("Jump is available, please make a jump move.", Message.Type.INFO);
+                 return new Message("Jump is valid.", Message.Type.INFO);
              }
              if (simpleMoveCheck(move)) {
+                 if(canJump(move.getStart())) {
+                     return new Message("Jump available. You must jump.", Message.Type.ERROR);
+                 }
                  activeMove = move;
                  activeMove.setType(Move.MoveType.SINGLE_MOVE);
                  return new Message("Move is valid.", Message.Type.INFO);
@@ -349,23 +352,105 @@ public class Game extends GameCenter {
         int endCol = move.getEnd().getCell();
         int startCol = move.getStart().getCell();
         Space capture = board.getRow((endRow + startRow) / 2).getSpace((endCol + startCol) / 2);
-        Space space = board.getRow(startRow).getSpace(startCol);
-        if(space.getPiece() != null && space.getPiece().getType()== Piece.Type.SINGLE) {
+        Space startSpace = board.getRow(startRow).getSpace(startCol);
+        Space endSpace = board.getRow(endRow).getSpace(endCol);
+        if(startSpace.getPiece() != null && startSpace.getPiece().getType()== Piece.Type.SINGLE) {
             if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                return capture.getPiece() != null && capture.getPiece().getColor() == Color.WHITE;
+                return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.WHITE;
             } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                return capture.getPiece() != null && capture.getPiece().getColor() == Color.RED;
+                return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.RED;
             } else {
                 return false;
             }
         }
-        else if(space.getPiece() != null && space.getPiece().getType() == Piece.Type.KING) {
+        else if(startSpace.getPiece() != null && startSpace.getPiece().getType() == Piece.Type.KING) {
             if(((endRow == startRow + 2) || (endRow == startRow - 2)) &&
                     ((endCol == startCol + 2) || (endCol == startCol - 2))) {
                 return capture.getPiece() != null && capture.getPiece().getColor() != getPlayerColor();
             }
         }
         return false;
+    }
+
+    public boolean canJump(Object obj) {
+        ArrayList<Move> availJumpSpots = new ArrayList<>();
+        Position prevStartPos = null;
+        Position startPos = null;
+        if (obj instanceof Move) {
+            prevStartPos = activeMove.getStart();
+            startPos = activeMove.getEnd();
+        } else if (obj instanceof Position) {
+            startPos = (Position) obj;
+        }
+        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
+        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
+        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
+        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
+        for (Move move: availJumpSpots) {
+            if ((prevStartPos != null && (move.getEnd() == prevStartPos)) || !isInRange(move.getEnd())) {
+                continue;
+            }
+            if (jumpCheck(move)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    /**
+//     * Checks if a checker piece can jump again after jumping already.
+//     *
+//     * @param activeMove
+//     *      The previous jump move
+//     *
+//     * @return
+//     *       True is the checker piece can jump again, false otherwise
+//     */
+//    public boolean canJump(Move activeMove) {
+//        ArrayList<Move> availJumpSpots = new ArrayList<>();
+//        Position prevStartPos = activeMove.getStart();
+//        Position startPos = activeMove.getEnd();
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
+//        for (Move move: availJumpSpots) {
+//            if ((move.getEnd() == prevStartPos) || !isInRange(move.getEnd())) {
+//                continue;
+//            }
+//            if (jumpCheck(move)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public boolean canJump(Position startPos) {
+//        ArrayList<Move> availJumpSpots = new ArrayList<>();
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
+//        for (Move move: availJumpSpots) {
+//            if (jumpCheck(move)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    /**
+     * Checks if space is in boundary of the checker board.
+     *
+     * @param position
+     *      The position being checked
+     *
+     * @return
+     *      True if in bounds, false otherwise
+     */
+    public boolean isInRange(Position position) {
+        return ((position.getRow() < DIM && position.getRow() >= 0) &&
+                (position.getCell() < DIM && position.getCell() >= 0));
     }
 
     /**

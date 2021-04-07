@@ -22,7 +22,12 @@ import static spark.Spark.halt;
  * @author: Truong Anh Tuan Hoang
  */
 public class GetGameRoute implements Route {
+<<<<<<< HEAD
 
+=======
+    
+    //Attributes
+>>>>>>> b28fcd0ffb9aacf257aae30edd799b84657e374e
     final String VIEW_NAME = "game.ftl";
     static final String PLAYER_ATTR = "player";
     static final String GAMEID_ATTR = "gameID";
@@ -114,8 +119,13 @@ public class GetGameRoute implements Route {
                BoardView board = game.redBoardView();
                if (game.isGameOver()) {
                     modeOptions.put("isGameOver", true);
+<<<<<<< HEAD
                     modeOptions.put("gameOverMessage", Message.info("Game Over"));
                    vm.put(MODEOPTIONS_ATTR, gson.toJson(modeOptions));
+=======
+                    modeOptions.put("gameOverMessage", Message.info("game is over"));
+                    vm.put(MODEOPTIONS_ATTR, gson.toJson(modeOptions));
+>>>>>>> b28fcd0ffb9aacf257aae30edd799b84657e374e
                }
                if(game.isWhitePlayer(player)) {
                   board = game.whiteBoardView();
