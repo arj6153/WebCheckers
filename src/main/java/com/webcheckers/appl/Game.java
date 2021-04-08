@@ -25,12 +25,10 @@ public class Game extends GameCenter {
     private Player playerTurn;
     private int redPieces = 12;
     private int whitePieces = 12;
-    private Move activeMove;
+    private Stack<Move> activeMove;
     private boolean gameOver;
     private String gameOverMessage = " game is over";
     private String resignMessage = "";
-//    private Piece redKing = new Piece(Piece.Type.KING, Color.RED);
-//    private Piece whiteKing = new Piece(Piece.Type.KING, Color.WHITE);
 
     /**
      * Constructor of a Game.
@@ -46,6 +44,7 @@ public class Game extends GameCenter {
         this.whitePlayer = white;
         this.board = new BoardView();
         this.ID = redPlayer.hashCode() * 31 + whitePlayer.hashCode() * 67;
+        this.activeMove = new Stack<>();
         gameOver = false;
     }
 
@@ -163,8 +162,8 @@ public class Game extends GameCenter {
      *      True if there is a position to backup to, else false
      */
     public boolean backupMove(){
-        if (this.activeMove != null) {
-             activeMove = null;
+        if (!activeMove.isEmpty()) {
+             activeMove.pop();
              return true;
         }
         return false;
@@ -202,26 +201,23 @@ public class Game extends GameCenter {
      *      The move being checked
      * @return
      *      True if move is valid and a valid message is sent to the player,
-     *      false otherwise and an error messageis sent to the player
+     *      false otherwise and an error message is sent to the player
      */
      public Message isValidMove(Move move) {
-         if(activeMove == null) {
-             if (jumpCheck(move)) {
-                 activeMove = move;
-                 activeMove.setType((Move.MoveType.CAPTURE_MOVE));
-                 return new Message("Jump is valid.", Message.Type.INFO);
-             }
-             if (simpleMoveCheck(move)) {
-                 if(canJump(move.getStart())) {
-                     return new Message("Jump available. You must jump.", Message.Type.ERROR);
-                 }
-                 activeMove = move;
-                 activeMove.setType(Move.MoveType.SINGLE_MOVE);
-                 return new Message("Move is valid.", Message.Type.INFO);
-             }
-             return new Message("Move is invalid.", Message.Type.ERROR);
+         activeMove.push(move);
+         if (jumpCheck(activeMove.peek())) {
+             activeMove.peek().setType((Move.MoveType.CAPTURE_MOVE));
+             return new Message("Jump is valid.", Message.Type.INFO);
          }
-         return new Message("You already moved.", Message.Type.ERROR);
+         if (simpleMoveCheck(activeMove.peek())) {
+             if(canJump()) {
+                 return new Message("Jump available. You must jump.", Message.Type.ERROR);
+             }
+             activeMove.peek().setType(Move.MoveType.SINGLE_MOVE);
+             return new Message("Move is valid.", Message.Type.INFO);
+         }
+         activeMove.pop();
+         return new Message("Move is invalid.", Message.Type.ERROR);
      }
 
     /**
@@ -253,8 +249,8 @@ public class Game extends GameCenter {
      * @return
      *      A valid move submitted to the game.
      */
-    public Move getActiveMove() {
-        return activeMove;
+    public Move getLatestMove() {
+        return activeMove.peek();
     }
 
     /**
@@ -294,6 +290,10 @@ public class Game extends GameCenter {
         if (whitePieces == 0 || redPieces == 0) {
             setGameOver();
         }
+    }
+
+    public void popMove() {
+        activeMove.pop();
     }
 
     /**
@@ -372,22 +372,50 @@ public class Game extends GameCenter {
         return false;
     }
 
-    public boolean canJump(Object obj) {
+//    public boolean canJump(Object obj) {
+//        ArrayList<Move> availJumpSpots = new ArrayList<>();
+//        Position prevStartPos = null;
+//        Position startPos = null;
+//        if (obj instanceof Move) {
+//            prevStartPos = activeMove.peek().getStart();
+//            startPos = activeMove.peek().getEnd();
+//        } else if (obj instanceof Position) {
+//            startPos = (Position) obj;
+//        }
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
+//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
+//        for (Move move: availJumpSpots) {
+//            if ((prevStartPos != null && (move.getEnd() == prevStartPos)) || !isInRange(move.getEnd())) {
+//                continue;
+//            }
+//            if (jumpCheck(move)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    /**
+     * Checks if a checker piece can jump again after jumping already.
+     *
+     * @param activeMove
+     *      The previous jump move
+     *
+     * @return
+     *       True is the checker piece can jump again, false otherwise
+     */
+    public boolean canJump(Move activeMove) {
         ArrayList<Move> availJumpSpots = new ArrayList<>();
-        Position prevStartPos = null;
-        Position startPos = null;
-        if (obj instanceof Move) {
-            prevStartPos = activeMove.getStart();
-            startPos = activeMove.getEnd();
-        } else if (obj instanceof Position) {
-            startPos = (Position) obj;
-        }
+        Position prevStartPos = activeMove.getStart();
+        Position startPos = activeMove.getEnd();
         availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
         availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
         availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
         availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
         for (Move move: availJumpSpots) {
-            if ((prevStartPos != null && (move.getEnd() == prevStartPos)) || !isInRange(move.getEnd())) {
+            if ((move.getEnd() == prevStartPos) || !isInRange(move.getEnd())) {
                 continue;
             }
             if (jumpCheck(move)) {
@@ -397,47 +425,39 @@ public class Game extends GameCenter {
         return false;
     }
 
-//    /**
-//     * Checks if a checker piece can jump again after jumping already.
-//     *
-//     * @param activeMove
-//     *      The previous jump move
-//     *
-//     * @return
-//     *       True is the checker piece can jump again, false otherwise
-//     */
-//    public boolean canJump(Move activeMove) {
-//        ArrayList<Move> availJumpSpots = new ArrayList<>();
-//        Position prevStartPos = activeMove.getStart();
-//        Position startPos = activeMove.getEnd();
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
-//        for (Move move: availJumpSpots) {
-//            if ((move.getEnd() == prevStartPos) || !isInRange(move.getEnd())) {
-//                continue;
-//            }
-//            if (jumpCheck(move)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    public boolean canJump(Position startPos) {
-//        ArrayList<Move> availJumpSpots = new ArrayList<>();
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
-//        for (Move move: availJumpSpots) {
-//            if (jumpCheck(move)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    /**
+     * Checks if checker piece can jump.
+     *
+     * @return
+     *      True if checker piece can jump at initial position of the turn
+     */
+    public boolean canJump() {
+        for (Row row : redBoardView()) {
+            for (Space space : row) {
+                Piece piece = space.getPiece();
+                if ((piece == null) || (piece.getColor() != getPlayerColor())) {
+                    continue;
+                }
+                Position startPos = new Position(row.getIndex(), space.getCellIdx());
+                // stores all the possible jump moves of a piece
+                ArrayList<Move> availJumpSpots = new ArrayList<>();
+                availJumpSpots.add(new Move(startPos, new Position(startPos.getRow() + 2, startPos.getCell() - 2)));
+                availJumpSpots.add(new Move(startPos, new Position(startPos.getRow() + 2, startPos.getCell() + 2)));
+                availJumpSpots.add(new Move(startPos, new Position(startPos.getRow() - 2, startPos.getCell() - 2)));
+                availJumpSpots.add(new Move(startPos, new Position(startPos.getRow() - 2, startPos.getCell() + 2)));
+                // check if those jump moves are valid
+                for (Move move : availJumpSpots) {
+                    if (!isInRange(move.getEnd())) {
+                        continue;
+                    }
+                    if (jumpCheck(move)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Checks if space is in boundary of the checker board.
@@ -471,7 +491,7 @@ public class Game extends GameCenter {
      * Clears the current active move and set it to null.
      */
     public void clearActiveMove() {
-         activeMove = null;
+         activeMove = new Stack<>();
     }
 
 //    public Piece kingCheck(Move move) {

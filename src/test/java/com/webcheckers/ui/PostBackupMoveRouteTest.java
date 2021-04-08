@@ -58,7 +58,7 @@ class PostBackupMoveRouteTest {
 
     @Test
     public void backupMove() throws Exception {
-       game.getActiveMove();
+       game.getLatestMove();
        game.clearActiveMove();
        game.backupMove();
     }

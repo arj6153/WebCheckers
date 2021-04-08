@@ -30,10 +30,9 @@ public class PostSubmitTurnRoute implements Route {
         final Session httpSession = request.session();
         Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         Game game = gameCenter.getGame(player);
-        game.move(game.getActiveMove(), game.getActiveMove().getType());
-
-        if (game.getActiveMove().getType() == Move.MoveType.CAPTURE_MOVE &&
-                game.canJump(game.getActiveMove())) {
+        game.move(game.getLatestMove(), game.getLatestMove().getType());
+        if (game.getLatestMove().getType() == Move.MoveType.CAPTURE_MOVE &&
+                game.canJump(game.getLatestMove())) {
             return gson.toJson(new Message("You must continue jumping.", Message.Type.ERROR));
         }
         if(game.isRedTurn()) {
