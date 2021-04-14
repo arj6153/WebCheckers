@@ -57,8 +57,16 @@ public class Move {
      *
      * @param type
      *      The move type
+     * @return
      */
-    public void setType(MoveType type) {
+    public MoveType setType(MoveType type) {
         Type = type;
+        return type;
+    }
+    public void printMove() {
+        System.out.println(this.getStart().getRow()+" "+this.getStart().getCell());
+        System.out.println(this.getEnd().getRow()+" "+this.getEnd().getCell());
+        System.out.println(this.getType());
+        System.out.println();
     }
 }

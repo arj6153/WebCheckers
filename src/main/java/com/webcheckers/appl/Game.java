@@ -25,10 +25,9 @@ public class Game extends GameCenter {
     private Player playerTurn;
     private int redPieces = 12;
     private int whitePieces = 12;
-    private Stack<Move> activeMove;
+    private Deque<Move> activeMove;
     private boolean gameOver;
     private String gameOverMessage = " game is over";
-    private String resignMessage = "";
 
     /**
      * Constructor of a Game.
@@ -44,7 +43,7 @@ public class Game extends GameCenter {
         this.whitePlayer = white;
         this.board = new BoardView();
         this.ID = redPlayer.hashCode() * 31 + whitePlayer.hashCode() * 67;
-        this.activeMove = new Stack<>();
+        activeMove = new LinkedList<>();
         gameOver = false;
     }
 
@@ -204,19 +203,22 @@ public class Game extends GameCenter {
      *      false otherwise and an error message is sent to the player
      */
      public Message isValidMove(Move move) {
-         activeMove.push(move);
-         if (jumpCheck(activeMove.peek())) {
+         if (jumpCheck(move)) {
+             activeMove.add(move);
+             assert activeMove.peek() != null;
              activeMove.peek().setType((Move.MoveType.CAPTURE_MOVE));
+             move.printMove();
              return new Message("Jump is valid.", Message.Type.INFO);
          }
-         if (simpleMoveCheck(activeMove.peek())) {
+         if (simpleMoveCheck(move)) {
              if(canJump()) {
                  return new Message("Jump available. You must jump.", Message.Type.ERROR);
              }
+             activeMove.add(move);
              activeMove.peek().setType(Move.MoveType.SINGLE_MOVE);
+             move.printMove();
              return new Message("Move is valid.", Message.Type.INFO);
          }
-         activeMove.pop();
          return new Message("Move is invalid.", Message.Type.ERROR);
      }
 
@@ -250,7 +252,16 @@ public class Game extends GameCenter {
      *      A valid move submitted to the game.
      */
     public Move getLatestMove() {
-        return activeMove.peek();
+        if(!activeMove.isEmpty()) {
+            return activeMove.peek();
+        }
+        return null;
+    }
+    public Move pollLatestMove() {
+        if(!activeMove.isEmpty()) {
+            return activeMove.poll();
+        }
+        return null;
     }
 
     /**
@@ -290,10 +301,6 @@ public class Game extends GameCenter {
         if (whitePieces == 0 || redPieces == 0) {
             setGameOver();
         }
-    }
-
-    public void popMove() {
-        activeMove.pop();
     }
 
     /**
@@ -410,10 +417,7 @@ public class Game extends GameCenter {
         ArrayList<Move> availJumpSpots = new ArrayList<>();
         Position prevStartPos = activeMove.getStart();
         Position startPos = activeMove.getEnd();
-        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
-        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
-        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
-        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
+        canJumpHelper(availJumpSpots, startPos);
         for (Move move: availJumpSpots) {
             if ((move.getEnd() == prevStartPos) || !isInRange(move.getEnd())) {
                 continue;
@@ -423,6 +427,13 @@ public class Game extends GameCenter {
             }
         }
         return false;
+    }
+
+    private void canJumpHelper(ArrayList<Move> availJumpSpots, Position startPos) {
+        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
+        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
+        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
+        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
     }
 
     /**
@@ -441,10 +452,7 @@ public class Game extends GameCenter {
                 Position startPos = new Position(row.getIndex(), space.getCellIdx());
                 // stores all the possible jump moves of a piece
                 ArrayList<Move> availJumpSpots = new ArrayList<>();
-                availJumpSpots.add(new Move(startPos, new Position(startPos.getRow() + 2, startPos.getCell() - 2)));
-                availJumpSpots.add(new Move(startPos, new Position(startPos.getRow() + 2, startPos.getCell() + 2)));
-                availJumpSpots.add(new Move(startPos, new Position(startPos.getRow() - 2, startPos.getCell() - 2)));
-                availJumpSpots.add(new Move(startPos, new Position(startPos.getRow() - 2, startPos.getCell() + 2)));
+                canJumpHelper(availJumpSpots, startPos);
                 // check if those jump moves are valid
                 for (Move move : availJumpSpots) {
                     if (!isInRange(move.getEnd())) {
@@ -491,7 +499,7 @@ public class Game extends GameCenter {
      * Clears the current active move and set it to null.
      */
     public void clearActiveMove() {
-         activeMove = new Stack<>();
+         activeMove = new LinkedList<>();
     }
 
 //    public Piece kingCheck(Move move) {

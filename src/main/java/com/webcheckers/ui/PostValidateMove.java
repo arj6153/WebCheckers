@@ -38,8 +38,8 @@ public class PostValidateMove implements Route {
         String param = request.queryParams("actionData");
         Game game = gameCenter.getGame(player);
         Move move = gson.fromJson(param, Move.class);
-        System.out.println("START "+ move.getStart().getRow() + " " + move.getStart().getCell());
-        System.out.println("END "+ move.getEnd().getRow() + " " + move.getEnd().getCell());
+        //System.out.println("START "+ move.getStart().getRow() + " " + move.getStart().getCell());
+        //System.out.println("END "+ move.getEnd().getRow() + " " + move.getEnd().getCell());
 
         Message message = game.isValidMove(move);
         return new Gson().toJson(message);
