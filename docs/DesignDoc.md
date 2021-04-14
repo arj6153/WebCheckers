@@ -75,8 +75,8 @@ using American Checker rules.
 
 
 ### Roadmap of Enhancements
-> _Provide a list of top-level features in the order you plan to consider them._
-
+No enhancement is required for this group due to the small size of the group.
+Enhancements may be implemented individually after the sprint 3 for self-learning.
 
 ## Application Domain
 
@@ -147,27 +147,12 @@ by WebServer.
 | PostResignRoute | NA | Resign message |
 | PostValidateMove | Move | Valid move message |
 
-> _At appropriate places as part of this narrative provide one or more
-> static models (UML class structure or object diagrams) with some
-> details such as critical attributes and methods._
-
-> _You must also provide any dynamic models, such as statechart and
-> sequence diagrams, as is relevant to a particular aspect of the design
-> that you are describing.  For example, in WebCheckers you might create
-> a sequence diagram of the `POST /validateMove` HTTP request processing
-> or you might show a statechart diagram if the Game component uses a
-> state machine to manage the game._
-
-> _If a dynamic model, such as a statechart describes a feature that is
-> not mostly in this tier and cuts across multiple tiers, you can
-> consider placing the narrative description of that feature in a
-> separate section for describing significant features. Place this after
-> you describe the design of the three tiers._
-
+####Sequence Diagram for PostSignInRoute
+![img_2.png](sequenceDiagram.png)
 
 ### Application Tier
 The application tier is made up of components that handle the server-wide
-interactions between the players and the application using GRASP.
+interactions between the players, and the application using GRASP.
 
 ### Model Tier
 The model tier shows the board of the checker game depending on the player.
@@ -175,6 +160,11 @@ It encompasses the two players, checker pieces, and spaces which with interact
 together to make a move.
 
 ### Design Improvements
+If the project were to continue, then the team will work to implement enhancements
+such as Spectator Mode and Watch Replays. For the current design, we would like to 
+tighten the code where we do not repeat calling functions within a function using dot
+notation. This lengthens the code and makes it difficult to read for the programmer.
+In our code metrics, ----------------------------------------------------------------------------
 > _Discuss design improvements that you would make if the project were
 > to continue. These improvement should be based on your direct
 > analysis of where there are problems in the code base which could be
@@ -185,10 +175,15 @@ together to make a move.
 > suggested design improvements to address those hot spots._
 
 ## Testing
+Unit testing have been implemented for majority of the classes. As of
+now, only half of the unit tests are passed. This will be updated after 
+sprint 3. ------------------------------------------------------
 > _This section will provide information about the testing performed
 > and the results of the testing._
 
 ### Acceptance Testing
+All user stories have pertaining to the MVP have passed with the exception to 
+Multiple Jump Move. This will be updated after sprint 3. --------------------
 > _Report on the number of user stories that have passed all their
 > acceptance criteria tests, the number that have some acceptance
 > criteria tests failing, and the number of user stories that
@@ -196,6 +191,10 @@ together to make a move.
 > acceptance testing and if there are any concerns._
 
 ### Unit Testing and Code Coverage
+Our unit testing strategy was to start with the smallest and simplest 
+classes. By doing so, we can get the easiest unit tests out of the way 
+first and then group up for the larger and more difficult unit tests. 
+This will be updated after sprint 3.------------------------------------------
 > _Discuss your unit testing strategy. Report on the code coverage
 > achieved from unit testing of the code base. Discuss the team's
 > coverage targets, why you selected those values, and how well your
