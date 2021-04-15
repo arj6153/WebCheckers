@@ -57,7 +57,7 @@ public class Row implements Iterable<Space> {
     public void initialize(Game.Color color, boolean isBlackSpace) {
         for(int col = 0; col < BoardView.DIM; col++) {
             if(isBlackSpace && color != NONE) {
-                spaces.add(new Space( col,new Piece(Piece.Type.KING, color),true));
+                spaces.add(new Space( col,new Piece(Piece.Type.SINGLE, color),true));
             } else {
                 spaces.add(new Space(col, null, isBlackSpace));
             }

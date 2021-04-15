@@ -104,7 +104,6 @@ public class GetGameRoute implements Route {
                }
            } else {
                if(gameID.equals("")) {
-                   System.out.println("fdsafdsa");
                    httpSession.attribute(MESSAGE_ATTR, Message.error("Not in a game."));
                    player.setPlaying(false);
                    response.redirect(WebServer.HOME_URL);

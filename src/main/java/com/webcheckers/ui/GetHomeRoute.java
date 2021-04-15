@@ -100,7 +100,7 @@ public class GetHomeRoute implements Route {
         vm.put(MESSAGE_ATTR, message);
         httpSession.attribute(MESSAGE_ATTR, null);
       } else {
-        vm.put(MESSAGE_ATTR, Message.info("Choose a Player"));
+        vm.put(MESSAGE_ATTR, Message.info("Choose a Player."));
       }
       vm.put(CURRENT_USER, player);
       vm.put(PLAYER_LIST_ATTR, gameCenter.getLobby().getMap());

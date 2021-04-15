@@ -58,7 +58,7 @@ public class PostResignRoute implements Route {
         Player resigner = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         Game game = gameCenter.getGame(resigner);
         if(game == null) {
-            return gson.toJson(new Message("game doesn't exist", Message.Type.ERROR));
+            return gson.toJson(new Message("Game doesn't exist.", Message.Type.ERROR));
         }
         Player player = gameCenter.getOpponent(resigner);
 

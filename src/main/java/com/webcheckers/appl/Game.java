@@ -27,7 +27,7 @@ public class Game {
     private int whitePieces = 12;
     private Deque<Move> activeMove;
     private boolean gameOver;
-    private String gameOverMessage = "game is over";
+    private String gameOverMessage = "Game is over. ";
 
 
     /**
@@ -332,7 +332,7 @@ public class Game {
                 whoLose += redPlayer.getName();
                 whoWon += whitePlayer.getName();
             }
-            gameOverMessage += whoLose + " loses the game." + whoWon + " has won";
+            gameOverMessage += whoLose + " loses the game. " + whoWon + " has won";
             setGameOver();
         }
     }
@@ -397,38 +397,30 @@ public class Game {
         Space endSpace = board.getRow(endRow).getSpace(endCol);
         boolean b = ((endRow == startRow + 2) || (endRow == startRow - 2)) && ((endCol == startCol + 2) || (endCol == startCol - 2));
         if (activeMove.isEmpty()) {
-            System.out.println("hello5");
             if (startSpace.getPiece() != null && startSpace.getPiece().getType() == Piece.Type.SINGLE) {
-                System.out.println("hello6");
                 if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                    System.out.println("hello7");
                     return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.WHITE;
                 } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                    System.out.println("hello8");
                     return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.RED;
                 } else {
                     return false;
                 }
             } else if (startSpace.getPiece() != null && startSpace.getPiece().getType() == Piece.Type.KING) {
-                System.out.println("helloKing3");
                 if (b) {
-                    System.out.println("helloKing4");
                     return capture.getPiece() != null && capture.getPiece().getColor() != getPlayerColor()
                             && endSpace.getPiece() == null;
+                } else {
+                    return false;
                 }
             }
         }
         if (activeMove.peekFirst().getType() == Move.MoveType.CAPTURE_MOVE) {
-            System.out.println("hello");
             Space originSpace = board.getRow(activeMove.peekFirst().getStart().getRow()).getSpace(activeMove.peekFirst().getStart().getCell());
             // checks original space is not null and it's a single checker piece
             if (originSpace.getPiece() != null && originSpace.getPiece().getType() == Piece.Type.SINGLE) {
-                System.out.println("hello2");
                 if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                    System.out.println("hello3");
                     return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.WHITE;
                 } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                    System.out.println("hello4");
                     return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.RED;
                 } else {
                     return false;
@@ -439,11 +431,11 @@ public class Game {
                 if (previousMove.getStart().equal(move.getEnd())) {
                     return false;
                 }
-                System.out.println("hello king1");
                 if (b) {
-                    System.out.println("hello king2");
                     return capture.getPiece() != null && capture.getPiece().getColor() != getPlayerColor()
                             && endSpace.getPiece() == null;
+                } else {
+                    return false;
                 }
             }
         }
