@@ -114,8 +114,10 @@ public class GetGameRoute implements Route {
                vm.put(WHITE_PLAYER_ATTR, game.getWhitePlayer());
                BoardView board = game.redBoardView();
                if (game.isGameOver()) {
-                    modeOptions.put("isGameOver", true);
-                    modeOptions.put("gameOverMessage", Message.info("game is over"));
+                    modeOptions.put("isGameOver", game.isGameOver());
+                    modeOptions.put("gameOverMessage", game.getGameOverMessage());
+                    game.getRedPlayer().setPlaying(false);
+                    game.getWhitePlayer().setPlaying(false);
                     vm.put(MODEOPTIONS_ATTR, gson.toJson(modeOptions));
                }
                if(game.isWhitePlayer(player)) {

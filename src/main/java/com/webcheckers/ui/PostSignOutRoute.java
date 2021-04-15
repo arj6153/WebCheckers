@@ -56,6 +56,7 @@ public class PostSignOutRoute implements Route{
         final Player player = httpSession.attribute(GetHomeRoute.CURRENT_USER);
         Game game = gameCenter.getGame(player);
         if(game != null) {
+            game.setGameOverMessage(player.getName() + " disconnected. You won");
             game.setGameOver();
         }
         gameCenter.removePlayer(player.getName());

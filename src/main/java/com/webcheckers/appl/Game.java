@@ -14,7 +14,7 @@ import static com.webcheckers.model.BoardView.DIM;
  * @author Bin Qiu
  * @author Alex Johannesson
  */
-public class Game extends GameCenter {
+public class Game {
 
     public enum Color {RED, WHITE, NONE}
 
@@ -26,9 +26,9 @@ public class Game extends GameCenter {
     private int redPieces = 12;
     private int whitePieces = 12;
     private Deque<Move> activeMove;
-    private Move lastKingMove;
     private boolean gameOver;
-    private String gameOverMessage = " game is over";
+    private String gameOverMessage = "game is over";
+
 
     /**
      * Constructor of a Game.
@@ -221,7 +221,9 @@ public class Game extends GameCenter {
          }
          return new Message("Move is invalid.", Message.Type.ERROR);
      }
-
+     public String getGameOverMessage() {
+         return gameOverMessage;
+     }
     /**
      * @return
      *      The red player's board view
@@ -321,6 +323,16 @@ public class Game extends GameCenter {
             }
         }
         if (whitePieces == 0 || redPieces == 0) {
+            String whoLose = "";
+            String whoWon = "";
+            if (whitePieces==0) {
+                whoLose += whitePlayer.getName();
+                whoWon += redPlayer.getName();
+            } else {
+                whoLose += redPlayer.getName();
+                whoWon += whitePlayer.getName();
+            }
+            gameOverMessage += whoLose + " loses the game." + whoWon + " has won";
             setGameOver();
         }
     }
@@ -383,6 +395,7 @@ public class Game extends GameCenter {
         Space capture = board.getRow((endRow + startRow) / 2).getSpace((endCol + startCol) / 2);
         Space startSpace = board.getRow(startRow).getSpace(startCol);
         Space endSpace = board.getRow(endRow).getSpace(endCol);
+        boolean b = ((endRow == startRow + 2) || (endRow == startRow - 2)) && ((endCol == startCol + 2) || (endCol == startCol - 2));
         if (activeMove.isEmpty()) {
             System.out.println("hello5");
             if (startSpace.getPiece() != null && startSpace.getPiece().getType() == Piece.Type.SINGLE) {
@@ -398,8 +411,7 @@ public class Game extends GameCenter {
                 }
             } else if (startSpace.getPiece() != null && startSpace.getPiece().getType() == Piece.Type.KING) {
                 System.out.println("helloKing3");
-                if (((endRow == startRow + 2) || (endRow == startRow - 2)) &&
-                        ((endCol == startCol + 2) || (endCol == startCol - 2))) {
+                if (b) {
                     System.out.println("helloKing4");
                     return capture.getPiece() != null && capture.getPiece().getColor() != getPlayerColor()
                             && endSpace.getPiece() == null;
@@ -428,7 +440,7 @@ public class Game extends GameCenter {
                     return false;
                 }
                 System.out.println("hello king1");
-                if (((endRow == startRow + 2) || (endRow == startRow - 2)) && ((endCol == startCol + 2) || (endCol == startCol - 2))) {
+                if (b) {
                     System.out.println("hello king2");
                     return capture.getPiece() != null && capture.getPiece().getColor() != getPlayerColor()
                             && endSpace.getPiece() == null;
@@ -478,7 +490,7 @@ public class Game extends GameCenter {
         Position startPos = activeMove.getEnd();
         canJumpHelper(availJumpSpots, startPos);
         for (Move move: availJumpSpots) {
-            if ((move.getEnd().equal(prevStartPos)) || !isInRange(move.getEnd())) {
+            if ((move.getEnd().equal(prevStartPos)) || isNotInRange(move.getEnd())) {
                 continue;
             }
             if (jumpCheck(move)) {
@@ -516,7 +528,7 @@ public class Game extends GameCenter {
                 canJumpHelper(availJumpSpots, startPos);
                 // check if those jump moves are valid
                 for (Move move : availJumpSpots) {
-                    if (!isInRange(move.getEnd())) {
+                    if (isNotInRange(move.getEnd())) {
                         continue;
                     }
                     if (jumpCheck(move)) {
@@ -537,9 +549,9 @@ public class Game extends GameCenter {
      * @return
      *      True if in bounds, false otherwise
      */
-    public boolean isInRange(Position position) {
-        return ((position.getRow() < DIM && position.getRow() >= 0) &&
-                (position.getCell() < DIM && position.getCell() >= 0));
+    public boolean isNotInRange(Position position) {
+        return ((position.getRow() >= DIM || position.getRow() < 0) ||
+                (position.getCell() >= DIM || position.getCell() < 0));
     }
 
     /**
@@ -550,10 +562,10 @@ public class Game extends GameCenter {
      * @return
      *      A message stating that the player has resigned
      */
-    public Message resignGame(Player player) {
+    public void resignGame(Player player) {
          this.gameOver = true;
          player.setPlaying(false);
-         return Message.info(gameOverMessage + ", " + player.getName() + "has resigned the game");
+         gameOverMessage = player.getName() + " has resigned the game. You won";
     }
 
     /**
@@ -563,26 +575,7 @@ public class Game extends GameCenter {
          activeMove.clear();
     }
 
-//    public Piece kingCheck(Move move) {
-//        int endRow = move.getEnd().getRow();
-//        int startRow = move.getStart().getRow();
-//        int startCol = move.getStart().getCell();
-//        Piece piece = new Piece(board.getRow(startRow).getSpace(startCol).getPiece().getType(), getPlayerColor());
-//        if( board.getRow(startRow).getSpace(startCol).getPiece().getType() == Piece.Type.SINGLE) {
-//            if (playerTurn.equals(redPlayer)){
-//                if(endRow == 7) {
-//                    piece = redKing;
-//                } else {
-//                    return piece;
-//                }
-//            } else if (playerTurn.equals(whitePlayer)) {
-//                if(endRow == 0) {
-//                    piece = whiteKing;
-//                } else {
-//                    return piece;
-//                }
-//            }
-//        }
-//        return piece;
-//    }
+    public void setGameOverMessage(String message) {
+        gameOverMessage = message;
+    }
 }
