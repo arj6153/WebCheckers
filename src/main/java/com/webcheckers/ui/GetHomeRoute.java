@@ -9,6 +9,8 @@ import com.webcheckers.model.Player;
 import spark.*;
 import com.webcheckers.util.Message;
 
+import static spark.Spark.halt;
+
 /**
  * The UI Controller to GET the Home page.
  *
@@ -61,18 +63,19 @@ public class GetHomeRoute implements Route {
     LOG.finer("GetHomeRoute is invoked.");
     final Session httpSession = request.session();
     final Player player = httpSession.attribute(CURRENT_USER);
-
     Map<String, Object> vm = new HashMap<>();
     vm.put(TITLE_ATTR, DESCRIPTION);
     vm.put(MESSAGE_ATTR, WELCOME_MSG);
     final Message message = httpSession.attribute(MESSAGE_ATTR);
     if(player != null) {
+      //System.out.println(player.getName() + " " +player.isPlaying());
+      System.out.println("From home route " + player);
       if(player.isPlaying()) {
-        String gameID = "";
+        int gameID = 0;
         boolean foundGame = false;
         for (Game game: gameCenter.getGameMap().values()) {
           if(game.isPlayerInGame(player) && !game.isGameOver()) {
-            gameID = String.valueOf(game.getID());
+            gameID = game.getID();
             foundGame = true;
             break;
           }
@@ -80,7 +83,18 @@ public class GetHomeRoute implements Route {
         if (foundGame) {
           response.redirect(WebServer.GAME_URL + "?gameID=" + gameID);
         }
+        halt();
         return null;
+      } else if (!player.isPlaying() && gameCenter.getGame(player) != null && gameCenter.getGame(player).isGameOver()) {
+        gameCenter.getLobby().addPlayer(player);
+        Game game = gameCenter.getGame(player);
+        if(gameCenter.getLobby().playerExists(game.getRedPlayer().getName())
+                && gameCenter.getLobby().playerExists(game.getWhitePlayer().getName())) {
+          gameCenter.getGameMap().remove(game.getID());
+          response.redirect(WebServer.HOME_URL);
+          halt();
+          return null;
+        }
       }
       if(message != null) {
         vm.put(MESSAGE_ATTR, message);

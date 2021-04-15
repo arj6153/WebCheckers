@@ -90,18 +90,21 @@ public class GetGameRoute implements Route {
             vm.put(CURRENT_USER, player);
             if(gameID == null) {
                if(!player.isPlaying()) {
-                   final Player opponent = gameCenter.getPlayer(request.queryParams(PLAYER_ATTR));
+                   Player opponent = gameCenter.getPlayer(request.queryParams(PLAYER_ATTR));
                    if(opponent.isPlaying()) {
                        httpSession.attribute(MESSAGE_ATTR, Message.error("Player is in game. Choose a different player."));
                        response.redirect(WebServer.HOME_URL);
                    } else {
                        gameID = String.valueOf(gameCenter.addGame(player, opponent));
+                       System.out.println(opponent.isPlaying());
                        response.redirect(WebServer.GAME_URL + "?gameID=" + gameID);
                    }
+                   halt();
                    return null;
                }
            } else {
                if(gameID.equals("")) {
+                   System.out.println("fdsafdsa");
                    httpSession.attribute(MESSAGE_ATTR, Message.error("Not in a game."));
                    player.setPlaying(false);
                    response.redirect(WebServer.HOME_URL);
@@ -116,8 +119,6 @@ public class GetGameRoute implements Route {
                if (game.isGameOver()) {
                     modeOptions.put("isGameOver", game.isGameOver());
                     modeOptions.put("gameOverMessage", game.getGameOverMessage());
-                    game.getRedPlayer().setPlaying(false);
-                    game.getWhitePlayer().setPlaying(false);
                     vm.put(MODEOPTIONS_ATTR, gson.toJson(modeOptions));
                }
                if(game.isWhitePlayer(player)) {

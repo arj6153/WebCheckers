@@ -74,6 +74,7 @@ public class PostResignRoute implements Route {
             return gson.toJson(Message.error(resignError));
         }
         game.resignGame(resigner);
+        gameCenter.getLobby().addPlayer(resigner);
         return json;
     }
 }
