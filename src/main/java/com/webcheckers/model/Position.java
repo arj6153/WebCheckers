@@ -39,4 +39,8 @@ public class Position  {
     public int getCell() {
         return this.cell;
     }
+
+    public boolean equal(Position other) {
+        return this.row == other.row && this.cell == other.cell;
+    }
 }
