@@ -31,6 +31,9 @@ public class Lobby {
         Player player = new Player(name);
         this.map.put(name, player);
     }
+    public synchronized void addPlayer(Player player) {
+        this.map.put(player.getName(), player);
+    }
 
     /**
      * Gets a player in hashmap.

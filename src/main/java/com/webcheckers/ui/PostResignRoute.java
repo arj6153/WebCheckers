@@ -73,13 +73,8 @@ public class PostResignRoute implements Route {
         if(game.isGameOver() && player.isPlaying()) {
             return gson.toJson(Message.error(resignError));
         }
-        Message resign = game.resignGame(player);
-        game.setGameOver();
-        if(game.isGameOver()) {
-            json = gson.toJson(resign);
-        } else {
-            json = gson.toJson(Message.error(resignError));
-        }
+        game.resignGame(resigner);
+        gameCenter.getLobby().addPlayer(resigner);
         return json;
     }
 }

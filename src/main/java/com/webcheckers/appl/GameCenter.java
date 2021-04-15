@@ -37,6 +37,8 @@ public class GameCenter {
         gameMap.put(newGame.getID(), newGame);
         redPlayer.setPlaying(true);
         whitePlayer.setPlaying(true);
+        lobby.removePlayer(redPlayer.getName());
+        lobby.removePlayer(whitePlayer.getName());
         return newGame.getID();
     }
 
@@ -44,7 +46,7 @@ public class GameCenter {
      * @return
      *      The lobby of the active players
      */
-    public Lobby getLobby() {
+    public synchronized Lobby getLobby() {
         return this.lobby;
     }
 
@@ -52,7 +54,7 @@ public class GameCenter {
      * @return
      *      The map of the games in session
      */
-    public HashMap<Integer, Game> getGameMap() {
+    public synchronized HashMap<Integer, Game> getGameMap() {
         return this.gameMap;
     }
 
@@ -62,7 +64,7 @@ public class GameCenter {
      * @param name
      *      The name of the player
      */
-    public void addPlayer(String name) {
+    public synchronized void addPlayer(String name) {
        this.lobby.addPlayer(name);
     }
 
@@ -74,7 +76,7 @@ public class GameCenter {
      * @return
      *      The player
      */
-    public Player getPlayer(String name) {
+    public synchronized Player getPlayer(String name) {
         return this.lobby.getPlayer(name);
     }
 
@@ -125,7 +127,7 @@ public class GameCenter {
      * @return
      *      The opposing player
      */
-    public Player getOpponent(Player player) {
+    public synchronized Player getOpponent(Player player) {
         Game game = getGame(player);
         if(game.getRedPlayer().equals(player)) {
             return game.getWhitePlayer();

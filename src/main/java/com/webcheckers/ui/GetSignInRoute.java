@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import static spark.Spark.halt;
+
 /**
  * UI controller for the signin page.
  *
@@ -65,6 +67,7 @@ public class GetSignInRoute implements Route {
             return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
         }
         response.redirect(WebServer.HOME_URL);
+        halt();
         return null;
     }
 }
