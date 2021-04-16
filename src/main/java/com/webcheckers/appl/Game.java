@@ -25,7 +25,7 @@ public class Game {
     private Player playerTurn;
     private int redPieces = 12;
     private int whitePieces = 12;
-    private Deque<Move> activeMove;
+    private final Deque<Move> activeMove;
     private boolean gameOver;
     private String gameOverMessage = "Game is over. ";
 
@@ -209,14 +209,13 @@ public class Game {
                  return new Message("Jump available. You must jump.", Message.Type.ERROR);
              }
              activeMove.add(move);
+             assert activeMove.peekLast() != null;
              activeMove.peekLast().setType(Move.MoveType.SINGLE_MOVE);
-             move.printMove();
              return new Message("Move is valid.", Message.Type.INFO);
          } else if (jumpCheck(move)) {
              activeMove.add(move);
              assert activeMove.peekLast() != null;
              activeMove.peekLast().setType((Move.MoveType.CAPTURE_MOVE));
-             move.printMove();
              return new Message("Jump is valid.", Message.Type.INFO);
          }
          return new Message("Move is invalid.", Message.Type.ERROR);
@@ -270,22 +269,12 @@ public class Game {
         }
         return null;
     }
-    public Move pollMove() {
+
+    public Move pollFirstMove() {
         if(!activeMove.isEmpty()) {
             return activeMove.pollFirst();
         }
         return null;
-    }
-
-    public Move pollLastMove() {
-        if (!activeMove.isEmpty()) {
-            return activeMove.pollLast();
-        }
-        return null;
-    }
-
-    public boolean addMove(Move move) {
-        return activeMove.add(move);
     }
 
     /**
@@ -398,13 +387,7 @@ public class Game {
         boolean b = ((endRow == startRow + 2) || (endRow == startRow - 2)) && ((endCol == startCol + 2) || (endCol == startCol - 2));
         if (activeMove.isEmpty()) {
             if (startSpace.getPiece() != null && startSpace.getPiece().getType() == Piece.Type.SINGLE) {
-                if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                    return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.WHITE;
-                } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                    return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.RED;
-                } else {
-                    return false;
-                }
+                return isValidCaptureSpace(endRow, startRow, endCol, startCol, capture, endSpace);
             } else if (startSpace.getPiece() != null && startSpace.getPiece().getType() == Piece.Type.KING) {
                 if (b) {
                     return capture.getPiece() != null && capture.getPiece().getColor() != getPlayerColor()
@@ -414,17 +397,12 @@ public class Game {
                 }
             }
         }
+        assert activeMove.peekFirst() != null;
         if (activeMove.peekFirst().getType() == Move.MoveType.CAPTURE_MOVE) {
             Space originSpace = board.getRow(activeMove.peekFirst().getStart().getRow()).getSpace(activeMove.peekFirst().getStart().getCell());
             // checks original space is not null and it's a single checker piece
             if (originSpace.getPiece() != null && originSpace.getPiece().getType() == Piece.Type.SINGLE) {
-                if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                    return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.WHITE;
-                } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
-                    return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.RED;
-                } else {
-                    return false;
-                }
+                return isValidCaptureSpace(endRow, startRow, endCol, startCol, capture, endSpace);
             } else if (originSpace.getPiece() != null && originSpace.getPiece().getType() == Piece.Type.KING) {
                 Move previousMove = activeMove.peekLast();
                 assert previousMove != null;
@@ -442,30 +420,15 @@ public class Game {
         return false;
     }
 
-//    public boolean canJump(Object obj) {
-//        ArrayList<Move> availJumpSpots = new ArrayList<>();
-//        Position prevStartPos = null;
-//        Position startPos = null;
-//        if (obj instanceof Move) {
-//            prevStartPos = activeMove.peek().getStart();
-//            startPos = activeMove.peek().getEnd();
-//        } else if (obj instanceof Position) {
-//            startPos = (Position) obj;
-//        }
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()-2)));
-//        availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
-//        for (Move move: availJumpSpots) {
-//            if ((prevStartPos != null && (move.getEnd() == prevStartPos)) || !isInRange(move.getEnd())) {
-//                continue;
-//            }
-//            if (jumpCheck(move)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    private boolean isValidCaptureSpace(int endRow, int startRow, int endCol, int startCol, Space capture, Space endSpace) {
+        if (playerTurn.equals(redPlayer) && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
+            return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.WHITE;
+        } else if (playerTurn.equals(whitePlayer) && endRow == startRow - 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
+            return capture.getPiece() != null && endSpace.getPiece() == null && capture.getPiece().getColor() == Color.RED;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * Checks if a checker piece can jump again after jumping already.
@@ -486,7 +449,6 @@ public class Game {
                 continue;
             }
             if (jumpCheck(move)) {
-                move.printMove();
                 return true;
             }
         }
@@ -551,8 +513,6 @@ public class Game {
      *
      * @param player
      *      The player that resigns
-     * @return
-     *      A message stating that the player has resigned
      */
     public void resignGame(Player player) {
          this.gameOver = true;

@@ -37,7 +37,7 @@ public class PostSubmitTurnRoute implements Route {
             }
         }
         while(game.getFrontMove() != null) {
-            Move move = game.pollMove();
+            Move move = game.pollFirstMove();
             game.move(move, move.getType());
         }
         if(game.isRedTurn()) {

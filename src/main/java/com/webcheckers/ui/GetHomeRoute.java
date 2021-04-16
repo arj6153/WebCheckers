@@ -69,7 +69,6 @@ public class GetHomeRoute implements Route {
     final Message message = httpSession.attribute(MESSAGE_ATTR);
     if(player != null) {
       //System.out.println(player.getName() + " " +player.isPlaying());
-      System.out.println("From home route " + player);
       if(player.isPlaying()) {
         int gameID = 0;
         boolean foundGame = false;
