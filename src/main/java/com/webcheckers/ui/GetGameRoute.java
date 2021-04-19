@@ -3,6 +3,7 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.AIPlayer;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
@@ -89,27 +90,27 @@ public class GetGameRoute implements Route {
            String gameID = request.queryParams(GAMEID_ATTR);
             vm.put(CURRENT_USER, player);
             if(gameID == null) {
+               String ai = request.queryParams("ai_player");
                if(!player.isPlaying()) {
+                   if( ai != null) {
+                       Player ai_player = new AIPlayer(gameCenter);
+                       gameID = String.valueOf(gameCenter.addGame(player, ai_player));
+                       response.redirect(WebServer.GAME_URL + "?gameID=" + gameID);
+                       halt();
+                   }
                    Player opponent = gameCenter.getPlayer(request.queryParams(PLAYER_ATTR));
                    if(opponent.isPlaying()) {
                        httpSession.attribute(MESSAGE_ATTR, Message.error("Player is in game. Choose a different player."));
                        response.redirect(WebServer.HOME_URL);
                    } else {
                        gameID = String.valueOf(gameCenter.addGame(player, opponent));
-                       System.out.println(opponent.isPlaying());
                        response.redirect(WebServer.GAME_URL + "?gameID=" + gameID);
                    }
                    halt();
                    return null;
                }
            } else {
-               if(gameID.equals("")) {
-                   httpSession.attribute(MESSAGE_ATTR, Message.error("Not in a game."));
-                   player.setPlaying(false);
-                   response.redirect(WebServer.HOME_URL);
-                   halt();
-                   return null;
-               }
+
                vm.put(VIEWMODE_ATTR, Mode.PLAY);
                Game game = gameCenter.getGame(Integer.parseInt(gameID));
                vm.put(RED_PLAYER_ATTR, game.getRedPlayer());

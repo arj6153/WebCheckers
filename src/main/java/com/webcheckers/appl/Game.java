@@ -23,8 +23,7 @@ public class Game {
     private final BoardView board;
     private final int ID;
     private Player playerTurn;
-    private int redPieces = 12;
-    private int whitePieces = 12;
+
     private final Deque<Move> activeMove;
     private boolean gameOver;
     private String gameOverMessage = "Game is over. ";
@@ -179,9 +178,9 @@ public class Game {
      */
     public int getNumPieces(Color color) {
         if (color == Color.RED) {
-            return this.redPieces;
+            return board.getRedPieces();
         }
-        return this.whitePieces;
+            return board.getWhitePieces();
     }
 
 
@@ -245,7 +244,8 @@ public class Game {
             }
             whiteBoard.add(row);
         }
-        return new BoardView(whiteBoard);
+
+        return new BoardView(whiteBoard, board.getRedPieces(), board.getWhitePieces());
     }
 
     /**
@@ -305,16 +305,16 @@ public class Game {
             board.getRow(endRow).getSpace(endCell).setPiece(piece);
             board.getRow((endRow+startRow)/2).getSpace((endCell+startCell)/2).setPiece(null);
             if(isRedPlayer(playerTurn)) {
-                whitePieces--;
+                board.increaseOrDecreaseWhitePieces(-1);
             }
             else if(isWhitePlayer(playerTurn)) {
-                redPieces--;
+                board.increaseOrDecreaseRedPieces(-1);
             }
         }
-        if (whitePieces == 0 || redPieces == 0) {
+        if (board.getWhitePieces() == 0 || board.getRedPieces() == 0) {
             String whoLose = "";
             String whoWon = "";
-            if (whitePieces==0) {
+            if (board.getWhitePieces()==0) {
                 whoLose += whitePlayer.getName();
                 whoWon += redPlayer.getName();
             } else {
@@ -517,7 +517,12 @@ public class Game {
     public void resignGame(Player player) {
          this.gameOver = true;
          player.setPlaying(false);
-         gameOverMessage = player.getName() + " has resigned the game. You won";
+         gameOverMessage = player.getName() + " has resigned the game. ";
+         if (player.equals(whitePlayer)) {
+             gameOverMessage += redPlayer.getName() + " won";
+         } else {
+             gameOverMessage += whitePlayer.getName() + " won";
+         }
     }
 
     /**
