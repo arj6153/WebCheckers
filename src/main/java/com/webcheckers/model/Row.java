@@ -34,6 +34,12 @@ public class Row implements Iterable<Space> {
         initialize(color, isBlackSpace);
     }
 
+    public Row(int index, String row, boolean isBlackSpace) {
+        this.spaces = new ArrayList<>();
+        this.index = index;
+        initialize(row, isBlackSpace);
+    }
+
     /**
      * Constructor of Row for empty rows.
      *
@@ -57,6 +63,26 @@ public class Row implements Iterable<Space> {
     public void initialize(Game.Color color, boolean isBlackSpace) {
         for(int col = 0; col < BoardView.DIM; col++) {
             if(isBlackSpace && color != NONE) {
+                spaces.add(new Space( col,new Piece(Piece.Type.SINGLE, color),true));
+            } else {
+                spaces.add(new Space(col, null, isBlackSpace));
+            }
+            isBlackSpace = !isBlackSpace;
+        }
+    }
+
+    public void initialize(String row, boolean isBlackSpace) {
+        for(int col = 0; col < BoardView.DIM; col++) {
+            char piece = row.charAt(col);
+            Game.Color color;
+            if(piece == 'R') {
+                color  = Game.Color.RED;
+            } else if (piece == 'W') {
+                color = Game.Color.WHITE;
+            } else {
+                color = Game.Color.NONE;
+            }
+            if(isBlackSpace && color != Game.Color.NONE) {
                 spaces.add(new Space( col,new Piece(Piece.Type.SINGLE, color),true));
             } else {
                 spaces.add(new Space(col, null, isBlackSpace));

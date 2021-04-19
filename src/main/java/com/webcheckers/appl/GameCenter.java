@@ -15,6 +15,7 @@ public class GameCenter {
 
     private final HashMap<Integer, Game> gameMap;
     private final Lobby lobby;
+    private int aiNum = 0;
 
     /**
      * Constructor of GameCenter.
@@ -133,5 +134,11 @@ public class GameCenter {
             return game.getWhitePlayer();
         }
         return game.getRedPlayer();
+    }
+    public synchronized int getAiNum() {
+        return aiNum;
+    }
+    public synchronized void addAiNum() {
+        aiNum++;
     }
 }
