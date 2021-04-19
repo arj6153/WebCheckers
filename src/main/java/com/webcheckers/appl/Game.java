@@ -538,6 +538,59 @@ public class Game {
         return false;
     }
 
+    public ArrayList<Move> getPossibleJumpMove() {
+        ArrayList<Move> moves = new ArrayList<>();
+        for (Row row : redBoardView()) {
+            for (Space space : row) {
+                Piece piece = space.getPiece();
+                if ((piece == null) || (piece.getColor() != getPlayerColor())) {
+                    continue;
+                }
+                Position startPos = new Position(row.getIndex(), space.getCellIdx());
+                // stores all the possible jump moves of a piece
+                ArrayList<Move> availJumpSpots = new ArrayList<>();
+                canJumpHelper(availJumpSpots, startPos);
+                // check if those jump moves are valid
+                for (Move move : availJumpSpots) {
+                    if (isNotInRange(move.getEnd())) {
+                        continue;
+                    }
+                    if (jumpCheck(move)) {
+                        move.setType(Move.MoveType.CAPTURE_MOVE);
+                        moves.add(move);
+                    }
+                }
+            }
+        }
+        return moves;
+    }
+    public ArrayList<Move> getPossibleSimpleMove() {
+        // iterate through the board
+        ArrayList<Move> moves = new ArrayList<>();
+        for (Row row : redBoardView()) {
+            for (Space space : row) {
+                Piece piece = space.getPiece();
+                // checks if the piece null and if it is the correct color
+                if ((piece == null) || (piece.getColor() != getPlayerColor())) {
+                    continue;
+                }
+                // get the starting position of the piece
+                Position startPos = new Position(row.getIndex(), space.getCellIdx());
+                ArrayList<Move> availMoveSpots = new ArrayList<>();
+                canMoveHelper(availMoveSpots, startPos);
+                for (Move move : availMoveSpots) {
+                    if (isNotInRange(move.getEnd())) {
+                        continue;
+                    }
+                    if (simpleMoveCheck(move)) {
+                        move.setType(Move.MoveType.SINGLE_MOVE);
+                        moves.add(move);
+                    }
+                }
+            }
+        }
+        return moves;
+    }
     /**
      * Checks if space is in boundary of the checker board.
      *
