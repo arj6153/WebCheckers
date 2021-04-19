@@ -3,6 +3,7 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.AIPlayer;
 import com.webcheckers.model.Move;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
@@ -44,6 +45,9 @@ public class PostSubmitTurnRoute implements Route {
             game.setPlayerTurn(game.getWhitePlayer());
         } else {
             game.setPlayerTurn(game.getRedPlayer());
+        }
+        if(gameCenter.getOpponent(player) instanceof AIPlayer) {
+            ((AIPlayer) gameCenter.getOpponent(player)).makeMove();
         }
         System.out.println(game.redBoardView().getRedPieces() + " " + game.whiteBoardView().getWhitePieces());
         game.clearActiveMove();
