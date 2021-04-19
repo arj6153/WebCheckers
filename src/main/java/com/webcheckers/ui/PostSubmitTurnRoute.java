@@ -47,6 +47,14 @@ public class PostSubmitTurnRoute implements Route {
         }
         System.out.println(game.redBoardView().getRedPieces() + " " + game.whiteBoardView().getWhitePieces());
         game.clearActiveMove();
+        // if player has no available moves then game over
+        System.out.println(game.canMove());
+        if (!game.canMove()) {
+            game.setGameOver();
+            game.setGameOverMessage("Player " + gameCenter.getOpponent(player).getName()
+                    + " has lost due no available moves. Player "
+                    + player.getName() + " has won!");
+        }
         return gson.toJson(new Message("Valid move.", Message.Type.INFO));
     }
 }

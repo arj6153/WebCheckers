@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.AIPlayer;
 import com.webcheckers.model.Player;
 import spark.*;
 import com.webcheckers.util.Message;
@@ -87,8 +88,9 @@ public class GetHomeRoute implements Route {
       } else if (!player.isPlaying() && gameCenter.getGame(player) != null && gameCenter.getGame(player).isGameOver()) {
         gameCenter.getLobby().addPlayer(player);
         Game game = gameCenter.getGame(player);
-        if(gameCenter.getLobby().playerExists(game.getRedPlayer().getName())
-                && gameCenter.getLobby().playerExists(game.getWhitePlayer().getName())) {
+        if((gameCenter.getLobby().playerExists(game.getRedPlayer().getName())
+                && gameCenter.getLobby().playerExists(game.getWhitePlayer().getName()))
+                || gameCenter.getOpponent(player) instanceof AIPlayer) {
           gameCenter.getGameMap().remove(game.getID());
           response.redirect(WebServer.HOME_URL);
           halt();

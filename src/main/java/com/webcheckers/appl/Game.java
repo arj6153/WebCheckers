@@ -2,6 +2,8 @@ package com.webcheckers.appl;
 
 import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
+
+import java.lang.reflect.Array;
 import java.util.*;
 
 import static com.webcheckers.model.BoardView.DIM;
@@ -23,7 +25,6 @@ public class Game {
     private final BoardView board;
     private final int ID;
     private Player playerTurn;
-
     private final Deque<Move> activeMove;
     private boolean gameOver;
     private String gameOverMessage = "Game is over. ";
@@ -340,18 +341,58 @@ public class Game {
         int endCol = move.getEnd().getCell();
         int startCol = move.getStart().getCell();
         Space space = getSpace(startRow, startCol);
-        if(space.getPiece() != null && space.getPiece().getType() == Piece.Type.SINGLE) {
+        Space endSpace = board.getRow(endRow).getSpace(endCol);
+        if (endSpace.getPiece() == null && space.getPiece().getType() == Piece.Type.SINGLE) {
             if (isRedPlayer(playerTurn) && (endRow == startRow + 1) &&
                     ((endCol == startCol + 1) || (endCol == startCol - 1))) {
                 return true;
             } else return isWhitePlayer(playerTurn) && (endRow == startRow - 1) &&
                     ((endCol == startCol + 1) || (endCol == startCol - 1));
         }
-        else if(space.getPiece() != null && space.getPiece().getType() == Piece.Type.KING) {
+        else if(endSpace.getPiece() == null && space.getPiece() != null && space.getPiece().getType() == Piece.Type.KING) {
             return ((endRow == startRow + 1) || (endRow == startRow - 1)) &&
                     ((endCol == startCol + 1) || (endCol == startCol - 1));
         }
         return false;
+    }
+
+    public boolean canSimpleMove() {
+        // iterate through the board
+        for (Row row : redBoardView()) {
+            for (Space space : row) {
+                Piece piece = space.getPiece();
+                // checks if the piece null and if it is the correct color
+                if ((piece == null) || (piece.getColor() != getPlayerColor())) {
+                    continue;
+                }
+                // get the starting position of the piece
+                Position startPos = new Position(row.getIndex(), space.getCellIdx());
+                ArrayList<Move> availMoveSpots = new ArrayList<>();
+                canMoveHelper(availMoveSpots, startPos);
+                for (Move move : availMoveSpots) {
+                    if (isNotInRange(move.getEnd())) {
+                        continue;
+                    }
+                    if (simpleMoveCheck(move)) {
+                        System.out.println("can move at: " + move.getEnd().getRow() + " " +  move.getEnd().getCell());
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if player can move.
+     *
+     * @return
+     *      True if player has availble move, false otherwise
+     */
+    public boolean canMove () {
+        System.out.println("canSimpleMove: " + canSimpleMove());
+        System.out.println("canJump: " + canJump());
+        return canSimpleMove() || canJump();
     }
 
     /**
@@ -455,7 +496,6 @@ public class Game {
         return false;
     }
 
-
     private void canJumpHelper(ArrayList<Move> availJumpSpots, Position startPos) {
         availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
         availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
@@ -463,7 +503,14 @@ public class Game {
         availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()-2, startPos.getCell()+2)));
     }
 
-    /**
+    private void canMoveHelper (ArrayList<Move> availMoveSpots, Position startPos) {
+        availMoveSpots.add(new Move(startPos, new Position(startPos.getRow()+1, startPos.getCell()-1)));
+        availMoveSpots.add(new Move(startPos, new Position(startPos.getRow()+1, startPos.getCell()+1)));
+        availMoveSpots.add(new Move(startPos, new Position(startPos.getRow()-1, startPos.getCell()-1)));
+        availMoveSpots.add(new Move(startPos, new Position(startPos.getRow()-1, startPos.getCell()+1)));
+    }
+
+    /**er(avai
      * Checks if checker piece can jump.
      *
      * @return
