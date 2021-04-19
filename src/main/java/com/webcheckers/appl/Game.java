@@ -342,7 +342,7 @@ public class Game {
         int startCol = move.getStart().getCell();
         Space space = getSpace(startRow, startCol);
         Space endSpace = board.getRow(endRow).getSpace(endCol);
-        if (endSpace.getPiece() == null && space.getPiece().getType() == Piece.Type.SINGLE) {
+        if (endSpace.getPiece() == null && space.getPiece() != null && space.getPiece().getType() == Piece.Type.SINGLE) {
             if (isRedPlayer(playerTurn) && (endRow == startRow + 1) &&
                     ((endCol == startCol + 1) || (endCol == startCol - 1))) {
                 return true;
@@ -374,7 +374,6 @@ public class Game {
                         continue;
                     }
                     if (simpleMoveCheck(move)) {
-                        System.out.println("can move at: " + move.getEnd().getRow() + " " +  move.getEnd().getCell());
                         return true;
                     }
                 }
@@ -390,8 +389,6 @@ public class Game {
      *      True if player has availble move, false otherwise
      */
     public boolean canMove () {
-        System.out.println("canSimpleMove: " + canSimpleMove());
-        System.out.println("canJump: " + canJump());
         return canSimpleMove() || canJump();
     }
 

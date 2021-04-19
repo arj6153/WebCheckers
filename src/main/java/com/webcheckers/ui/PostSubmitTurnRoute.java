@@ -48,8 +48,7 @@ public class PostSubmitTurnRoute implements Route {
         System.out.println(game.redBoardView().getRedPieces() + " " + game.whiteBoardView().getWhitePieces());
         game.clearActiveMove();
         // if player has no available moves then game over
-        System.out.println(game.canMove());
-        if (!game.canMove()) {
+        if (!game.canMove() && game.getNumPieces(Game.Color.RED) != 0 && game.getNumPieces(Game.Color.WHITE) != 0) {
             game.setGameOver();
             game.setGameOverMessage("Player " + gameCenter.getOpponent(player).getName()
                     + " has lost due no available moves. Player "
