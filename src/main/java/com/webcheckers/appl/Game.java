@@ -322,7 +322,7 @@ public class Game {
                 whoLose += redPlayer.getName();
                 whoWon += whitePlayer.getName();
             }
-            gameOverMessage += whoLose + " loses the game. " + whoWon + " has won";
+            gameOverMessage += whoLose + " loses the game. " + whoWon + " has won!";
             setGameOver();
         }
     }
@@ -616,9 +616,9 @@ public class Game {
          player.setPlaying(false);
          gameOverMessage = player.getName() + " has resigned the game. ";
          if (player.equals(whitePlayer)) {
-             gameOverMessage += redPlayer.getName() + " won";
+             gameOverMessage += redPlayer.getName() + " won!";
          } else {
-             gameOverMessage += whitePlayer.getName() + " won";
+             gameOverMessage += whitePlayer.getName() + " won!";
          }
     }
 

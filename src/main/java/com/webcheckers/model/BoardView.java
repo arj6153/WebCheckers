@@ -25,7 +25,7 @@ public class BoardView implements Iterable<Row>{
     public BoardView() {
        this.board = new ArrayList<>();
        try {
-           initializeConfigBoard("src/main/java/com/webcheckers/model/BoardConFigs/config1.txt");
+           initializeConfigBoard("src/main/java/com/webcheckers/model/BoardConFigs/config4.txt");
        } catch (FileNotFoundException ignored) {
            System.out.println("file not found");
        }
