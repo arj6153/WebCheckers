@@ -326,7 +326,9 @@ public class Game {
             setGameOver();
         }
     }
-
+    public Deque<Move> getActiveMove() {
+        return activeMove;
+    }
     /**
      * Checks if a move is a simple move.
      *
@@ -435,8 +437,8 @@ public class Game {
                 }
             }
         }
-        assert activeMove.peekFirst() != null;
-        if (activeMove.peekFirst().getType() == Move.MoveType.CAPTURE_MOVE) {
+
+        if (activeMove.peekFirst() != null && activeMove.peekFirst().getType() == Move.MoveType.CAPTURE_MOVE) {
             Space originSpace = board.getRow(activeMove.peekFirst().getStart().getRow()).getSpace(activeMove.peekFirst().getStart().getCell());
             // checks original space is not null and it's a single checker piece
             if (originSpace.getPiece() != null && originSpace.getPiece().getType() == Piece.Type.SINGLE) {
@@ -493,6 +495,26 @@ public class Game {
         return false;
     }
 
+    public Move addNextJump(Move activeMove) {
+        if(this.activeMove.isEmpty()) {
+            this.activeMove.add(activeMove);
+        }
+        ArrayList<Move> availJumpSpots = new ArrayList<>();
+        Position prevStartPos = activeMove.getStart();
+        Position startPos = activeMove.getEnd();
+        canJumpHelper(availJumpSpots, startPos);
+        for (Move move: availJumpSpots) {
+            if ((move.getEnd().equal(prevStartPos)) || isNotInRange(move.getEnd())) {
+                continue;
+            }
+            if (jumpCheck(move)) {
+                move.setType(Move.MoveType.CAPTURE_MOVE);
+                this.activeMove.add(move);
+                return move;
+            }
+        }
+        return null;
+    }
     private void canJumpHelper(ArrayList<Move> availJumpSpots, Position startPos) {
         availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()-2)));
         availJumpSpots.add(new Move(startPos, new Position(startPos.getRow()+2, startPos.getCell()+2)));
