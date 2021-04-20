@@ -12,6 +12,6 @@
             </#list>
         </#if>
     <#else>
-        Server Population: ${lobbyCount}
+        Server Population: ${serverPop}
     </#if>
 </div>
