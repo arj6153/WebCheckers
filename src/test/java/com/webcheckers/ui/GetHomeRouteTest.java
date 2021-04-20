@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import spark.*;
 
-import java.awt.*;
-
 import static com.webcheckers.ui.GetHomeRoute.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -51,7 +49,7 @@ public class GetHomeRouteTest {
         testHelper.assertViewModelIsaMap();
         testHelper.assertViewModelAttribute(GetHomeRoute.MESSAGE_ATTR, GetHomeRoute.WELCOME_MSG);
         testHelper.assertViewModelAttribute(GetHomeRoute.CURRENT_USER, null);
-        testHelper.assertViewModelAttribute(LOBBY_COUNT, lobby.getLobbySize());
+        testHelper.assertViewModelAttribute(SERVER_POP_ATTR, lobby.getLobbySize());
         testHelper.assertViewName(GetHomeRoute.VIEW_NAME);
 
     }

@@ -22,7 +22,8 @@ public class GetHomeRoute implements Route {
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
 
   static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
-  static final String LOBBY_COUNT = "lobbyCount";
+  static final String SERVER_POP_ATTR = "serverPop";
+  static final String LOBBY_COUNT_ATTR = "lobbyCount";
   static final String CURRENT_USER = "currentUser";
   static final String VIEW_NAME = "home.ftl";
   static final String DESCRIPTION = "Home";
@@ -107,7 +108,7 @@ public class GetHomeRoute implements Route {
       vm.put(PLAYER_LIST_ATTR, gameCenter.getLobby().getMap());
     } else {
       // display a user message in the Home page
-      vm.put(LOBBY_COUNT, gameCenter.getLobby().getLobbySize());
+      vm.put(SERVER_POP_ATTR, gameCenter.getServerPopulation());
     }
     // render the View
     return templateEngine.render(new ModelAndView(vm , VIEW_NAME));
