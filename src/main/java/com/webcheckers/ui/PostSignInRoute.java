@@ -85,6 +85,7 @@ public class PostSignInRoute implements Route {
                 return templateEngine.render(mv);
             }
             gameCenter.addPlayer(name);
+            gameCenter.updatePopulation(1);
             vm.put(GetHomeRoute.CURRENT_USER, gameCenter.getPlayer(name));
             httpSession.attribute(GetHomeRoute.CURRENT_USER,gameCenter.getPlayer(name));
         }

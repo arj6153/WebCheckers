@@ -16,6 +16,7 @@ public class GameCenter {
     private final HashMap<Integer, Game> gameMap;
     private final Lobby lobby;
     private int aiNum = 0;
+    private int serverPopulation = 0;
 
     /**
      * Constructor of GameCenter.
@@ -137,6 +138,12 @@ public class GameCenter {
     }
     public synchronized int getAiNum() {
         return aiNum;
+    }
+    public synchronized void updatePopulation(int num) {
+        serverPopulation += num;
+    }
+    public synchronized  int getServerPopulation() {
+        return serverPopulation;
     }
     public synchronized void addAiNum() {
         aiNum++;

@@ -60,6 +60,7 @@ public class PostSignOutRoute implements Route{
             game.setGameOver();
         }
         gameCenter.removePlayer(player.getName());
+        gameCenter.updatePopulation(-1);
         httpSession.attribute(GetHomeRoute.CURRENT_USER, null);
         response.redirect(WebServer.HOME_URL);
         halt();
