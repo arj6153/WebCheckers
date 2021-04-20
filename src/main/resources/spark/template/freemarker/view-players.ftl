@@ -1,7 +1,7 @@
 <div class="activePlayers">
     <#if currentUser??>
         <form action="/game" method="GET">
-            <input type="submit" name="ai_player" value=${"takeshi_kovacs"}>
+            <input type="submit" name="ai_player" value=${"ai_player"}>
         <#if playerList??>
             <h2>Online Player</h2>
             <#list playerList?keys as key>
