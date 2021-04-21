@@ -1,8 +1,9 @@
-1. Open the project and using any IDE
+1. Open the project using any IDE
 2. Rebuild the project by clicking on Build and then Rebuild Project
 3. Run mvn compile exec:java command in the terminal or go to Edit Configurations
    and click Add New Configuration and select Maven, then go to Parameters to the
    right and in the command line text box type in exec:java, click apply, and then
    run the the program
 4. Once the program is up and running open two different browsers to localhost:4567
-5. Our Multiple Jump is not implemented so testing is not required
+5. You can now sign in and play checkers with another player that is also signed in
+   or against an AI
