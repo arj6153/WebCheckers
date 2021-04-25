@@ -1,12 +1,14 @@
-package com.webcheckers.model;
+package com.webcheckers.model.AIEnhancement;
 
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
+import com.webcheckers.model.Move;
+import com.webcheckers.model.Player;
 
 import java.util.ArrayList;
 import java.util.Deque;
 
-public class AIPlayer extends Player{
+public class AIPlayer extends Player {
     private final GameCenter gameCenter;
 
     /**
@@ -20,6 +22,8 @@ public class AIPlayer extends Player{
     }
     public void makeMove() {
         Game game = gameCenter.getGame(this);
+        GameState gameState = new GameState(game);
+        System.out.println(gameState);
         if(game.getPlayerTurn().equals(this)) {
             ArrayList<Move> moves = game.getPossibleJumpMove();
             moves.addAll(game.getPossibleSimpleMove());

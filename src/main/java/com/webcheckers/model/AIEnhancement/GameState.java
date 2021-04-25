@@ -11,77 +11,59 @@ import static com.webcheckers.appl.Game.Color.RED;
 import static com.webcheckers.model.BoardView.DIM;
 
 public class GameState {
-    private final Player redPlayer;
-    private final Player whitePlayer;
-    private Player playerTurn;
-    private final Deque<Move> activeMove;
+    private boolean redTurn;
     private boolean gameOver;
-    private BoardView boardView;
+    private String [][] board;
     public GameState(Game game) {
-        redPlayer = new Player("min_player");
-        whitePlayer = new Player("max_player");
         gameOver = game.isGameOver();
-        activeMove = game.getActiveMove();
-        playerTurn = whitePlayer;
-        this.boardView = makeBoardFromBoardView(game.redBoardView());
+        redTurn = false;
+        makeBoardFromBoardView(game.redBoardView());
     }
-    public BoardView makeBoardFromBoardView(BoardView boardView) {
-        List<Row> board = new ArrayList<>();
+    public GameState(String [][] board, boolean isRedTurn, boolean gameOver) {
+        this.board = deepCopy(board);
+        this.redTurn = isRedTurn;
+        this.gameOver = gameOver;
+    }
+
+
+
+    public String [][] deepCopy(String [][] arr) {
+        String [][] copy = new String[arr.length][];
+        for(int i = 0; i < arr.length; i++)
+            copy[i] = arr[i].clone();
+        return copy;
+    }
+    public void makeBoardFromBoardView(BoardView boardView) {
+        board = new String [DIM][DIM];
         for(int r = DIM-1; r>=0; r--) {
-            Row row = new Row(boardView.getRow(r).getIndex());
             for (int c = 0; c < DIM; c++) {
                 Space space = boardView.getRow(r).getSpace(c);
-                row.add(space);
+                if(space.getPiece() == null) {
+                    board[r][c] = ".";
+                } else if (space.getPiece().getColor() == RED) {
+                    board[r][c] = "R";
+                } else {
+                    board[r][c] = "W";
+                }
             }
-            board.add(row);
-        }
 
-        return new BoardView(board, boardView.getRedPieces(), boardView.getWhitePieces());
-    }
-    public BoardView getBoardView() {
-        return this.boardView;
-    }
-    public void simulateMove(Move move, Move.MoveType type){
-        int startRow = move.getStart().getRow();
-        int startCell = move.getStart().getCell();
-        int endRow = move.getEnd().getRow();
-        int endCell = move.getEnd().getCell();
-        Space space = boardView.getRow(startRow).getSpace(startCell);
-        Piece piece = space.getPiece();
-        if (isWhitePlayer(playerTurn) && boardView.getRow(endRow).getIndex() == 0) {
-            piece.setKing();
-        } else if (isRedPlayer(playerTurn) && boardView.getRow(endRow).getIndex()== DIM-1) {
-            piece.setKing();
         }
-        space.setPiece(null);
-        if (type == Move.MoveType.SINGLE_MOVE) {
-            boardView.getRow(endRow).getSpace(endCell).setPiece(piece);
-        } else if(type == Move.MoveType.CAPTURE_MOVE) {
-            boardView.getRow(endRow).getSpace(endCell).setPiece(piece);
-            boardView.getRow((endRow+startRow)/2).getSpace((endCell+startCell)/2).setPiece(null);
-            if(isRedPlayer(playerTurn)) {
-                boardView.increaseOrDecreaseWhitePieces(-1);
-            }
-            else if(isWhitePlayer(playerTurn)) {
-                boardView.increaseOrDecreaseRedPieces(-1);
-            }
-        }
-        if (boardView.getWhitePieces() == 0 || boardView.getRedPieces() == 0) {
-            setGameOver();
-        }
-    }
-
-    public boolean isWhitePlayer(Player player) {
-        return player.equals(this.whitePlayer);
-    }
-
-    public boolean isRedPlayer(Player player) {
-        return player.equals(this.redPlayer);
     }
 
     public void setGameOver() {
-        redPlayer.setPlaying(false);
-        whitePlayer.setPlaying(false);
         gameOver = true;
+    }
+    public boolean isGameOver() {
+        return gameOver;
+    }
+    public String toString() {
+        String str = "";
+        for(int r = DIM-1; r >= 0; r--) {
+            for(int c = 0; c < DIM; c++) {
+                str += board[r][c] + " ";
+            }
+            str += "\n";
+        }
+        return str;
     }
 }

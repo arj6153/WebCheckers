@@ -3,7 +3,7 @@ package com.webcheckers.ui;
 import com.google.gson.Gson;
 import com.webcheckers.appl.Game;
 import com.webcheckers.appl.GameCenter;
-import com.webcheckers.model.AIPlayer;
+import com.webcheckers.model.AIEnhancement.AIPlayer;
 import com.webcheckers.model.BoardView;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
