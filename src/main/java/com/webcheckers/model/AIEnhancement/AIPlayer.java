@@ -29,6 +29,8 @@ public class AIPlayer extends Player {
             moves.addAll(game.getPossibleSimpleMove());
             if(!moves.isEmpty()) {
                 Move move = moves.get(0);
+                gameState.move(move);
+                System.out.println(gameState);
                 if(move.getType() == Move.MoveType.CAPTURE_MOVE) {
                     while (move != null) {
                         move = game.addNextJump(move);

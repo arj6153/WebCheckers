@@ -586,6 +586,7 @@ public class Game {
         }
         return moves;
     }
+
     public ArrayList<Move> getPossibleSimpleMove() {
         // iterate through the board
         ArrayList<Move> moves = new ArrayList<>();
@@ -613,6 +614,7 @@ public class Game {
         }
         return moves;
     }
+
     /**
      * Checks if space is in boundary of the checker board.
      *
