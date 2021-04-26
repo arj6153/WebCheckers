@@ -43,4 +43,8 @@ public class Position  {
     public boolean equal(Position other) {
         return this.row == other.row && this.cell == other.cell;
     }
+
+    public String toString() {
+        return this.row+" "+this.cell;
+    }
 }

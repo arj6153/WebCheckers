@@ -22,15 +22,11 @@ public class AIPlayer extends Player {
     }
     public void makeMove() {
         Game game = gameCenter.getGame(this);
-        GameState gameState = new GameState(game);
-        System.out.println(gameState);
         if(game.getPlayerTurn().equals(this)) {
             ArrayList<Move> moves = game.getPossibleJumpMove();
             moves.addAll(game.getPossibleSimpleMove());
             if(!moves.isEmpty()) {
                 Move move = moves.get(0);
-                gameState.move(move);
-                System.out.println(gameState);
                 if(move.getType() == Move.MoveType.CAPTURE_MOVE) {
                     while (move != null) {
                         move = game.addNextJump(move);
