@@ -73,7 +73,8 @@ using American Checker rules.
 ### Roadmap of Enhancements
 
 No enhancement is required for this group due to the small size of the group.
-Enhancements may be implemented individually after the sprint 3 for self-learning.
+AI enhancement is implemented using minimax algorithm. The purpose of the minimax
+algorithm is to make the AI difficult to defeat.
 
 ## Application Domain
 
