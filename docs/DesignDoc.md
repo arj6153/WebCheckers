@@ -75,6 +75,7 @@ using American Checker rules.
 
 
 ### Roadmap of Enhancements
+
 No enhancement is required for this group due to the small size of the group.
 Enhancements may be implemented individually after the sprint 3 for self-learning.
 
@@ -125,11 +126,14 @@ to the Home page with the lobby.
 
 
 ### UI Tier
+
 The server-side UI tier is responsible for mapping the HTTP and Routes to the
 Controller that is responsible for handling the interaction. This is accomplished
 by WebServer.
 
+
 ###Controllers for ViewModel and Redirecting
+
 | Controller | FreeMarker | Function |
 | --- | --- | --- |
 | GetSignInRoute | signin.ftl | Displays sign-in page |
@@ -139,6 +143,7 @@ by WebServer.
 | PostSignOutRoute | redirects page | Redirects to sign out page |
 
 ###Controllers for AJAX and JSON POJO
+
 | Controller | Request | Response |
 | --- | --- | --- |
 | PostBackupMoveRoute | NA | Backup message |
@@ -147,56 +152,68 @@ by WebServer.
 | PostResignRoute | NA | Resign message |
 | PostValidateMove | Move | Valid move message |
 
+
 ####Sequence Diagram for PostSignInRoute
+
 ![img_2.png](sequenceDiagram.png)
 
+
 ### Application Tier
+
 The application tier is made up of components that handle the server-wide
 interactions between the players, and the application using GRASP.
 
+
 ### Model Tier
+
 The model tier shows the board of the checker game depending on the player.
 It encompasses the two players, checker pieces, and spaces which with interact
 together to make a move.
 
+
 ### Design Improvements
+
 If the project were to continue, then the team will work to implement enhancements
 such as Spectator Mode and Watch Replays. For the current design, we would like to 
 tighten the code where we do not repeat calling functions within a function using dot
 notation. This lengthens the code and makes it difficult to read for the programmer.
-In our code metrics, ----------------------------------------------------------------------------
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements. After completion of the Code metrics exercise, you
-> will also discuss the resutling metric measurements.  Indicate the
-> hot spots the metrics identified in your code base, and your
-> suggested design improvements to address those hot spots._
+Our code metrics passed the targeted complexity as unit, but some modules did not meet
+the target. GetGameRoute and GetHomeRoute have a Cavg of 5 while PostSubmitTurnRoute has
+a Cavg of 4. These hot spots are not that significant, and the program runs without defects
+so, we decided to not redesign them. However, we have a high WMC of 107 for the Game module.
+This was alarming at first, but after some thought we believe this should be the game considering
+Game contains the core logic of the program and therefore should be complex. Other hotspots pertain
+to the AI in our efforts to make the AI extremely difficult to defeat. AIPlayer and BoardViewTest
+have a Cavg of 4 which and GameState have a WMC of 32. These hotspots did not concern us much. Even
+though GameState has a large outlier, it makes sense since it is similar to Game - they both carry 
+the core logic for their respective purposes in the program.
+
 
 ## Testing
-Unit testing have been implemented for majority of the classes. As of
-now, only half of the unit tests are passed. This will be updated after 
-sprint 3. ------------------------------------------------------
-> _This section will provide information about the testing performed
-> and the results of the testing._
+
+Testing went smoothly for the majority of the program. We found two bugs during testing.
+The first bug allowed users to sign in with the name "Jon Snow", but only portray "Jon".
+This new "Jon" would be different from "Jon" that signs in before or after them. The second
+bug was when a player signs out during a game, the other player will still remain in the game. 
+These bugs were simple fixes.
+
 
 ### Acceptance Testing
-All user stories have pertaining to the MVP have passed with the exception to 
-Multiple Jump Move. This will be updated after sprint 3. --------------------
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+
+All user stories pertaining to the MVP have passed their testings to meet the 
+acceptance criteria. All user stories pertaining to the AI enhancement has their
+testing to the acceptance criteria.
+
 
 ### Unit Testing and Code Coverage
-Our unit testing strategy was to start with the smallest and simplest 
-classes. By doing so, we can get the easiest unit tests out of the way 
-first and then group up for the larger and more difficult unit tests. 
-This will be updated after sprint 3.------------------------------------------
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+
+Our unit testing and code coverage strategy was to start with the smallest and 
+simplest classes. By doing so, we can get the easiest unit tests out of the way 
+first and then group up for the larger and more difficult unit tests. Unit testing 
+have been implemented for the majority of the classes. As of now, only half of the 
+unit tests have passed. The ones that did not pass were at 0% which came to us as
+an anomaly. Upon further inspection, due to the constant updates and altering of the
+code, we did not apply the correct unit testing for some classes. If this project is
+to continue, we would like update the unit testing for code coverage and put forth more
+effort in being aware that each members' updates to the code need to be accounted for in
+the unit testing and code coverage.

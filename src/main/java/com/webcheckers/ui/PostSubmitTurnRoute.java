@@ -11,8 +11,6 @@ import spark.*;
 
 import java.util.logging.Logger;
 
-import static spark.Spark.halt;
-
 public class PostSubmitTurnRoute implements Route {
     private final GameCenter gameCenter;
     private final TemplateEngine templateEngine;
