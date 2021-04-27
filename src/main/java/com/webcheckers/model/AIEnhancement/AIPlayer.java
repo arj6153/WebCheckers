@@ -56,7 +56,7 @@ public class AIPlayer extends Player {
             if(game.canMove()) {
                 GameState gameState = new GameState(game);
                 MiniMax minimaxAlgo = new MiniMax();
-                EvaluatedGameState eval = minimaxAlgo.minimax(null, gameState, true, 5);
+                EvaluatedGameState eval = minimaxAlgo.minimax(null, gameState, true, 7);
                 if (eval.getMove() != null) {
                     ArrayList<Move> moves;
                     if (eval.getMove().getType() == Move.MoveType.SINGLE_MOVE) {
