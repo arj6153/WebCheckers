@@ -2,10 +2,8 @@ package com.webcheckers.model.AIEnhancement;
 
 import com.webcheckers.appl.Game;
 import com.webcheckers.model.*;
-
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.webcheckers.appl.Game.Color.RED;
 import static com.webcheckers.appl.Game.Color.WHITE;
@@ -19,7 +17,7 @@ public class GameState {
     private int redKingPieces = 0;
     private int whiteKingPieces = 0;
     private int whitePieces;
-    private boolean justJumped = false;
+    private ArrayList<Move> jumped = new ArrayList<>();
 
     public GameState(Game game) {
         redPieces = game.getNumPieces(RED);
@@ -49,8 +47,6 @@ public class GameState {
     public double evaluate() {
         return whitePieces - redPieces + (whiteKingPieces*0.5 - redKingPieces*0.5);
     }
-
-
     public int getRedPieces() {
         return redPieces;
     }
@@ -96,11 +92,13 @@ public class GameState {
     public void setPiece(Position position, String piece) {
         board[position.getRow()][position.getCell()] = piece;
     }
+
     public void move(Move move) {
         if(move.getType() == Move.MoveType.SINGLE_MOVE) {
             simulateMove(move);
         } else {
             ArrayList<Move> moves = getMaxJumpMove(move.getStart());
+            jumped = moves;
             for (Move temp : moves) {
                 simulateMove(temp);
             }
@@ -132,7 +130,6 @@ public class GameState {
                 setPiece(move.getEnd(), piece);
             }
             if (redPieces == 0 || whitePieces == 0) {
-                System.out.println("gameOver");
                 setGameOver();
             }
 
@@ -169,7 +166,9 @@ public class GameState {
 
     public ArrayList<Move> getAllPossibleMove() {
         ArrayList<Move> arr = getPossibleJumpMove();
-        arr.addAll(getPossibleSimpleMove());
+        if (arr.isEmpty()) {
+            arr.addAll(getPossibleSimpleMove());
+        }
         return arr;
 
     }
@@ -301,7 +300,9 @@ public class GameState {
             }
         return false;
     }
-
+    public void submitTurn() {
+        redTurn = !redTurn;
+    }
     private boolean isValidCapture (int endRow, int startRow, int endCol, int startCol, String captured, String endPiece) {
         if (redTurn && endRow == startRow + 2 && (endCol == startCol + 2 || endCol == startCol - 2)) {
             return !captured.equals(".") && endPiece.equals(".") && captured.contains("W");
@@ -335,5 +336,16 @@ public class GameState {
     }
     public boolean isRedTurn() {
         return redTurn;
+    }
+    public HashMap<Move, GameState> getSuccessors() {
+        ArrayList<Move> moves = this.getAllPossibleMove();
+        HashMap<Move, GameState> states = new HashMap<>();
+        for(Move move: moves) {
+            GameState tempState = new GameState(this);
+            tempState.move(move);
+            tempState.submitTurn();
+            states.put(move, tempState);
+        }
+        return states;
     }
 }

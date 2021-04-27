@@ -20,6 +20,7 @@ public class AIPlayer extends Player {
        this.gameCenter = gameCenter;
        this.gameCenter.addAiNum();
     }
+    /**
     public void makeMove() {
         Game game = gameCenter.getGame(this);
         if(game.getPlayerTurn().equals(this)) {
@@ -44,6 +45,27 @@ public class AIPlayer extends Player {
                 }
                 game.clearActiveMove();
             }
+            game.setPlayerTurn(gameCenter.getOpponent(this));
+        }
+    }
+     **/
+    public void makeMove() {
+        Game game = gameCenter.getGame(this);
+        if(game.getPlayerTurn().equals(this)) {
+            GameState gameState = new GameState(game);
+            MiniMax minimaxAlgo = new MiniMax();
+            EvaluatedGameState eval = minimaxAlgo.minimax(null,gameState,true,3);
+            System.out.println(eval.getMove().getType());
+            ArrayList<Move> moves;
+            if (eval.getMove().getType() == Move.MoveType.SINGLE_MOVE) {
+                game.move(eval.getMove(),eval.getMove().getType());
+            } else {
+                moves = gameState.getMaxJumpMove(eval.getMove().getStart());
+                for(Move m: moves) {
+                    game.move(m,m.getType());
+                }
+            }
+            game.clearActiveMove();
             game.setPlayerTurn(gameCenter.getOpponent(this));
         }
     }

@@ -1,18 +1,20 @@
 package com.webcheckers.model.AIEnhancement;
 
+import com.webcheckers.model.Move;
+
 public class EvaluatedGameState {
     private final double evaluation;
-    private final GameState gameState;
-    public EvaluatedGameState(double evaluation, GameState gameState) {
+    private final Move move;
+    public EvaluatedGameState(double evaluation, Move move) {
         this.evaluation = evaluation;
-        this.gameState = new GameState(gameState);
+        this.move = move;
     }
 
     public double getEvaluation() {
         return evaluation;
     }
 
-    public GameState getGameState() {
-        return gameState;
+    public Move getMove() {
+        return move;
     }
 }
