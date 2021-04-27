@@ -5,6 +5,7 @@ import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.Move;
 import com.webcheckers.model.Player;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Deque;
 
@@ -52,17 +53,30 @@ public class AIPlayer extends Player {
     public void makeMove() {
         Game game = gameCenter.getGame(this);
         if(game.getPlayerTurn().equals(this)) {
-            GameState gameState = new GameState(game);
-            MiniMax minimaxAlgo = new MiniMax();
-            EvaluatedGameState eval = minimaxAlgo.minimax(null,gameState,true,3);
-            ArrayList<Move> moves;
-            if (eval.getMove().getType() == Move.MoveType.SINGLE_MOVE) {
-                game.move(eval.getMove(),eval.getMove().getType());
-            } else {
-                moves = gameState.getMaxJumpMove(eval.getMove().getStart());
-                for(Move m: moves) {
-                    game.move(m,m.getType());
+            if(game.canMove()) {
+                GameState gameState = new GameState(game);
+                MiniMax minimaxAlgo = new MiniMax();
+                EvaluatedGameState eval = minimaxAlgo.minimax(null, gameState, true, 5);
+                if (eval.getMove() != null) {
+                    ArrayList<Move> moves;
+                    if (eval.getMove().getType() == Move.MoveType.SINGLE_MOVE) {
+                        game.move(eval.getMove(), eval.getMove().getType());
+                    } else {
+                        moves = gameState.getMaxJumpMove(eval.getMove().getStart());
+                        for (Move m : moves) {
+                            game.move(m, m.getType());
+                        }
+                    }
+                } else {
+                    ArrayList<Move> endMoves = game.getAllPossibleMove();
+                    for(Move move: endMoves) {
+                        System.out.println("fdaf");
+                        move.printMove();
+                    }
+                    game.move(endMoves.get(0), endMoves.get(0).getType());
                 }
+            } else {
+                game.setGameOver();
             }
             game.clearActiveMove();
             game.setPlayerTurn(gameCenter.getOpponent(this));
