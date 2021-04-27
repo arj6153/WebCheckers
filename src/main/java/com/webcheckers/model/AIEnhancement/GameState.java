@@ -126,7 +126,6 @@ public class GameState {
                 setPiece(move.getEnd(), "RK");
             } else if (!redTurn && move.getEnd().getRow() == 0) {
                 whiteKingPieces++;
-                System.out.println(this);
                 setPiece(move.getEnd(), "WK");
             } else {
                 setPiece(move.getEnd(), piece);
