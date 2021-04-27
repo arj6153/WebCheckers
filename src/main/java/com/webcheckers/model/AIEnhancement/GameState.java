@@ -77,8 +77,9 @@ public class GameState {
                     if (space.getPiece().getType() == Piece.Type.KING) {
                         board[r][c] = "WK";
                         whiteKingPieces++;
+                    } else {
+                        board[r][c] = "W";
                     }
-                    board[r][c] = "W";
                 }
             }
 
@@ -125,6 +126,7 @@ public class GameState {
                 setPiece(move.getEnd(), "RK");
             } else if (!redTurn && move.getEnd().getRow() == 0) {
                 whiteKingPieces++;
+                System.out.println(this);
                 setPiece(move.getEnd(), "WK");
             } else {
                 setPiece(move.getEnd(), piece);
@@ -207,9 +209,9 @@ public class GameState {
         if ((piece.equals(".")) || (!piece.contains( getPlayerColor()))) {
             return moves;
         }
-        ArrayList<Move> availMoveSpots = new ArrayList<>();
-        canJumpHelper(availMoveSpots, startPos);
-        for (Move move : availMoveSpots) {
+        ArrayList<Move> availJumpSpots = new ArrayList<>();
+        canJumpHelper(availJumpSpots, startPos);
+        for (Move move : availJumpSpots) {
             if (isNotInRange(move.getEnd())) {
                 continue;
             }
