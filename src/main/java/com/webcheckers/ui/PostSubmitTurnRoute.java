@@ -54,6 +54,12 @@ public class PostSubmitTurnRoute implements Route {
         if(gameCenter.getOpponent(player) instanceof AIPlayer) {
             ((AIPlayer) gameCenter.getOpponent(player)).makeMove();
         }
+        if (!game.canMove() && game.getNumPieces(Game.Color.RED) != 0 && game.getNumPieces(Game.Color.WHITE) != 0) {
+            game.setGameOver();
+            game.setGameOverMessage("Player " + gameCenter.getOpponent(player).getName()
+                    + " has lost due no available moves. Player "
+                    + player.getName() + " has won!");
+        }
         game.clearActiveMove();
         return gson.toJson(new Message("Valid move.", Message.Type.INFO));
     }
