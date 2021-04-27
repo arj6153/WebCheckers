@@ -3,10 +3,6 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
 
 ## Team Information
 * Team name: TEAMNAME
@@ -77,7 +73,8 @@ using American Checker rules.
 ### Roadmap of Enhancements
 
 No enhancement is required for this group due to the small size of the group.
-Enhancements may be implemented individually after the sprint 3 for self-learning.
+AI enhancement is implemented using minimax algorithm. The purpose of the minimax
+algorithm is to make the AI difficult to defeat.
 
 ## Application Domain
 
