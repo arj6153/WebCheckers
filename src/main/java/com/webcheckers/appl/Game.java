@@ -588,7 +588,9 @@ public class Game {
     }
     public ArrayList<Move> getAllPossibleMove() {
         ArrayList<Move> moves = getPossibleJumpMove();
-        moves.addAll(getPossibleSimpleMove());
+        if(moves.isEmpty()) {
+            moves.addAll(getPossibleSimpleMove());
+        }
         return moves;
     }
     public ArrayList<Move> getPossibleSimpleMove() {

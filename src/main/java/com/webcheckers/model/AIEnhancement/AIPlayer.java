@@ -56,7 +56,7 @@ public class AIPlayer extends Player {
             if(game.canMove()) {
                 GameState gameState = new GameState(game);
                 MiniMax minimaxAlgo = new MiniMax();
-                EvaluatedGameState eval = minimaxAlgo.minimax(null, gameState, true, 7);
+                EvaluatedGameState eval = minimaxAlgo.minimax(null, gameState, true, 5);
                 if (eval.getMove() != null) {
                     ArrayList<Move> moves;
                     if (eval.getMove().getType() == Move.MoveType.SINGLE_MOVE) {
@@ -69,10 +69,6 @@ public class AIPlayer extends Player {
                     }
                 } else {
                     ArrayList<Move> endMoves = game.getAllPossibleMove();
-                    for(Move move: endMoves) {
-                        System.out.println("fdaf");
-                        move.printMove();
-                    }
                     game.move(endMoves.get(0), endMoves.get(0).getType());
                 }
             } else {
