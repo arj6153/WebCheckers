@@ -586,7 +586,13 @@ public class Game {
         }
         return moves;
     }
-
+    public ArrayList<Move> getAllPossibleMove() {
+        ArrayList<Move> moves = getPossibleJumpMove();
+        if(moves.isEmpty()) {
+            moves.addAll(getPossibleSimpleMove());
+        }
+        return moves;
+    }
     public ArrayList<Move> getPossibleSimpleMove() {
         // iterate through the board
         ArrayList<Move> moves = new ArrayList<>();

@@ -5,6 +5,7 @@ import com.webcheckers.appl.GameCenter;
 import com.webcheckers.model.Move;
 import com.webcheckers.model.Player;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Deque;
 
@@ -20,17 +21,14 @@ public class AIPlayer extends Player {
        this.gameCenter = gameCenter;
        this.gameCenter.addAiNum();
     }
+    /**
     public void makeMove() {
         Game game = gameCenter.getGame(this);
-        GameState gameState = new GameState(game);
-        System.out.println(gameState);
         if(game.getPlayerTurn().equals(this)) {
             ArrayList<Move> moves = game.getPossibleJumpMove();
             moves.addAll(game.getPossibleSimpleMove());
             if(!moves.isEmpty()) {
                 Move move = moves.get(0);
-                gameState.move(move);
-                System.out.println(gameState);
                 if(move.getType() == Move.MoveType.CAPTURE_MOVE) {
                     while (move != null) {
                         move = game.addNextJump(move);
@@ -48,6 +46,35 @@ public class AIPlayer extends Player {
                 }
                 game.clearActiveMove();
             }
+            game.setPlayerTurn(gameCenter.getOpponent(this));
+        }
+    }
+     **/
+    public void makeMove() {
+        Game game = gameCenter.getGame(this);
+        if(game.getPlayerTurn().equals(this)) {
+            if(game.canMove()) {
+                GameState gameState = new GameState(game);
+                MiniMax minimaxAlgo = new MiniMax();
+                EvaluatedGameState eval = minimaxAlgo.minimax(null, gameState, true, 5);
+                if (eval.getMove() != null) {
+                    ArrayList<Move> moves;
+                    if (eval.getMove().getType() == Move.MoveType.SINGLE_MOVE) {
+                        game.move(eval.getMove(), eval.getMove().getType());
+                    } else {
+                        moves = gameState.getMaxJumpMove(eval.getMove().getStart());
+                        for (Move m : moves) {
+                            game.move(m, m.getType());
+                        }
+                    }
+                } else {
+                    ArrayList<Move> endMoves = game.getAllPossibleMove();
+                    game.move(endMoves.get(0), endMoves.get(0).getType());
+                }
+            } else {
+                game.setGameOver();
+            }
+            game.clearActiveMove();
             game.setPlayerTurn(gameCenter.getOpponent(this));
         }
     }
