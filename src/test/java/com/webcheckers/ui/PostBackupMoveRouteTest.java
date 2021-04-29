@@ -39,7 +39,6 @@ class PostBackupMoveRouteTest {
         when(request.session()).thenReturn(session);
         response = mock(Response.class);
         gson = new Gson();
-
         gameCenter = new GameCenter();
         gameCenter.addPlayer(PLAYER1);
         gameCenter.addPlayer(PLAYER2);
@@ -53,7 +52,6 @@ class PostBackupMoveRouteTest {
         gameCenter.addGame(player1, player2);
         game = gameCenter.getGame(player1);
         when(request.queryParams(GetGameRoute.GAMEID_ATTR)).thenReturn(gameID);
-
         BackUpMoveRoute = new PostBackupMoveRoute(gameCenter, gson);
     }
 

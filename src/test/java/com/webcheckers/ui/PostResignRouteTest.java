@@ -42,7 +42,6 @@ public class PostResignRouteTest {
         game = gameCenter.getGame(player1);
         when(request.queryParams(GetGameRoute.GAMEID_ATTR)).thenReturn(gameID);
         resignRoute = new PostResignRoute(gameCenter, gson);
-
     }
 
 }

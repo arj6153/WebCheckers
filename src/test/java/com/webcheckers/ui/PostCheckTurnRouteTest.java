@@ -30,7 +30,6 @@ class PostCheckTurnRouteTest {
     private GameCenter gameCenter;
     private String gameID;
     private Game game;
-
     private Request request;
     private Response response;
     private Session session;
