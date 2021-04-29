@@ -44,12 +44,13 @@ class PostBackupMoveRouteTest {
         gameCenter.addPlayer(PLAYER1);
         gameCenter.addPlayer(PLAYER2);
         Player player1 = gameCenter.getPlayer(PLAYER1);
+        Player player2 = gameCenter.getPlayer(PLAYER2);
         gameCenter.addGame(gameCenter.getPlayer(PLAYER1), gameCenter.getPlayer(PLAYER2));
         player = gameCenter.getPlayer(PLAYER1);
-        player.setPlaying(true);
+        player1.setPlaying(true);
         opponent = gameCenter.getPlayer(PLAYER2);
-        opponent.setPlaying(true);
-        gameCenter.addGame(player, opponent);
+        player2.setPlaying(false);
+        gameCenter.addGame(player1, player2);
         game = gameCenter.getGame(player1);
         when(request.queryParams(GetGameRoute.GAMEID_ATTR)).thenReturn(gameID);
 

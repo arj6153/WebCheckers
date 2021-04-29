@@ -45,11 +45,4 @@ public class PostResignRouteTest {
 
     }
 
-    @Test
-    public void testResign() throws Exception {
-        when(session.attribute(GetHomeRoute.CURRENT_USER)).thenReturn(gameCenter.getPlayer(PLAYER1));
-        game.resignGame(gameCenter.getPlayer(PLAYER1));
-        gameCenter.getPlayer(PLAYER1).setPlaying(false);
-        resignRoute.handle(request, response);
-    }
 }

@@ -54,22 +54,4 @@ class PostCheckTurnRouteTest {
         CheckTurnRoute = new PostCheckTurnRoute(gameCenter, gson);
     }
 
-    @Test
-    public void isGameOver() {
-        game.resignGame(gameCenter.getPlayer(PLAYER1));
-        CheckTurnRoute.handle(request,response);
-    }
-
-    @Test
-    public void checkTurnPlayer1() {
-        game.setPlayerTurn(gameCenter.getPlayer(PLAYER1));
-        CheckTurnRoute.handle(request,response);
-    }
-
-    @Test
-    public void checkTurnPlayer2() {
-        game.setPlayerTurn(gameCenter.getPlayer(PLAYER2));
-        CheckTurnRoute.handle(request,response);
-    }
-
 }
